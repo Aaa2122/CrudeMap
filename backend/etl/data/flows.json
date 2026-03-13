@@ -1,0 +1,2305 @@
+[
+  {
+    "source_iso": "SAU",
+    "target_iso": "CHN",
+    "volume_mt": 85,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA/Vortexa 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "IND",
+    "volume_mt": 39,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "JPN",
+    "volume_mt": 38,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "KOR",
+    "volume_mt": 34,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "USA",
+    "volume_mt": 28,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "SGP",
+    "volume_mt": 12,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "NLD",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "ITA",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "FRA",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "CHN",
+    "volume_mt": 100,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "DEU",
+    "volume_mt": 18,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "NLD",
+    "volume_mt": 22,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "POL",
+    "volume_mt": 14,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "IND",
+    "volume_mt": 42,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "TUR",
+    "volume_mt": 12,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "GRC",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "ITA",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "CHN",
+    "volume_mt": 60,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "IND",
+    "volume_mt": 28,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "KOR",
+    "volume_mt": 15,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "ITA",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "GRC",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "USA",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "CHN",
+    "volume_mt": 28,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "IND",
+    "volume_mt": 18,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "JPN",
+    "volume_mt": 30,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "KOR",
+    "volume_mt": 18,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "SGP",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "IRN",
+    "target_iso": "CHN",
+    "volume_mt": 80,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA estimate 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "IRN",
+    "target_iso": "IND",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA estimate 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "IRN",
+    "target_iso": "SGP",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "estimate",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "CHN",
+    "volume_mt": 22,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "IND",
+    "volume_mt": 14,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "JPN",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "OMN",
+    "target_iso": "CHN",
+    "volume_mt": 20,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "OMN",
+    "target_iso": "IND",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "OMN",
+    "target_iso": "JPN",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "IND",
+    "volume_mt": 16,
+    "via_chokepoints": [
+      "bab_el_mandeb",
+      "hormuz"
+    ],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "CHN",
+    "volume_mt": 14,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "NLD",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "ESP",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "USA",
+    "volume_mt": 10,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "AGO",
+    "target_iso": "CHN",
+    "volume_mt": 32,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "AGO",
+    "target_iso": "IND",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "AGO",
+    "target_iso": "ESP",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "LBY",
+    "target_iso": "ITA",
+    "volume_mt": 18,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "LBY",
+    "target_iso": "DEU",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "LBY",
+    "target_iso": "ESP",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "LBY",
+    "target_iso": "CHN",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "suez"
+    ],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "DZA",
+    "target_iso": "ITA",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "DZA",
+    "target_iso": "ESP",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "DZA",
+    "target_iso": "FRA",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "NLD",
+    "volume_mt": 18,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "DEU",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "GBR",
+    "volume_mt": 10,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "FRA",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "USA",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "CHN",
+    "volume_mt": 14,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "ITA",
+    "volume_mt": 12,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "NLD",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "FRA",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "AZE",
+    "target_iso": "ITA",
+    "volume_mt": 10,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "AZE",
+    "target_iso": "GRC",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "AZE",
+    "target_iso": "ISR",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "CHN",
+    "volume_mt": 30,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "USA",
+    "volume_mt": 22,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "IND",
+    "volume_mt": 10,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "ESP",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "Eurostat 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "GUY",
+    "target_iso": "USA",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "GUY",
+    "target_iso": "CHN",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "GUY",
+    "target_iso": "IND",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "CAN",
+    "target_iso": "USA",
+    "volume_mt": 195,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "CAN",
+    "target_iso": "CHN",
+    "volume_mt": 10,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "USA",
+    "target_iso": "CHN",
+    "volume_mt": 20,
+    "via_chokepoints": [
+      "malacca"
+    ],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "USA",
+    "target_iso": "KOR",
+    "volume_mt": 18,
+    "via_chokepoints": [
+      "malacca"
+    ],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "USA",
+    "target_iso": "IND",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "USA",
+    "target_iso": "NLD",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "MEX",
+    "target_iso": "USA",
+    "volume_mt": 30,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "high"
+  },
+  {
+    "source_iso": "MEX",
+    "target_iso": "IND",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "VEN",
+    "target_iso": "CHN",
+    "volume_mt": 18,
+    "via_chokepoints": [],
+    "source": "IEA estimate 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "VEN",
+    "target_iso": "USA",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "ECU",
+    "target_iso": "CHN",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "panama"
+    ],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "ECU",
+    "target_iso": "USA",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EIA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "MYS",
+    "target_iso": "CHN",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "MYS",
+    "target_iso": "IND",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "IEA 2024",
+    "confidence": "medium"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "AUS",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "AUS",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "MYS",
+    "target_iso": "AUS",
+    "volume_mt": 7,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "TWN",
+    "volume_mt": 22,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "TWN",
+    "volume_mt": 15,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "TWN",
+    "volume_mt": 13,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "ZAF",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "ZAF",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "AGO",
+    "target_iso": "ZAF",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "PAK",
+    "volume_mt": 7,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "PAK",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "PAK",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "PHL",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "PHL",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "PHL",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "VNM",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KWT",
+    "target_iso": "VNM",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "BGD",
+    "volume_mt": 3.5,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "BGD",
+    "volume_mt": 2.5,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "ISR",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "AUT",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "AUT",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "CHL",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ECU",
+    "target_iso": "CHL",
+    "volume_mt": 3.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "CHL",
+    "volume_mt": 2.5,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ECU",
+    "target_iso": "PER",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COL",
+    "target_iso": "PER",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COL",
+    "target_iso": "USA",
+    "volume_mt": 15,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COL",
+    "target_iso": "CHN",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "panama"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COL",
+    "target_iso": "IND",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "panama"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "ARG",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "ARG",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "SWE",
+    "volume_mt": 9,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "SWE",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "SWE",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "FIN",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "FIN",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "PRT",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "DZA",
+    "target_iso": "PRT",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "PRT",
+    "volume_mt": 2,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "BRA",
+    "target_iso": "PRT",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "ROU",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "ROU",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "BGR",
+    "volume_mt": 4.5,
+    "via_chokepoints": [
+      "turkish_straits"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "BGR",
+    "volume_mt": 2.5,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "HUN",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "SVK",
+    "volume_mt": 5.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "CZE",
+    "volume_mt": 5.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "AZE",
+    "target_iso": "CZE",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "LTU",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "LTU",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "BLR",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "AZE",
+    "target_iso": "UKR",
+    "volume_mt": 2.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "KAZ",
+    "target_iso": "UKR",
+    "volume_mt": 2.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "SRB",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "IRQ",
+    "target_iso": "SRB",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NOR",
+    "target_iso": "IRL",
+    "volume_mt": 3.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "NGA",
+    "target_iso": "IRL",
+    "volume_mt": 2.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "LKA",
+    "volume_mt": 2.5,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "ARE",
+    "target_iso": "LKA",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "hormuz"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "QAT",
+    "target_iso": "JPN",
+    "volume_mt": 14,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "QAT",
+    "target_iso": "KOR",
+    "volume_mt": 12,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "QAT",
+    "target_iso": "CHN",
+    "volume_mt": 9,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "BHR",
+    "volume_mt": 12,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "TTO",
+    "target_iso": "USA",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COG",
+    "target_iso": "CHN",
+    "volume_mt": 14,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GAB",
+    "target_iso": "CHN",
+    "volume_mt": 5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GAB",
+    "target_iso": "USA",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GNQ",
+    "target_iso": "CHN",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GNQ",
+    "target_iso": "ESP",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "TKM",
+    "target_iso": "CHN",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "BRN",
+    "target_iso": "JPN",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "BRN",
+    "target_iso": "KOR",
+    "volume_mt": 2,
+    "via_chokepoints": [
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GHA",
+    "target_iso": "CHN",
+    "volume_mt": 4,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "GHA",
+    "target_iso": "IND",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SSD",
+    "target_iso": "CHN",
+    "volume_mt": 7,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SDN",
+    "target_iso": "CHN",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "NZL",
+    "volume_mt": 3.5,
+    "via_chokepoints": [
+      "hormuz",
+      "malacca"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "AUS",
+    "target_iso": "NZL",
+    "volume_mt": 2.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "SAU",
+    "target_iso": "MAR",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "hormuz",
+      "suez"
+    ],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "MAR",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "DNK",
+    "target_iso": "NLD",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "DNK",
+    "target_iso": "SWE",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "VEN",
+    "target_iso": "CUB",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "RUS",
+    "target_iso": "CUB",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "USA",
+    "target_iso": "DOM",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "VEN",
+    "target_iso": "DOM",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "source_iso": "COL",
+    "target_iso": "DOM",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "source": "EI/IEA estimates 2024",
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "BEL",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "suez_canal",
+      "strait_of_gibraltar"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "BEL",
+    "volume_mt": 8,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "BEL",
+    "volume_mt": 7,
+    "via_chokepoints": [
+      "strait_of_gibraltar"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "NOR",
+    "target_iso": "BEL",
+    "volume_mt": 6,
+    "via_chokepoints": [],
+    "confidence": "high"
+  },
+  {
+    "id": null,
+    "source_iso": "IRQ",
+    "target_iso": "BEL",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "suez_canal"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "EGY",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "IRQ",
+    "target_iso": "EGY",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "bab_el_mandeb"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "THA",
+    "volume_mt": 15,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "ARE",
+    "target_iso": "THA",
+    "volume_mt": 8,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "KWT",
+    "target_iso": "THA",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "OMN",
+    "target_iso": "THA",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "MYS",
+    "target_iso": "THA",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "strait_of_malacca"
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "IDN",
+    "volume_mt": 10,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "IDN",
+    "volume_mt": 6,
+    "via_chokepoints": [
+      "cape_of_good_hope",
+      "strait_of_malacca"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "ARE",
+    "target_iso": "IDN",
+    "volume_mt": 5,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "MYS",
+    "target_iso": "IDN",
+    "volume_mt": 4,
+    "via_chokepoints": [
+      "strait_of_malacca"
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "JOR",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "IRQ",
+    "target_iso": "JOR",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "IRQ",
+    "target_iso": "LBN",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "LBN",
+    "volume_mt": 1,
+    "via_chokepoints": [
+      "suez_canal"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "YEM",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "IRQ",
+    "target_iso": "SYR",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "TCD",
+    "target_iso": "CMR",
+    "volume_mt": 3,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "TCD",
+    "target_iso": "USA",
+    "volume_mt": 2,
+    "via_chokepoints": [
+      "strait_of_gibraltar"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "CMR",
+    "target_iso": "CHN",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "cape_of_good_hope",
+      "strait_of_malacca"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "CHE",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "strait_of_gibraltar"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "LBY",
+    "target_iso": "CHE",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "KAZ",
+    "target_iso": "CHE",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "KEN",
+    "volume_mt": 3,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "ARE",
+    "target_iso": "KEN",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "ETH",
+    "volume_mt": 2,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "TZA",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "UGA",
+    "volume_mt": 0.8,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "MOZ",
+    "volume_mt": 0.5,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "DJI",
+    "volume_mt": 0.3,
+    "via_chokepoints": [
+      "bab_el_mandeb"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "ZAF",
+    "target_iso": "NAM",
+    "volume_mt": 0.5,
+    "via_chokepoints": [
+      "cape_of_good_hope"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "CIV",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "SEN",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "NGA",
+    "target_iso": "GHA",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "DZA",
+    "target_iso": "TUN",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "TUN",
+    "volume_mt": 0.5,
+    "via_chokepoints": [
+      "suez_canal"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "HRV",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "BIH",
+    "volume_mt": 0.8,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "MKD",
+    "volume_mt": 0.8,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "MNE",
+    "volume_mt": 0.2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "ALB",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "SVN",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "LVA",
+    "volume_mt": 0.8,
+    "via_chokepoints": [
+      "danish_straits"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "EST",
+    "volume_mt": 0.5,
+    "via_chokepoints": [
+      "danish_straits"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "LBY",
+    "target_iso": "MLT",
+    "volume_mt": 0.3,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "CYP",
+    "volume_mt": 0.5,
+    "via_chokepoints": [
+      "suez_canal"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "NOR",
+    "target_iso": "ISL",
+    "volume_mt": 0.3,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "KGZ",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "UZB",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "GEO",
+    "volume_mt": 0.8,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "ARM",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "RUS",
+    "target_iso": "MNG",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "CHN",
+    "target_iso": "MNG",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "MMR",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "SAU",
+    "target_iso": "KHM",
+    "volume_mt": 1,
+    "via_chokepoints": [
+      "strait_of_hormuz",
+      "strait_of_malacca"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "IND",
+    "target_iso": "NPL",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "IRN",
+    "target_iso": "AFG",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "PAK",
+    "target_iso": "AFG",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "AUS",
+    "target_iso": "PNG",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "AUS",
+    "target_iso": "FJI",
+    "volume_mt": 0.3,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "PAN",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "panama_canal"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "VEN",
+    "target_iso": "PAN",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "CRI",
+    "volume_mt": 1.5,
+    "via_chokepoints": [
+      "panama_canal"
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "GTM",
+    "volume_mt": 2,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "MEX",
+    "target_iso": "GTM",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "HND",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "SLV",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "NIC",
+    "volume_mt": 0.8,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "VEN",
+    "target_iso": "HTI",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "TTO",
+    "target_iso": "JAM",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "USA",
+    "target_iso": "JAM",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "BRA",
+    "target_iso": "URY",
+    "volume_mt": 1.5,
+    "via_chokepoints": [],
+    "confidence": "medium"
+  },
+  {
+    "id": null,
+    "source_iso": "ARG",
+    "target_iso": "PRY",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "BRA",
+    "target_iso": "PRY",
+    "volume_mt": 0.5,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "ARG",
+    "target_iso": "BOL",
+    "volume_mt": 1,
+    "via_chokepoints": [],
+    "confidence": "low"
+  },
+  {
+    "id": null,
+    "source_iso": "VEN",
+    "target_iso": "SUR",
+    "volume_mt": 0.3,
+    "via_chokepoints": [],
+    "confidence": "low"
+  }
+]

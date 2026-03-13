@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "hormuz_closure",
+    "name": "Strait of Hormuz — Full Closure",
+    "description": "Full closure of the Strait of Hormuz. All crude flows that pass through Hormuz are reduced to zero. Alternative routing via Yanbu is partially available for Saudi Arabia only.",
+    "scenario_type": "chokepoint",
+    "disruptions": [
+      {"target_type": "chokepoint", "target_id": "hormuz", "param": "capacity_factor", "delta": 0.0},
+      {"target_type": "chokepoint", "target_id": "hormuz", "param": "cost_multiplier", "delta": 5.0}
+    ]
+  },
+  {
+    "slug": "hormuz_50pct",
+    "name": "Strait of Hormuz — 50% Disruption",
+    "description": "Significant tension in the Strait of Hormuz reduces throughput capacity to 50% of normal. Shipping costs increase by 80%.",
+    "scenario_type": "chokepoint",
+    "disruptions": [
+      {"target_type": "chokepoint", "target_id": "hormuz", "param": "capacity_factor", "delta": 0.5},
+      {"target_type": "chokepoint", "target_id": "hormuz", "param": "cost_multiplier", "delta": 1.8}
+    ]
+  },
+  {
+    "slug": "russia_sanctions",
+    "name": "Russia — Full Export Embargo",
+    "description": "Comprehensive sanctions reduce Russian crude exports to 20% of normal volumes. Significant rerouting pressure on remaining global suppliers.",
+    "scenario_type": "country",
+    "disruptions": [
+      {"target_type": "country", "target_id": "RUS", "param": "capacity_factor", "delta": 0.2},
+      {"target_type": "country", "target_id": "RUS", "param": "cost_multiplier", "delta": 2.0}
+    ]
+  },
+  {
+    "slug": "bab_el_mandeb_disruption",
+    "name": "Bab el-Mandeb — Red Sea Crisis",
+    "description": "Sustained Houthi attacks reduce Red Sea shipping capacity to 40% of normal. Vessels divert around Cape of Good Hope, adding 10-15 days and significantly raising costs.",
+    "scenario_type": "chokepoint",
+    "disruptions": [
+      {"target_type": "chokepoint", "target_id": "bab_el_mandeb", "param": "capacity_factor", "delta": 0.4},
+      {"target_type": "chokepoint", "target_id": "bab_el_mandeb", "param": "cost_multiplier", "delta": 2.2},
+      {"target_type": "chokepoint", "target_id": "suez", "param": "capacity_factor", "delta": 0.4},
+      {"target_type": "chokepoint", "target_id": "suez", "param": "cost_multiplier", "delta": 2.2}
+    ]
+  },
+  {
+    "slug": "saudi_cut_40pct",
+    "name": "Saudi Arabia — 40% Production Cut",
+    "description": "Saudi Arabia announces a unilateral 40% cut in crude oil production and exports. Major supply shock for all Saudi importers.",
+    "scenario_type": "country",
+    "disruptions": [
+      {"target_type": "country", "target_id": "SAU", "param": "capacity_factor", "delta": 0.6},
+      {"target_type": "country", "target_id": "SAU", "param": "cost_multiplier", "delta": 1.5}
+    ]
+  }
+]

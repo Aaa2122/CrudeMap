@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "hormuz",
+    "name": "Strait of Hormuz",
+    "lat": 26.6,
+    "lon": 56.3,
+    "oil_transit_mbd": 21.0,
+    "pct_world_trade": 21.0,
+    "risk_level": "critical",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "malacca",
+    "name": "Strait of Malacca",
+    "lat": 2.5,
+    "lon": 101.5,
+    "oil_transit_mbd": 16.0,
+    "pct_world_trade": 16.0,
+    "risk_level": "high",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "suez",
+    "name": "Suez Canal",
+    "lat": 30.7,
+    "lon": 32.3,
+    "oil_transit_mbd": 5.5,
+    "pct_world_trade": 5.5,
+    "risk_level": "high",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "sumed",
+    "name": "SUMED Pipeline",
+    "lat": 30.1,
+    "lon": 31.4,
+    "oil_transit_mbd": 2.5,
+    "pct_world_trade": 2.5,
+    "risk_level": "medium",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "bab_el_mandeb",
+    "name": "Bab el-Mandeb",
+    "lat": 12.6,
+    "lon": 43.4,
+    "oil_transit_mbd": 8.8,
+    "pct_world_trade": 8.5,
+    "risk_level": "critical",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "turkish_straits",
+    "name": "Turkish Straits (Bosphorus)",
+    "lat": 41.1,
+    "lon": 29.0,
+    "oil_transit_mbd": 3.7,
+    "pct_world_trade": 3.7,
+    "risk_level": "medium",
+    "source": "EIA / IEA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "panama",
+    "name": "Panama Canal",
+    "lat": 9.1,
+    "lon": -79.7,
+    "oil_transit_mbd": 0.9,
+    "pct_world_trade": 0.9,
+    "risk_level": "low",
+    "source": "EIA 2024",
+    "source_year": 2024
+  }
+]
