@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgis/postgis:15-3.3
+    environment:
+      POSTGRES_DB: crudemap
+      POSTGRES_USER: crudemap
+      POSTGRES_PASSWORD: crudemap
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crudemap"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    command: bash /app/entrypoint.sh
+    environment:
+      DATABASE_URL: postgresql+asyncpg://crudemap:crudemap@db:5432/crudemap
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

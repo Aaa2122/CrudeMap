@@ -1,0 +1,19 @@
+/.claude/
+/sourceInfo.md
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node / frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Environment files
+.env
+backend/.env
+frontend/.env
+
+# Logs
+*.log
