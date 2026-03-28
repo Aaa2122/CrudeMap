@@ -9,15 +9,15 @@ export interface CountryBrief {
   resilience_score: number
   dependency_score: number
   supplier_hhi: number
-  data_level: string
-}
-
-export interface CountryDetail extends CountryBrief {
   production_oil_mt: number
   import_oil_mt: number
   export_oil_mt: number
   consumption_oil_mt: number
   refining_capacity_mt: number
+  data_level: string
+}
+
+export interface CountryDetail extends CountryBrief {
   source: string | null
   source_year: number | null
   confidence: string | null
@@ -102,3 +102,15 @@ export type SelectableEntity =
   | { type: 'chokepoint'; slug: string }
   | { type: 'infrastructure'; id: number }
   | null
+
+export type CountryMetricKey =
+  | 'dependency_score'
+  | 'production_oil_mt'
+  | 'import_oil_mt'
+  | 'export_oil_mt'
+  | 'consumption_oil_mt'
+  | 'refining_capacity_mt'
+  | 'importance_score'
+  | 'resilience_score'
+
+export type FlowMode = 'selected' | 'top20'

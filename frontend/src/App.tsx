@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
+import type { CountryMetricKey, FlowMode } from './api/types'
 import { useMapStore } from './store/mapStore'
 import { useScenarioStore } from './store/scenarioStore'
 import { useScenarios } from './api/hooks/useScenario'
 import { useCountries } from './api/hooks/useCountries'
 import { WorldMap } from './components/Map/WorldMap'
+import { COUNTRY_METRIC_OPTIONS } from './components/Map/countryMetrics'
 import { SidePanel } from './components/Panels/SidePanel'
 import { SimulationResults } from './components/Simulation/SimulationResults'
 
@@ -14,7 +16,22 @@ const SCENARIO_TYPE_ICON: Record<string, string> = {
 }
 
 export default function App() {
-  const { showFlowLayer, showChokeLayer, showInfraLayer, toggleLayer, viewMode, setViewMode, filters, setFilter, clearFilters } = useMapStore()
+  const {
+    showCountryLayer,
+    showFlowLayer,
+    showChokeLayer,
+    showInfraLayer,
+    toggleLayer,
+    viewMode,
+    setViewMode,
+    selectedMetric,
+    setSelectedMetric,
+    flowMode,
+    setFlowMode,
+    filters,
+    setFilter,
+    clearFilters,
+  } = useMapStore()
   const { activeSlug, loading, activateScenario, clearScenario } = useScenarioStore()
   const { data: scenarios } = useScenarios()
   const { data: countries } = useCountries()
@@ -68,6 +85,7 @@ export default function App() {
 
         {/* Right: layer toggles + icons */}
         <div className="flex items-center gap-3">
+          <LayerToggle label="Countries" icon="public" active={showCountryLayer} onClick={() => toggleLayer('country')} color="#38bdf8" />
           <LayerToggle label="Flows" icon="hub" active={showFlowLayer} onClick={() => toggleLayer('flow')} color="#f59e0b" />
           <LayerToggle label="Chokepoints" icon="anchor" active={showChokeLayer} onClick={() => toggleLayer('choke')} color="#ef4444" />
           <LayerToggle label="Infra" icon="factory" active={showInfraLayer} onClick={() => toggleLayer('infra')} color="#818cf8" />
@@ -126,6 +144,15 @@ export default function App() {
             value={filters.role}
             options={roles}
             onChange={v => setFilter('role', v)}
+          />
+          <MetricSelect
+            value={selectedMetric}
+            onChange={setSelectedMetric}
+          />
+          <FlowModeSelect
+            value={flowMode}
+            disabled={!showFlowLayer}
+            onChange={setFlowMode}
           />
           <div className="flex items-center gap-1.5">
             <span className="text-[10px] text-text-muted uppercase font-bold">Min importance</span>
@@ -306,6 +333,54 @@ function FilterSelect({
       >
         <option value="">All</option>
         {options.map(o => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  )
+}
+
+function MetricSelect({
+  value,
+  onChange,
+}: {
+  value: CountryMetricKey
+  onChange: (value: CountryMetricKey) => void
+}) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="text-[10px] text-text-muted uppercase font-bold">Metric</span>
+      <select
+        value={value}
+        onChange={e => onChange(e.target.value as CountryMetricKey)}
+        className="bg-bg border border-border rounded text-[11px] py-0.5 px-2 text-text focus:ring-1 focus:ring-primary focus:outline-none"
+      >
+        {COUNTRY_METRIC_OPTIONS.map(option => (
+          <option key={option.key} value={option.key}>{option.label}</option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+function FlowModeSelect({
+  value,
+  disabled,
+  onChange,
+}: {
+  value: FlowMode
+  disabled: boolean
+  onChange: (value: FlowMode) => void
+}) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="text-[10px] text-text-muted uppercase font-bold">Flows</span>
+      <select
+        value={value}
+        disabled={disabled}
+        onChange={e => onChange(e.target.value as FlowMode)}
+        className="bg-bg border border-border rounded text-[11px] py-0.5 px-2 text-text focus:ring-1 focus:ring-primary focus:outline-none disabled:opacity-40"
+      >
+        <option value="selected">Selected country</option>
+        <option value="top20">Top 20 routes</option>
       </select>
     </div>
   )

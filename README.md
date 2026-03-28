@@ -61,6 +61,7 @@ frontend/
 ## Extending
 
 - **New data source**: implement `DataLoader` in `backend/etl/loaders/` and pass it to `seed(loader=MyLoader())`
+- **Refresh canonical crude data**: place normalized `energy_institute`, `jodi`, `eia`, and `comtrade` CSV/JSON exports under `backend/etl/sources/`, then run `docker compose run --rm backend python -m etl.refresh --write-seed`
 - **New scenario**: add an entry to `backend/etl/data/scenarios.json` and re-seed
 - **New country**: add to `countries.json` + flows + update `COUNTRY_COORDS` in `FlowLayer.tsx`
 - **Toggle a feature**: edit `frontend/src/config/features.ts`

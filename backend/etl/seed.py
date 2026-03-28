@@ -22,12 +22,22 @@ from app.models.infrastructure import Infrastructure
 from app.models.flow import CountryFlow
 from app.models.scenario import Scenario
 from etl.loaders.json_loader import JsonLoader
+from etl.loaders.refresh_loader import RefreshableOilDataLoader
 from scoring.engine import compute_and_write_scores
+
+
+def build_loader():
+    loader_name = os.getenv("ETL_LOADER", "json").strip().lower()
+    if loader_name in {"json", "static"}:
+        return JsonLoader()
+    if loader_name in {"refresh", "refreshable"}:
+        return RefreshableOilDataLoader()
+    raise ValueError(f"Unsupported ETL_LOADER: {loader_name}")
 
 
 def seed(loader=None):
     if loader is None:
-        loader = JsonLoader()
+        loader = build_loader()
 
     engine = create_engine(settings.sync_database_url, echo=False)
 
@@ -62,7 +72,7 @@ def seed(loader=None):
             session.add(Scenario(**row))
         session.commit()
 
-    print("Running scoring engine...")
+    print(f"Running scoring engine with {loader.describe()}...")
     compute_and_write_scores(engine)
 
     print("✓ Seed complete.")

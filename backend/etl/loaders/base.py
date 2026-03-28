@@ -26,3 +26,6 @@ class DataLoader(ABC):
     @abstractmethod
     def load_scenarios(self) -> list[dict]:
         ...
+
+    def describe(self) -> str:
+        return self.__class__.__name__

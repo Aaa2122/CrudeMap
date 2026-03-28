@@ -1,4 +1,4 @@
-import { ScatterplotLayer } from '@deck.gl/layers'
+import { ScatterplotLayer, TextLayer } from '@deck.gl/layers'
 import useSWR from 'swr'
 import { apiClient } from '../../api/client'
 import type { Infrastructure } from '../../api/types'
@@ -13,6 +13,13 @@ const TYPE_COLOR: Record<string, [number, number, number, number]> = {
   refinery: [236, 72, 153, 180],
 }
 
+const TYPE_EMOJI: Record<string, string> = {
+  terminal: '🛢️',
+  port: '⚓',
+  pipeline: '🔗',
+  refinery: '🏭',
+}
+
 interface Props {
   onHover: (info: any) => void
 }
@@ -23,20 +30,21 @@ export function InfraLayer({ onHover }: Props) {
   if (!infras) return null
 
   const data = infras
-    .filter(i => i.lat && i.lon)
-    .map(i => ({
-      ...i,
-      position: [i.lon!, i.lat!] as [number, number],
-      color: TYPE_COLOR[i.type ?? ''] ?? [150, 150, 150, 180],
-      __tooltip: `${i.name} (${i.type})\n${i.capacity_mt} Mt/yr — ${i.status}`,
+    .filter(infra => infra.lat && infra.lon)
+    .map(infra => ({
+      ...infra,
+      position: [infra.lon!, infra.lat!] as [number, number],
+      color: TYPE_COLOR[infra.type ?? ''] ?? [150, 150, 150, 180],
+      emoji: TYPE_EMOJI[infra.type ?? ''] ?? '📍',
+      __tooltip: `${TYPE_EMOJI[infra.type ?? ''] ?? '📍'} ${infra.name}\n${infra.type ?? 'unknown'}\n${infra.capacity_mt} Mt/yr | ${infra.status}`,
     }))
 
-  return new ScatterplotLayer({
-    id: 'infra-layer',
+  const hitLayer = new ScatterplotLayer({
+    id: 'infra-hit',
     data,
-    getPosition: (d: any) => d.position,
-    getRadius: 40000,
-    getFillColor: (d: any) => d.color,
+    getPosition: (point: any) => point.position,
+    getRadius: 50000,
+    getFillColor: [8, 12, 18, 1],
     stroked: false,
     pickable: true,
     onHover,
@@ -44,4 +52,25 @@ export function InfraLayer({ onHover }: Props) {
       if (info.object) setSelected({ type: 'infrastructure', id: info.object.id })
     },
   })
+
+  const emojiLayer = new TextLayer({
+    id: 'infra-emoji',
+    data,
+    getPosition: (point: any) => point.position,
+    getText: (point: any) => point.emoji,
+    getSize: 18,
+    sizeUnits: 'pixels',
+    getTextAnchor: 'middle',
+    getAlignmentBaseline: 'center',
+    getColor: [255, 255, 255, 245],
+    background: true,
+    getBackgroundColor: (point: any) => [...point.color.slice(0, 3), 165] as [number, number, number, number],
+    getBorderColor: [255, 255, 255, 40],
+    getBorderWidth: 1,
+    getBackgroundPadding: [4, 3],
+    billboard: true,
+    pickable: false,
+  })
+
+  return [hitLayer, emojiLayer]
 }

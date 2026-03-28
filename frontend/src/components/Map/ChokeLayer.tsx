@@ -16,38 +16,76 @@ interface Props {
 
 export function ChokeLayer({ chokepoints, onHover, onClick }: Props) {
   const data = chokepoints
-    .filter(c => c.lat && c.lon)
-    .map(c => ({
-      ...c,
-      position: [c.lon!, c.lat!] as [number, number],
-      color: RISK_COLOR[c.risk_level] ?? RISK_COLOR.medium,
-      radius: Math.max(60000, c.oil_transit_mbd * 25000),
-      __tooltip: `${c.name}\n${c.oil_transit_mbd} Mb/d (${c.pct_world_trade}% world trade)`,
+    .filter(chokepoint => chokepoint.lat && chokepoint.lon)
+    .map(chokepoint => ({
+      ...chokepoint,
+      position: [chokepoint.lon!, chokepoint.lat!] as [number, number],
+      color: RISK_COLOR[chokepoint.risk_level] ?? RISK_COLOR.medium,
+      radius: Math.max(60000, chokepoint.oil_transit_mbd * 25000),
+      emoji: '⚓',
+      __tooltip: `⚓ ${chokepoint.name}\n${chokepoint.oil_transit_mbd} Mb/d\n${chokepoint.pct_world_trade}% of world trade`,
     }))
 
   const haloLayer = new ScatterplotLayer({
     id: 'choke-halo',
     data,
-    getPosition: (d: any) => d.position,
-    getRadius: (d: any) => d.radius * 1.8,
-    getFillColor: (d: any) => [...d.color.slice(0, 3), 30] as [number, number, number, number],
+    getPosition: (point: any) => point.position,
+    getRadius: (point: any) => point.radius * 1.9,
+    getFillColor: (point: any) => [...point.color.slice(0, 3), 30] as [number, number, number, number],
     stroked: false,
     pickable: false,
   })
 
-  const dotLayer = new ScatterplotLayer({
-    id: 'choke-dots',
+  const hitLayer = new ScatterplotLayer({
+    id: 'choke-hit',
     data,
-    getPosition: (d: any) => d.position,
-    getRadius: (d: any) => d.radius,
-    getFillColor: (d: any) => d.color,
-    stroked: true,
-    getLineColor: [255, 255, 255, 60],
-    lineWidthMinPixels: 1,
+    getPosition: (point: any) => point.position,
+    getRadius: (point: any) => point.radius * 1.15,
+    getFillColor: [8, 12, 18, 1],
+    stroked: false,
     pickable: true,
     onHover,
     onClick,
   })
 
-  return [haloLayer, dotLayer]
+  const emojiLayer = new TextLayer({
+    id: 'choke-emoji',
+    data,
+    getPosition: (point: any) => point.position,
+    getText: (point: any) => point.emoji,
+    getSize: 22,
+    sizeUnits: 'pixels',
+    getTextAnchor: 'middle',
+    getAlignmentBaseline: 'center',
+    getColor: [255, 255, 255, 255],
+    background: true,
+    getBackgroundColor: (point: any) => [...point.color.slice(0, 3), 175] as [number, number, number, number],
+    getBorderColor: [255, 255, 255, 65],
+    getBorderWidth: 1,
+    getBackgroundPadding: [6, 4],
+    billboard: true,
+    pickable: false,
+  })
+
+  const labelLayer = new TextLayer({
+    id: 'choke-labels',
+    data,
+    getPosition: (point: any) => point.position,
+    getText: (point: any) => point.name,
+    getSize: 12,
+    sizeUnits: 'pixels',
+    getTextAnchor: 'middle',
+    getAlignmentBaseline: 'top',
+    getPixelOffset: [0, 18],
+    getColor: [229, 238, 245, 230],
+    background: true,
+    getBackgroundColor: [8, 14, 20, 185],
+    getBorderColor: [255, 255, 255, 25],
+    getBorderWidth: 1,
+    getBackgroundPadding: [6, 3],
+    billboard: true,
+    pickable: false,
+  })
+
+  return [haloLayer, hitLayer, emojiLayer, labelLayer]
 }
