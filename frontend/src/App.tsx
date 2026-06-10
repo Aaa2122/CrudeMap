@@ -1,14 +1,11 @@
 import { useMemo, useState } from 'react'
 import { useMapStore, type LayerKey } from './store/mapStore'
-import { useScenarioStore } from './store/scenarioStore'
-import { useScenarios } from './api/hooks/useScenario'
 import { useFlows } from './api/hooks/useFlows'
 import { useInfrastructures } from './api/hooks/useInfrastructures'
 import { useFieldsData } from './api/hooks/useFields'
 import { useChokepoints } from './api/hooks/useChokepoints'
 import { WorldMap } from './components/Map/WorldMap'
 import { SidePanel } from './components/Panels/SidePanel'
-import { SimulationResults } from './components/Simulation/SimulationResults'
 import { CommodityToggle } from './components/Controls/CommodityToggle'
 import { LayersPanel } from './components/Controls/LayersPanel'
 import { SearchBox } from './components/Controls/SearchBox'
@@ -19,8 +16,6 @@ type Tab = 'network' | 'overview'
 
 export default function App() {
   const { commodity, viewMode, setViewMode } = useMapStore()
-  const { activeSlug, loading, activateScenario, clearScenario } = useScenarioStore()
-  const { data: scenarios } = useScenarios()
   const { data: flows } = useFlows(commodity)
   const { data: infras } = useInfrastructures()
   const { data: fields } = useFieldsData()
@@ -129,8 +124,6 @@ export default function App() {
 
           <LayersPanel counts={layerCounts} />
 
-          <SimulationResults />
-
           <div className="absolute inset-y-0 right-0 pointer-events-none">
             <div className="pointer-events-auto h-full">
               <SidePanel />
@@ -144,53 +137,18 @@ export default function App() {
         )}
       </div>
 
-      {/* ── Footer: scenario bar + status ── */}
-      <footer className="shrink-0 border-t border-border bg-surface/90 flex items-center justify-between px-5 h-9 backdrop-blur">
-        <div
-          className="flex items-center gap-1.5 overflow-x-auto"
-          title={isGas ? 'Disruption simulation runs on the oil network — switch to Oil to use scenarios' : undefined}
-        >
-          <span className="caps-label shrink-0 mr-1.5">Scenario</span>
-          <button
-            onClick={clearScenario}
-            disabled={isGas}
-            className={`shrink-0 h-5.5 px-2.5 py-0.5 rounded-sm font-mono text-[10px] transition-colors disabled:opacity-30 ${
-              !activeSlug
-                ? 'bg-text text-bg font-semibold'
-                : 'border border-border text-text-muted hover:text-text'
-            }`}
-          >
-            none
-          </button>
-          {(scenarios ?? []).map(s => {
-            const isActive = activeSlug === s.slug
-            return (
-              <button
-                key={s.slug}
-                onClick={() => isActive ? clearScenario() : activateScenario(s.slug)}
-                disabled={loading || isGas}
-                title={isGas ? 'Oil-network simulation — switch to Oil mode' : s.description ?? ''}
-                className={`shrink-0 px-2.5 py-0.5 rounded-sm font-mono text-[10px] transition-colors disabled:opacity-30 ${
-                  isActive
-                    ? 'bg-disrupted/15 border border-disrupted/60 text-disrupted'
-                    : 'border border-border text-text-muted hover:text-text hover:border-text-muted'
-                }`}
-              >
-                {s.name}
-                {isActive && <span className="ml-1.5 opacity-70">✕</span>}
-              </button>
-            )
-          })}
-          {loading && <span className="font-mono text-[10px] text-text-muted animate-pulse shrink-0">running…</span>}
-        </div>
-
+      {/* ── Footer: status strip ── */}
+      <footer className="shrink-0 border-t border-border bg-surface/90 flex items-center justify-between px-5 h-8 backdrop-blur">
+        <span className="font-mono text-[9px] uppercase tracking-caps text-text-muted">
+          {commodity === 'gas' ? 'Natural gas network' : 'Crude oil network'} · curated 2024 dataset
+        </span>
         <div className="flex items-center gap-4 shrink-0">
           <div className="flex items-center gap-1.5">
             <div className="w-1 h-1 rounded-full bg-safe" />
             <span className="caps-label !text-safe">Live</span>
           </div>
           <div className="h-3 w-px bg-border" />
-          <span className="font-mono text-[9px] text-text-muted">v1.1.0</span>
+          <span className="font-mono text-[9px] text-text-muted">v1.2.0</span>
         </div>
       </footer>
 

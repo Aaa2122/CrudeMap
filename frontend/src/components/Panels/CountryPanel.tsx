@@ -1,9 +1,7 @@
 import { useCountry, useCountryFlows, useCountryChokeExposure, useCountryInfras } from '../../api/hooks/useCountries'
-import { useScenarioStore } from '../../store/scenarioStore'
 import { useMapStore } from '../../store/mapStore'
 import { SupplierBar } from '../Charts/SupplierBar'
 import { RouteDonut } from '../Charts/RouteDonut'
-import { WaterfallImpact } from '../Charts/WaterfallImpact'
 
 function resilience_label(score: number) {
   if (score >= 70) return { label: 'Resilient', color: '#22c55e' }
@@ -18,10 +16,8 @@ export function CountryPanel({ iso }: Props) {
   const { data: flows } = useCountryFlows(iso)
   const { data: exposure } = useCountryChokeExposure(iso)
   const { data: infras } = useCountryInfras(iso)
-  const { result: scenarioResult } = useScenarioStore()
   const { setSelected } = useMapStore()
 
-  const impact = scenarioResult?.impacts.find(i => i.country_iso === iso)
   const resLabel = country ? resilience_label(country.resilience_score) : null
 
   if (isLoading || !country) {
@@ -71,8 +67,8 @@ export function CountryPanel({ iso }: Props) {
             </div>
           </div>
           <div className="bg-bg border border-border rounded p-2 text-center">
-            <div className="text-[10px] text-text-muted uppercase">Importance</div>
-            <div className="text-sm font-bold text-primary">{Math.round(country.importance_score)}/100</div>
+            <div className="text-[10px] text-text-muted uppercase">Refining</div>
+            <div className="text-sm font-bold text-primary">{country.refining_capacity_mt} Mt</div>
           </div>
         </div>
 
@@ -180,13 +176,6 @@ export function CountryPanel({ iso }: Props) {
         </p>
       </div>
 
-      {/* Scenario impact */}
-      {impact && (
-        <>
-          <Divider label="SCENARIO IMPACT" highlight />
-          <WaterfallImpact impact={impact} baseline_import_mt={impact.baseline_import_mt} />
-        </>
-      )}
     </div>
   )
 }

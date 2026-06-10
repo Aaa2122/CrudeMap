@@ -135,14 +135,15 @@ export type SelectableEntity =
   | null
 
 export type CountryMetricKey =
+  | 'oil_balance' // computed: production - consumption (Mt/yr)
   | 'dependency_score'
   | 'production_oil_mt'
   | 'import_oil_mt'
   | 'export_oil_mt'
   | 'consumption_oil_mt'
   | 'refining_capacity_mt'
-  | 'importance_score'
   | 'resilience_score'
+  | 'gas_balance' // computed: production - consumption (bcm/yr)
   | 'dependency_score_gas'
   | 'production_gas_bcm'
   | 'import_gas_bcm'

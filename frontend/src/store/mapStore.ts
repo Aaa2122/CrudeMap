@@ -1,12 +1,6 @@
 import { create } from 'zustand'
 import type { Commodity, CountryMetricKey, SelectableEntity } from '../api/types'
 
-interface Filters {
-  region: string | null
-  role: string | null
-  minImportance: number
-}
-
 type ViewMode = 'flat' | 'globe'
 
 export type LayerKey =
@@ -22,9 +16,10 @@ export type LayerKey =
   | 'shippingLanes'
   | 'containerPorts'
 
+// Country color answers "who pumps vs who burns" by default
 export const DEFAULT_METRIC: Record<Commodity, CountryMetricKey> = {
-  oil: 'production_oil_mt',
-  gas: 'production_gas_bcm',
+  oil: 'oil_balance',
+  gas: 'gas_balance',
 }
 
 interface MapStore {
@@ -33,21 +28,12 @@ interface MapStore {
   layers: Record<LayerKey, boolean>
   viewMode: ViewMode
   selectedMetric: CountryMetricKey
-  filters: Filters
   setSelected: (entity: SelectableEntity) => void
   clearSelected: () => void
   setCommodity: (commodity: Commodity) => void
   toggleLayer: (layer: LayerKey) => void
   setViewMode: (mode: ViewMode) => void
   setSelectedMetric: (metric: CountryMetricKey) => void
-  setFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void
-  clearFilters: () => void
-}
-
-const defaultFilters: Filters = {
-  region: null,
-  role: null,
-  minImportance: 0,
 }
 
 // Lean defaults — refineries and maritime extras are opt-in to keep the
@@ -72,7 +58,6 @@ export const useMapStore = create<MapStore>(set => ({
   layers: { ...defaultLayers },
   viewMode: 'flat',
   selectedMetric: DEFAULT_METRIC.oil,
-  filters: { ...defaultFilters },
 
   setSelected: entity => set({ selected: entity }),
   clearSelected: () => set({ selected: null }),
@@ -86,9 +71,4 @@ export const useMapStore = create<MapStore>(set => ({
 
   toggleLayer: layer =>
     set(state => ({ layers: { ...state.layers, [layer]: !state.layers[layer] } })),
-
-  setFilter: (key, value) =>
-    set(state => ({ filters: { ...state.filters, [key]: value } })),
-
-  clearFilters: () => set({ filters: { ...defaultFilters } }),
 }))

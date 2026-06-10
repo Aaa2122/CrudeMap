@@ -13,7 +13,6 @@ import { useCountries } from '../../api/hooks/useCountries'
 import { useFieldsData } from '../../api/hooks/useFields'
 import { useFlows } from '../../api/hooks/useFlows'
 import { useInfrastructures } from '../../api/hooks/useInfrastructures'
-import { useScenarioStore } from '../../store/scenarioStore'
 import { useMapStore } from '../../store/mapStore'
 
 const RISK_COLOR: Record<string, string> = {
@@ -26,7 +25,6 @@ const RISK_COLOR: Record<string, string> = {
 /** "System Overview" tab — KPIs, top corridors, chokepoint risk board. */
 export function OverviewDashboard() {
   const { commodity, setSelected } = useMapStore()
-  const { result: scenarioResult } = useScenarioStore()
   const { data: countries } = useCountries()
   const { data: flows } = useFlows(commodity)
   const { data: infras } = useInfrastructures()
@@ -214,39 +212,42 @@ export function OverviewDashboard() {
             </div>
           </section>
 
-          {/* Scenario summary */}
+          {/* Net balance leaders */}
           <section className="rounded border border-border bg-surface p-4">
             <h2 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
-              Active scenario
+              Largest net {commodity} importers
             </h2>
-            {scenarioResult ? (
-              <div className="mt-3 space-y-2">
-                <div className="text-sm font-semibold text-disrupted">{scenarioResult.name}</div>
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <Kpi
-                    label="Countries hit"
-                    value={String(scenarioResult.impacts.filter(i => i.stress_score > 0).length)}
-                    unit=""
-                    accent="#ef4444"
-                  />
-                  <Kpi
-                    label="Volume lost"
-                    value={scenarioResult.impacts.reduce((s, i) => s + i.volume_lost_mt, 0).toFixed(0)}
-                    unit="Mt/yr"
-                    accent="#ef4444"
-                  />
-                  <Kpi label="Flows cut" value={String(scenarioResult.disrupted_flow_ids.length)} unit="routes" accent="#ef4444" />
-                </div>
-                <p className="text-[11px] text-text-muted">
-                  Switch to the Network Map tab to see disrupted routes in red.
-                </p>
-              </div>
-            ) : (
-              <p className="mt-3 text-xs text-text-muted">
-                No scenario running. Pick one in the bottom bar to simulate a supply disruption
-                (oil network only).
-              </p>
-            )}
+            <div className="mt-3 space-y-1.5">
+              {[...(countries ?? [])]
+                .map(c => ({
+                  c,
+                  deficit: isGas
+                    ? c.consumption_gas_bcm - c.production_gas_bcm
+                    : c.consumption_oil_mt - c.production_oil_mt,
+                }))
+                .filter(x => x.deficit > 0)
+                .sort((a, b) => b.deficit - a.deficit)
+                .slice(0, 8)
+                .map(({ c, deficit }, i, arr) => (
+                  <button
+                    key={c.iso}
+                    onClick={() => setSelected({ type: 'country', iso: c.iso })}
+                    className="flex w-full items-center gap-2 text-left"
+                  >
+                    <span className="w-9 font-mono text-[10px] text-text-muted">{c.iso}</span>
+                    <span className="w-32 truncate text-xs text-text">{c.name}</span>
+                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-bg">
+                      <span
+                        className="block h-full rounded-full bg-[#3E6E98]"
+                        style={{ width: `${(deficit / (arr[0]?.deficit || 1)) * 100}%` }}
+                      />
+                    </span>
+                    <span className="w-20 text-right font-mono text-[10px] text-text-muted">
+                      −{deficit.toFixed(0)} {isGas ? 'bcm' : 'Mt'}
+                    </span>
+                  </button>
+                ))}
+            </div>
           </section>
         </div>
       </div>

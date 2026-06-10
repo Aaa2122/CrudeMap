@@ -3,7 +3,6 @@ import DeckGL from '@deck.gl/react'
 import { _GlobeView as GlobeView, FlyToInterpolator, MapView, WebMercatorViewport } from '@deck.gl/core'
 import type { Infrastructure } from '../../api/types'
 import { useMapStore } from '../../store/mapStore'
-import { useScenarioStore } from '../../store/scenarioStore'
 import { useFlows } from '../../api/hooks/useFlows'
 import { useChokepoints } from '../../api/hooks/useChokepoints'
 import { useCountries } from '../../api/hooks/useCountries'
@@ -32,6 +31,9 @@ import {
   labelsVisibleAtZoom,
   quantizeZoom,
 } from './lod'
+
+const EMPTY_ID_SET = new Set<number>()
+const EMPTY_SLUG_SET = new Set<string>()
 
 const FLAT_VIEW_STATE = {
   longitude: 18,
@@ -93,7 +95,7 @@ function getFeatureBounds(feature: any): [[number, number], [number, number]] | 
   return [[minLon, minLat], [maxLon, maxLat]]
 }
 
-export // Rough feature centroid + angular span, cached per feature for hemisphere culling
+// Rough feature centroid + angular span, cached per feature for hemisphere culling
 const featureGeomCache = new WeakMap<object, { centroid: [number, number]; spanDeg: number }>()
 
 function getFeatureCullingInfo(feature: any): { centroid: [number, number]; spanDeg: number } {
@@ -134,9 +136,7 @@ export function WorldMap() {
     layers: layerVisibility,
     viewMode,
     selectedMetric,
-    filters,
   } = useMapStore()
-  const { activeSlug, result: scenarioResult } = useScenarioStore()
   const { data: flows } = useFlows(commodity)
   const { data: chokepoints } = useChokepoints()
   const { data: countries } = useCountries()
@@ -180,22 +180,6 @@ export function WorldMap() {
     rafRef.current = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(rafRef.current)
   }, [])
-
-  const disrupted = useMemo(
-    () => new Set(scenarioResult?.disrupted_flow_ids ?? []),
-    [scenarioResult],
-  )
-
-  // Chokepoints named in the active scenario slug pulse red on the map
-  const disruptedChokeSlugs = useMemo(() => {
-    const slugs = new Set<string>()
-    if (activeSlug && scenarioResult) {
-      for (const cp of chokepoints ?? []) {
-        if (activeSlug.includes(cp.slug)) slugs.add(cp.slug)
-      }
-    }
-    return slugs
-  }, [activeSlug, scenarioResult, chokepoints])
 
   const countryCoords = useMemo(() => {
     const coords: Record<string, [number, number]> = {}
@@ -249,23 +233,8 @@ export function WorldMap() {
     return () => observer.disconnect()
   }, [])
 
-  const filteredCountries = useMemo(() => {
-    let list = countries ?? []
-    if (filters.region) list = list.filter(country => country.region === filters.region)
-    if (filters.role) list = list.filter(country => country.role === filters.role)
-    if (filters.minImportance > 0) list = list.filter(country => country.importance_score >= filters.minImportance)
-    return list
-  }, [countries, filters])
-
-  const filteredIsos = useMemo(() => new Set(filteredCountries.map(country => country.iso)), [filteredCountries])
-
-  const filteredFlows = useMemo(() => {
-    let list = flows ?? []
-    if (filters.region || filters.role || filters.minImportance > 0) {
-      list = list.filter(flow => filteredIsos.has(flow.source_iso) || filteredIsos.has(flow.target_iso))
-    }
-    return list
-  }, [flows, filters, filteredIsos])
+  const allCountries = useMemo(() => countries ?? [], [countries])
+  const allFlows = useMemo(() => flows ?? [], [flows])
 
   const selectedCountryIso = selected?.type === 'country' ? selected.iso : null
   const selectedInfraId = selected?.type === 'infrastructure' ? selected.id : null
@@ -275,19 +244,19 @@ export function WorldMap() {
     if (!layerVisibility.flows) return []
 
     if (selectedCountryIso) {
-      return filteredFlows.filter(
+      return allFlows.filter(
         flow => flow.source_iso === selectedCountryIso || flow.target_iso === selectedCountryIso,
       )
     }
 
-    return [...filteredFlows]
+    return [...allFlows]
       .sort((left, right) => {
         const lv = left.commodity === 'gas' ? left.volume_bcm ?? 0 : left.volume_mt
         const rv = right.commodity === 'gas' ? right.volume_bcm ?? 0 : right.volume_mt
         return rv - lv
       })
       .slice(0, TOP_FLOWS_OVERVIEW)
-  }, [layerVisibility.flows, selectedCountryIso, filteredFlows])
+  }, [layerVisibility.flows, selectedCountryIso, allFlows])
 
   // Routed geometry — recomputed only when flows/coords change, never per frame
   const flowPaths = useMemo(
@@ -296,7 +265,7 @@ export function WorldMap() {
   )
 
   // Simulated live fleet sailing the routed flows
-  const fleet = useMemo(() => buildFleet(flowPaths, disrupted), [flowPaths, disrupted])
+  const fleet = useMemo(() => buildFleet(flowPaths, EMPTY_ID_SET), [flowPaths])
 
   // Infrastructure split: pipelines draw as traces, the rest as icons.
   // Commodity filter: oil mode shows oil+products assets, gas mode gas assets.
@@ -335,8 +304,8 @@ export function WorldMap() {
   }, [fields, layerVisibility.fields, matchesCommodity, zoom])
 
   const metricScale = useMemo(
-    () => buildMetricScale(filteredCountries, selectedMetric),
-    [filteredCountries, selectedMetric],
+    () => buildMetricScale(allCountries, selectedMetric),
+    [allCountries, selectedMetric],
   )
 
   useEffect(() => {
@@ -446,7 +415,7 @@ export function WorldMap() {
       renderGeoJson &&
       CountryChoroplethLayer({
         geojson: renderGeoJson,
-        countries: filteredCountries,
+        countries: allCountries,
         selectedMetric,
         selectedIso: selected?.type === 'country' ? selected.iso : null,
         globe: isGlobe,
@@ -483,7 +452,7 @@ export function WorldMap() {
       flowPaths.length > 0 &&
       FlowLayer({
         flowPaths,
-        disrupted,
+        disrupted: EMPTY_ID_SET,
         commodity,
         animTime,
         globe: isGlobe,
@@ -525,7 +494,7 @@ export function WorldMap() {
     layerVisibility.chokepoints &&
       ChokeLayer({
         chokepoints: chokepoints ?? [],
-        disruptedSlugs: disruptedChokeSlugs,
+        disruptedSlugs: EMPTY_SLUG_SET,
         animTime,
         showLabels: zoom >= 2.2,
         globe: isGlobe,

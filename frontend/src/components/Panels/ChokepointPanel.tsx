@@ -1,6 +1,5 @@
 import { useChokepoint, useChokepoints } from '../../api/hooks/useChokepoints'
 import { useFlows } from '../../api/hooks/useFlows'
-import { useScenarioStore } from '../../store/scenarioStore'
 import { useMapStore } from '../../store/mapStore'
 
 const RISK_COLOR: Record<string, string> = {
@@ -16,7 +15,6 @@ export function ChokepointPanel({ slug }: Props) {
   const { data: choke, isLoading } = useChokepoint(slug)
   const { data: allChokepoints } = useChokepoints()
   const { data: allFlows } = useFlows()
-  const { result: scenarioResult } = useScenarioStore()
   const { setSelected } = useMapStore()
 
   if (isLoading || !choke) {
@@ -117,11 +115,6 @@ export function ChokepointPanel({ slug }: Props) {
       </div>
 
       {/* Scenario hint */}
-      {scenarioResult && (
-        <div className="bg-disrupted/10 border border-disrupted/30 rounded p-2 text-xs text-disrupted">
-          Scenario active — click exposed countries to see impact.
-        </div>
-      )}
     </div>
   )
 }
