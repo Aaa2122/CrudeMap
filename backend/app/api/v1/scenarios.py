@@ -28,7 +28,8 @@ async def run_scenario_endpoint(slug: str, session: AsyncSession = Depends(get_s
         raise HTTPException(status_code=404, detail=f"Scenario '{slug}' not found")
 
     countries = await country_repo.list_all()
-    flows = await flow_repo.list_all()
+    # Simulation operates on the oil network only — gas flows must not enter the graph
+    flows = await flow_repo.list_by_commodity("oil")
 
     flows_list = [
         {

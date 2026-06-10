@@ -24,6 +24,10 @@ class DataLoader(ABC):
         ...
 
     @abstractmethod
+    def load_fields(self) -> list[dict]:
+        ...
+
+    @abstractmethod
     def load_scenarios(self) -> list[dict]:
         ...
 

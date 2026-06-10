@@ -64,6 +64,9 @@ class FixtureLoader(DataLoader):
             }
         ]
 
+    def load_fields(self) -> list[dict]:
+        return []
+
     def load_scenarios(self) -> list[dict]:
         return []
 

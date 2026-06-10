@@ -17,6 +17,11 @@ class CountryBrief(BaseModel):
     export_oil_mt: float
     consumption_oil_mt: float
     refining_capacity_mt: float
+    production_gas_bcm: float = 0.0
+    import_gas_bcm: float = 0.0
+    export_gas_bcm: float = 0.0
+    consumption_gas_bcm: float = 0.0
+    dependency_score_gas: float = 0.0
     data_level: str = "A"
 
     model_config = {"from_attributes": True}

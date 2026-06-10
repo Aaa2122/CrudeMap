@@ -171,6 +171,9 @@ class RefreshableOilDataLoader(DataLoader):
             )
         return flows
 
+    def load_fields(self) -> list[dict]:
+        return self.fallback_loader.load_fields()
+
     def load_scenarios(self) -> list[dict]:
         return self.fallback_loader.load_scenarios()
 
@@ -180,6 +183,7 @@ class RefreshableOilDataLoader(DataLoader):
             "flows": self.load_flows(),
             "chokepoints": self.load_chokepoints(),
             "infrastructures": self.load_infrastructures(),
+            "fields": self.load_fields(),
             "scenarios": self.load_scenarios(),
         }
 

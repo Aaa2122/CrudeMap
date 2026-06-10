@@ -21,6 +21,7 @@ from app.models.chokepoint import Chokepoint
 from app.models.infrastructure import Infrastructure
 from app.models.flow import CountryFlow
 from app.models.scenario import Scenario
+from app.models.field import OilGasField
 from etl.loaders.json_loader import JsonLoader
 from etl.loaders.refresh_loader import RefreshableOilDataLoader
 from scoring.engine import compute_and_write_scores
@@ -43,7 +44,7 @@ def seed(loader=None):
 
     with Session(engine) as session:
         print("Truncating tables...")
-        session.execute(text("TRUNCATE country_flows, scenarios, infrastructures, chokepoints, countries RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE country_flows, scenarios, infrastructures, fields, chokepoints, countries RESTART IDENTITY CASCADE"))
         session.commit()
 
         print("Loading chokepoints...")
@@ -65,6 +66,11 @@ def seed(loader=None):
         for row in loader.load_flows():
             # skip flows whose country ISOs aren't in DB
             session.add(CountryFlow(**{k: v for k, v in row.items() if k != "year"}, year=row.get("year", 2024)))
+        session.commit()
+
+        print("Loading fields...")
+        for row in loader.load_fields():
+            session.add(OilGasField(**row))
         session.commit()
 
         print("Loading scenarios...")
