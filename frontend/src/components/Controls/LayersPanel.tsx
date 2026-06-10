@@ -34,6 +34,7 @@ export function LayersPanel({ counts }: Props) {
       title: 'Flows',
       rows: [
         { key: 'flows', label: isGas ? 'Gas trade flows' : 'Oil trade flows', color: isGas ? '#46C8DC' : '#DCA54A', count: counts.flows },
+        { key: 'vessels', label: isGas ? 'LNG carriers (live sim)' : 'Tankers (live sim)', color: isGas ? '#9FE8F2' : '#F2CE8C', count: counts.vessels },
         { key: 'pipelines', label: isGas ? 'Gas pipelines' : 'Oil pipelines', color: isGas ? '#46C8DC' : '#3EA080', count: counts.pipelines },
       ],
     },

@@ -17,6 +17,7 @@ export type IconKey =
   | 'lng_import'
   | 'chokepoint'
   | 'container_port'
+  | 'vessel'
 
 type RGBA = [number, number, number, number]
 
@@ -49,6 +50,9 @@ const GLYPHS: Record<IconKey, string> = {
   // stacked shipping containers on a quay
   container_port:
     '<rect x="3.6" y="12.6" width="7.6" height="4.2" rx="0.6"/><rect x="12.4" y="12.6" width="7.6" height="4.2" rx="0.6"/><rect x="8" y="7.6" width="7.6" height="4.2" rx="0.6"/><rect x="3.6" y="17.8" width="16.4" height="2.2" rx="0.8"/>',
+  // tanker hull seen from above, bow pointing up (rotated by heading)
+  vessel:
+    '<path d="M12 1.6c2.6 2.8 4 5.4 4 8.6v9.2a2.6 2.6 0 01-2.6 2.6h-2.8A2.6 2.6 0 018 19.4v-9.2c0-3.2 1.4-5.8 4-8.6z"/>',
 }
 
 function svgDataUrl(body: string): string {

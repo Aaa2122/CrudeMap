@@ -12,6 +12,7 @@ type ViewMode = 'flat' | 'globe'
 export type LayerKey =
   | 'countries'
   | 'flows'
+  | 'vessels'
   | 'pipelines'
   | 'terminals'
   | 'refineries'
@@ -54,6 +55,7 @@ const defaultFilters: Filters = {
 const defaultLayers: Record<LayerKey, boolean> = {
   countries: true,
   flows: true,
+  vessels: true,
   pipelines: true,
   terminals: true,
   refineries: false,

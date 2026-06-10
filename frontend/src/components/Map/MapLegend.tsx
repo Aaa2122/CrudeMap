@@ -26,6 +26,13 @@ export function MapLegend({ scale, flowsLabel }: Props) {
   if (layers.flows) {
     keyRows.push({ label: 'Trade flows · particles = direction', color: accent, shape: 'line' })
   }
+  if (layers.vessels && layers.flows) {
+    keyRows.push({
+      label: commodity === 'gas' ? 'LNG carriers · simulated live' : 'Tankers · simulated live',
+      color: commodity === 'gas' ? '#9FE8F2' : '#F2CE8C',
+      shape: 'dot',
+    })
+  }
   if (layers.pipelines) {
     keyRows.push(
       commodity === 'gas'
