@@ -14,7 +14,11 @@
     "source": "BP Statistical Review / EI 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 114.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 114.0
   },
   {
     "iso": "RUS",
@@ -31,7 +35,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 620.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 135.0,
+    "consumption_gas_bcm": 480.0
   },
   {
     "iso": "USA",
@@ -48,7 +56,11 @@
     "source": "EIA 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 1035.0,
+    "import_gas_bcm": 80.0,
+    "export_gas_bcm": 190.0,
+    "consumption_gas_bcm": 886.0
   },
   {
     "iso": "CAN",
@@ -65,7 +77,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 190.0,
+    "import_gas_bcm": 22.0,
+    "export_gas_bcm": 85.0,
+    "consumption_gas_bcm": 122.0
   },
   {
     "iso": "IRQ",
@@ -82,7 +98,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ARE",
@@ -99,7 +119,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 56.0,
+    "import_gas_bcm": 20.0,
+    "export_gas_bcm": 8.0,
+    "consumption_gas_bcm": 68.0
   },
   {
     "iso": "IRN",
@@ -116,7 +140,11 @@
     "source": "OPEC / IEA 2024 (estimate)",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 260.0,
+    "import_gas_bcm": 5.0,
+    "export_gas_bcm": 18.0,
+    "consumption_gas_bcm": 245.0
   },
   {
     "iso": "KWT",
@@ -133,7 +161,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 18.0,
+    "import_gas_bcm": 6.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 24.0
   },
   {
     "iso": "NGA",
@@ -150,7 +182,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 47.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 27.0,
+    "consumption_gas_bcm": 20.0
   },
   {
     "iso": "AGO",
@@ -167,7 +203,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "LBY",
@@ -184,7 +224,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 12.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 3.0,
+    "consumption_gas_bcm": 9.0
   },
   {
     "iso": "DZA",
@@ -201,7 +245,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 100.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 52.0,
+    "consumption_gas_bcm": 49.0
   },
   {
     "iso": "NOR",
@@ -218,7 +266,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 117.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 114.0,
+    "consumption_gas_bcm": 4.0
   },
   {
     "iso": "KAZ",
@@ -235,7 +287,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 28.0,
+    "import_gas_bcm": 5.0,
+    "export_gas_bcm": 8.0,
+    "consumption_gas_bcm": 24.0
   },
   {
     "iso": "AZE",
@@ -252,7 +308,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 36.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 24.0,
+    "consumption_gas_bcm": 13.0
   },
   {
     "iso": "BRA",
@@ -269,7 +329,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 14.0,
+    "import_gas_bcm": 20.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 34.0
   },
   {
     "iso": "GUY",
@@ -286,7 +350,11 @@
     "source": "EIA 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "VEN",
@@ -303,7 +371,11 @@
     "source": "OPEC 2024 (estimate)",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 21.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 21.0
   },
   {
     "iso": "MEX",
@@ -320,7 +392,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 38.0,
+    "import_gas_bcm": 60.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 95.0
   },
   {
     "iso": "OMN",
@@ -337,7 +413,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 41.0,
+    "import_gas_bcm": 2.0,
+    "export_gas_bcm": 15.0,
+    "consumption_gas_bcm": 28.0
   },
   {
     "iso": "ECU",
@@ -354,7 +434,11 @@
     "source": "OPEC 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CHN",
@@ -371,7 +455,11 @@
     "source": "BP Statistical Review / EI 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 235.0,
+    "import_gas_bcm": 165.0,
+    "export_gas_bcm": 5.0,
+    "consumption_gas_bcm": 400.0
   },
   {
     "iso": "IND",
@@ -388,7 +476,11 @@
     "source": "BP Statistical Review / EI 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 32.0,
+    "import_gas_bcm": 33.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 64.0
   },
   {
     "iso": "JPN",
@@ -405,7 +497,11 @@
     "source": "BP Statistical Review / EI 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 2.0,
+    "import_gas_bcm": 88.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 90.0
   },
   {
     "iso": "KOR",
@@ -422,7 +518,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 60.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 60.0
   },
   {
     "iso": "SGP",
@@ -439,7 +539,11 @@
     "source": "EI 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 12.0,
+    "export_gas_bcm": 2.0,
+    "consumption_gas_bcm": 10.0
   },
   {
     "iso": "NLD",
@@ -456,7 +560,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 14.0,
+    "import_gas_bcm": 26.0,
+    "export_gas_bcm": 9.0,
+    "consumption_gas_bcm": 30.0
   },
   {
     "iso": "ITA",
@@ -473,7 +581,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 3.0,
+    "import_gas_bcm": 59.0,
+    "export_gas_bcm": 1.0,
+    "consumption_gas_bcm": 61.0
   },
   {
     "iso": "ESP",
@@ -490,7 +602,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 33.0,
+    "export_gas_bcm": 3.0,
+    "consumption_gas_bcm": 30.0
   },
   {
     "iso": "FRA",
@@ -507,7 +623,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 41.0,
+    "export_gas_bcm": 7.0,
+    "consumption_gas_bcm": 36.0
   },
   {
     "iso": "TUR",
@@ -524,7 +644,11 @@
     "source": "Eurostat / EIA 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 1.0,
+    "import_gas_bcm": 52.0,
+    "export_gas_bcm": 1.0,
+    "consumption_gas_bcm": 52.0
   },
   {
     "iso": "DEU",
@@ -541,7 +665,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 4.0,
+    "import_gas_bcm": 77.0,
+    "export_gas_bcm": 5.0,
+    "consumption_gas_bcm": 76.0
   },
   {
     "iso": "POL",
@@ -558,7 +686,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 4.0,
+    "import_gas_bcm": 14.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 18.0
   },
   {
     "iso": "GBR",
@@ -575,7 +707,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 34.0,
+    "import_gas_bcm": 45.0,
+    "export_gas_bcm": 8.0,
+    "consumption_gas_bcm": 70.0
   },
   {
     "iso": "BEL",
@@ -592,7 +728,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "high",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 22.0,
+    "export_gas_bcm": 8.0,
+    "consumption_gas_bcm": 15.0
   },
   {
     "iso": "GRC",
@@ -609,7 +749,11 @@
     "source": "Eurostat 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 7.0,
+    "export_gas_bcm": 1.0,
+    "consumption_gas_bcm": 6.0
   },
   {
     "iso": "EGY",
@@ -626,7 +770,11 @@
     "source": "EIA 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 59.0,
+    "import_gas_bcm": 4.0,
+    "export_gas_bcm": 6.0,
+    "consumption_gas_bcm": 60.0
   },
   {
     "iso": "MYS",
@@ -643,7 +791,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 74.0,
+    "import_gas_bcm": 3.0,
+    "export_gas_bcm": 35.0,
+    "consumption_gas_bcm": 43.0
   },
   {
     "iso": "THA",
@@ -660,7 +812,11 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 32.0,
+    "import_gas_bcm": 14.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 47.0
   },
   {
     "iso": "IDN",
@@ -677,9 +833,12 @@
     "source": "BP Statistical Review 2024",
     "source_year": 2024,
     "confidence": "medium",
-    "data_level": "B"
+    "data_level": "B",
+    "production_gas_bcm": 60.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 19.0,
+    "consumption_gas_bcm": 41.0
   },
-
   {
     "iso": "QAT",
     "name": "Qatar",
@@ -695,7 +854,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 181.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 130.0,
+    "consumption_gas_bcm": 48.0
   },
   {
     "iso": "BHR",
@@ -712,7 +875,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 17.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 17.0
   },
   {
     "iso": "YEM",
@@ -729,7 +896,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "JOR",
@@ -746,7 +917,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "LBN",
@@ -763,7 +938,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SYR",
@@ -780,7 +959,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ISR",
@@ -797,9 +980,12 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 22.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 10.0,
+    "consumption_gas_bcm": 12.0
   },
-
   {
     "iso": "ZAF",
     "name": "South Africa",
@@ -815,7 +1001,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "COG",
@@ -832,7 +1022,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "GAB",
@@ -849,7 +1043,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "GNQ",
@@ -866,7 +1064,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 6.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 5.0,
+    "consumption_gas_bcm": 1.0
   },
   {
     "iso": "TCD",
@@ -883,7 +1085,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CMR",
@@ -900,7 +1106,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SDN",
@@ -917,7 +1127,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SSD",
@@ -934,7 +1148,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CIV",
@@ -951,7 +1169,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "GHA",
@@ -968,7 +1190,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SEN",
@@ -985,7 +1211,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "TUN",
@@ -1002,7 +1232,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MAR",
@@ -1019,7 +1253,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MOZ",
@@ -1036,7 +1274,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "TZA",
@@ -1053,7 +1295,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "KEN",
@@ -1070,7 +1316,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ETH",
@@ -1087,7 +1337,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "UGA",
@@ -1104,7 +1358,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "NAM",
@@ -1121,7 +1379,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "DJI",
@@ -1138,9 +1400,12 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
-
   {
     "iso": "AUT",
     "name": "Austria",
@@ -1156,7 +1421,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CHE",
@@ -1173,7 +1442,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CZE",
@@ -1190,7 +1463,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "DNK",
@@ -1207,7 +1484,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "FIN",
@@ -1224,7 +1505,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "HUN",
@@ -1241,7 +1526,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "IRL",
@@ -1258,7 +1547,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "PRT",
@@ -1275,7 +1568,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ROU",
@@ -1292,7 +1589,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SVK",
@@ -1309,7 +1610,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SVN",
@@ -1326,7 +1631,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SWE",
@@ -1343,7 +1652,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "HRV",
@@ -1360,7 +1673,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "BGR",
@@ -1377,7 +1694,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SRB",
@@ -1394,7 +1715,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "UKR",
@@ -1411,7 +1736,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 18.0,
+    "import_gas_bcm": 2.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 20.0
   },
   {
     "iso": "BLR",
@@ -1428,7 +1757,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "LTU",
@@ -1445,7 +1778,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "LVA",
@@ -1462,7 +1799,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "EST",
@@ -1479,7 +1820,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CYP",
@@ -1496,7 +1841,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ISL",
@@ -1513,7 +1862,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MLT",
@@ -1530,7 +1883,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MNE",
@@ -1547,7 +1904,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MKD",
@@ -1564,7 +1925,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ALB",
@@ -1581,7 +1946,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "BIH",
@@ -1598,9 +1967,12 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
-
   {
     "iso": "TWN",
     "name": "Taiwan",
@@ -1616,7 +1988,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 27.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 27.0
   },
   {
     "iso": "VNM",
@@ -1633,7 +2009,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 7.0,
+    "import_gas_bcm": 1.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 8.0
   },
   {
     "iso": "PHL",
@@ -1650,7 +2030,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MMR",
@@ -1667,7 +2051,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 16.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 12.0,
+    "consumption_gas_bcm": 4.0
   },
   {
     "iso": "PAK",
@@ -1684,7 +2072,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 34.0,
+    "import_gas_bcm": 9.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 43.0
   },
   {
     "iso": "BGD",
@@ -1701,7 +2093,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 23.0,
+    "import_gas_bcm": 5.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 28.0
   },
   {
     "iso": "LKA",
@@ -1718,7 +2114,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "KHM",
@@ -1735,7 +2135,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "MNG",
@@ -1752,7 +2156,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "BRN",
@@ -1769,7 +2177,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 11.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 7.0,
+    "consumption_gas_bcm": 4.0
   },
   {
     "iso": "NZL",
@@ -1786,7 +2198,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "AUS",
@@ -1803,7 +2219,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 152.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 110.0,
+    "consumption_gas_bcm": 42.0
   },
   {
     "iso": "PNG",
@@ -1820,7 +2240,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 12.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 11.0,
+    "consumption_gas_bcm": 1.0
   },
   {
     "iso": "FJI",
@@ -1837,7 +2261,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "NPL",
@@ -1854,7 +2282,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "AFG",
@@ -1871,7 +2303,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "UZB",
@@ -1888,7 +2324,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 47.0,
+    "import_gas_bcm": 1.0,
+    "export_gas_bcm": 3.0,
+    "consumption_gas_bcm": 45.0
   },
   {
     "iso": "TKM",
@@ -1905,7 +2345,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 81.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 42.0,
+    "consumption_gas_bcm": 39.0
   },
   {
     "iso": "KGZ",
@@ -1922,7 +2366,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "GEO",
@@ -1939,7 +2387,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "ARM",
@@ -1956,9 +2408,12 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
-
   {
     "iso": "ARG",
     "name": "Argentina",
@@ -1974,7 +2429,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 41.0,
+    "import_gas_bcm": 6.0,
+    "export_gas_bcm": 3.0,
+    "consumption_gas_bcm": 46.0
   },
   {
     "iso": "CHL",
@@ -1991,7 +2450,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 1.0,
+    "import_gas_bcm": 6.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 7.0
   },
   {
     "iso": "COL",
@@ -2008,7 +2471,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 12.0,
+    "import_gas_bcm": 1.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 13.0
   },
   {
     "iso": "PER",
@@ -2025,7 +2492,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 13.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 5.0,
+    "consumption_gas_bcm": 8.0
   },
   {
     "iso": "BOL",
@@ -2042,7 +2513,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 13.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 10.0,
+    "consumption_gas_bcm": 3.0
   },
   {
     "iso": "PRY",
@@ -2059,7 +2534,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "URY",
@@ -2076,7 +2555,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SUR",
@@ -2093,7 +2576,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "TTO",
@@ -2110,7 +2597,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "low",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 26.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 17.0,
+    "consumption_gas_bcm": 9.0
   },
   {
     "iso": "CUB",
@@ -2127,7 +2618,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "DOM",
@@ -2144,7 +2639,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "HTI",
@@ -2161,7 +2660,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "JAM",
@@ -2178,7 +2681,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "CRI",
@@ -2195,7 +2702,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "PAN",
@@ -2212,7 +2723,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "GTM",
@@ -2229,7 +2744,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "HND",
@@ -2246,7 +2765,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "SLV",
@@ -2263,7 +2786,11 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   },
   {
     "iso": "NIC",
@@ -2280,6 +2807,10 @@
     "source": "EI/IEA estimates 2024",
     "source_year": 2024,
     "confidence": "estimated",
-    "data_level": "A"
+    "data_level": "A",
+    "production_gas_bcm": 0.0,
+    "import_gas_bcm": 0.0,
+    "export_gas_bcm": 0.0,
+    "consumption_gas_bcm": 0.0
   }
 ]

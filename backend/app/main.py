@@ -6,6 +6,7 @@ from app.api.v1.flows import router as flows_router
 from app.api.v1.chokepoints import router as chokepoints_router
 from app.api.v1.infrastructures import router as infrastructures_router
 from app.api.v1.scenarios import router as scenarios_router
+from app.api.v1.fields import router as fields_router
 
 app = FastAPI(
     title="CrudeMap API",
@@ -28,6 +29,7 @@ app.include_router(flows_router, prefix=API_PREFIX)
 app.include_router(chokepoints_router, prefix=API_PREFIX)
 app.include_router(infrastructures_router, prefix=API_PREFIX)
 app.include_router(scenarios_router, prefix=API_PREFIX)
+app.include_router(fields_router, prefix=API_PREFIX)
 
 
 @app.get("/health")

@@ -12,17 +12,22 @@ class CountryBrief(BaseModel):
     resilience_score: float
     dependency_score: float
     supplier_hhi: float
+    production_oil_mt: float
+    import_oil_mt: float
+    export_oil_mt: float
+    consumption_oil_mt: float
+    refining_capacity_mt: float
+    production_gas_bcm: float = 0.0
+    import_gas_bcm: float = 0.0
+    export_gas_bcm: float = 0.0
+    consumption_gas_bcm: float = 0.0
+    dependency_score_gas: float = 0.0
     data_level: str = "A"
 
     model_config = {"from_attributes": True}
 
 
 class CountryDetail(CountryBrief):
-    production_oil_mt: float
-    import_oil_mt: float
-    export_oil_mt: float
-    consumption_oil_mt: float
-    refining_capacity_mt: float
     source: str | None
     source_year: int | None
     confidence: str | None

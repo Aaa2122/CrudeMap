@@ -19,10 +19,17 @@ class Country(Base):
     consumption_oil_mt = Column(Float, default=0.0)
     refining_capacity_mt = Column(Float, default=0.0)
 
+    # Natural gas profile (bcm/yr, 2024 estimates)
+    production_gas_bcm = Column(Float, default=0.0)
+    import_gas_bcm = Column(Float, default=0.0)
+    export_gas_bcm = Column(Float, default=0.0)
+    consumption_gas_bcm = Column(Float, default=0.0)
+
     # Computed scores (written at seed time by scoring engine)
     importance_score = Column(Float, default=0.0)
     resilience_score = Column(Float, default=0.0)
-    dependency_score = Column(Float, default=0.0)   # import / consumption
+    dependency_score = Column(Float, default=0.0)   # oil: import / consumption
+    dependency_score_gas = Column(Float, default=0.0)  # gas: import / consumption
     supplier_hhi = Column(Float, default=0.0)
 
     # Data coverage level: "B" = detailed (infra), "A" = macro only

@@ -9,6 +9,7 @@ __pycache__/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
+frontend/tsconfig.tsbuildinfo
 
 # Environment files
 .env

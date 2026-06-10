@@ -1,100 +1,115 @@
-import { ArcLayer } from '@deck.gl/layers'
-import { GreatCircleLayer } from '@deck.gl/geo-layers'
-import type { Flow } from '../../api/types'
+import { PathLayer } from '@deck.gl/layers'
+import { TripsLayer } from '@deck.gl/geo-layers'
+import type { Commodity } from '../../api/types'
+import type { FlowPathDatum } from './flowGeometry'
+import { globeParams, pathVisibleOnGlobe } from './globeCulling'
+
+type RGBA = [number, number, number, number]
+
+const OIL_BASE: RGBA = [220, 165, 74, 62] // restrained amber underlay
+const OIL_HEAD: RGBA = [242, 206, 140, 220]
+const GAS_BASE: RGBA = [70, 200, 220, 58] // restrained cyan underlay
+const GAS_HEAD: RGBA = [159, 232, 242, 220]
+const DISRUPTED_BASE: RGBA = [217, 84, 77, 88]
+const DISRUPTED_HEAD: RGBA = [240, 130, 124, 225]
 
 interface Props {
-  flows: Flow[]
+  flowPaths: FlowPathDatum[]
   disrupted: Set<number>
-  countryCoords: Record<string, [number, number]>
+  commodity: Commodity
+  animTime: number
+  globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
   onClick: (info: any) => void
-  globe?: boolean
-  animTime?: number  // 0-1 cycling value for pulse animation
 }
 
-export function FlowLayer({ flows, disrupted, countryCoords, onHover, onClick, globe, animTime = 0 }: Props) {
-  const data = flows
-    .map(f => {
-      const src = countryCoords[f.source_iso]
-      const tgt = countryCoords[f.target_iso]
-      if (!src || !tgt) return null
-      const isDisrupted = disrupted.has(f.id)
-      // Distance factor for arc height (globe mode)
-      const dx = tgt[0] - src[0]
-      const dy = tgt[1] - src[1]
-      const dist = Math.sqrt(dx * dx + dy * dy)
-      return {
-        ...f,
-        sourcePosition: src,
-        targetPosition: tgt,
-        isDisrupted,
-        dist,
-        __tooltip: `${f.source_iso} → ${f.target_iso}: ${f.volume_mt} Mt/yr`,
-      }
-    })
-    .filter(Boolean)
+function volumeOf(d: FlowPathDatum): number {
+  return d.flow.commodity === 'gas' ? d.flow.volume_bcm ?? 0 : d.flow.volume_mt
+}
 
-  // Animated alpha pulse: each flow has a phase offset based on its id
-  const pulseAlpha = (base: number, id: number) => {
-    const phase = ((animTime + (id % 17) / 17) % 1) * Math.PI * 2
-    const wave = Math.sin(phase) * 0.35 + 0.65  // oscillates 0.3 → 1.0
-    return Math.round(base * wave)
-  }
+function formatVolume(d: FlowPathDatum): string {
+  return d.flow.commodity === 'gas'
+    ? `${(d.flow.volume_bcm ?? 0).toFixed(1)} bcm/yr`
+    : `${d.flow.volume_mt.toFixed(1)} Mt/yr`
+}
 
-  if (globe) {
-    // 3D globe: tall arcs that fly over the surface
-    return new ArcLayer({
-      id: 'flow-arcs-globe',
-      data,
-      getSourcePosition: (d: any) => d.sourcePosition,
-      getTargetPosition: (d: any) => d.targetPosition,
-      getSourceColor: (d: any) =>
-        d.isDisrupted
-          ? [239, 68, 68, pulseAlpha(230, d.id)]
-          : [245, 158, 11, pulseAlpha(200, d.id)],
-      getTargetColor: (d: any) =>
-        d.isDisrupted
-          ? [239, 68, 68, pulseAlpha(120, d.id)]
-          : [245, 158, 11, pulseAlpha(100, d.id)],
-      getHeight: (d: any) => Math.min(0.35, d.dist / 350),
-      getWidth: (d: any) => Math.max(1, Math.log(d.volume_mt + 1) * 0.8),
-      greatCircle: true,
-      numSegments: 50,
-      widthScale: 1,
-      widthUnits: 'pixels',
-      pickable: true,
-      onHover,
-      onClick,
-      updateTriggers: {
-        getSourceColor: [disrupted.size, animTime],
-        getTargetColor: [disrupted.size, animTime],
-      },
-    })
-  }
+/**
+ * Trade flows as chokepoint-routed paths: a static underlay shows the full
+ * route, and TripsLayer particles run source -> target so direction is
+ * readable at a glance. Disrupted flows turn red with frozen particles.
+ */
+export function FlowLayer({ flowPaths, disrupted, commodity, animTime, globe, cameraCenter, onHover, onClick }: Props) {
+  const visiblePaths = globe
+    ? flowPaths.filter(d => pathVisibleOnGlobe(d.path, cameraCenter))
+    : flowPaths
+  const data = visiblePaths.map(d => {
+    const isDisrupted = disrupted.has(d.flow.id)
+    const viaText = d.flow.via_chokepoints?.length
+      ? `via ${d.flow.via_chokepoints.join(', ')}`
+      : d.flow.transport_mode === 'pipeline'
+      ? 'pipeline'
+      : 'direct route'
+    return {
+      ...d,
+      isDisrupted,
+      width: 0.7 + Math.min(2.2, Math.log1p(volumeOf(d)) * 0.5),
+      __tooltip: `${d.flow.source_iso} -> ${d.flow.target_iso}${isDisrupted ? ' — DISRUPTED' : ''}\n${formatVolume(d)} ${commodity}\n${viaText}`,
+    }
+  })
 
-  // 2D flat map: great circle geodesic curves (natural-looking on Mercator)
-  return new GreatCircleLayer({
-    id: 'flow-arcs-flat',
+  const baseColor = commodity === 'gas' ? GAS_BASE : OIL_BASE
+  const headColor = commodity === 'gas' ? GAS_HEAD : OIL_HEAD
+
+  const routeLayer = new PathLayer({
+    id: 'flow-routes',
     data,
-    getSourcePosition: (d: any) => d.sourcePosition,
-    getTargetPosition: (d: any) => d.targetPosition,
-    getSourceColor: (d: any) =>
-      d.isDisrupted
-        ? [239, 68, 68, pulseAlpha(210, d.id)]
-        : [245, 158, 11, pulseAlpha(170, d.id)],
-    getTargetColor: (d: any) =>
-      d.isDisrupted
-        ? [239, 68, 68, pulseAlpha(90, d.id)]
-        : [245, 158, 11, pulseAlpha(70, d.id)],
-    getWidth: (d: any) => Math.max(0.8, Math.log(d.volume_mt + 1) * 0.5),
-    widthScale: 1,
+    getPath: (d: any) => d.path,
+    getColor: (d: any) => (d.isDisrupted ? DISRUPTED_BASE : baseColor),
+    getWidth: (d: any) => d.width,
     widthUnits: 'pixels',
+    widthMinPixels: 1,
+    jointRounded: true,
+    capRounded: true,
     pickable: true,
+    autoHighlight: true,
+    highlightColor: [255, 255, 255, 110],
     onHover,
     onClick,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
-      getSourceColor: [disrupted.size, animTime],
-      getTargetColor: [disrupted.size, animTime],
+      getColor: [disrupted.size, commodity],
     },
   })
+
+  // Per-flow phase offset (id % 17) staggers departures; disrupted flows
+  // freeze (currentTime pinned) to read as "stopped".
+  // The shared clock cycles in 60s; particles run 10 cycles per clock cycle.
+  const particleClock = (animTime * 10) % 1
+  const LOOP = 2000
+  const particleLayers = [false, true].map(
+    isDisruptedGroup =>
+      new TripsLayer({
+        id: isDisruptedGroup ? 'flow-particles-disrupted' : 'flow-particles',
+        data: data.filter((d: any) => d.isDisrupted === isDisruptedGroup),
+        getPath: (d: any) => d.path,
+        getTimestamps: (d: any) => {
+          const offset = ((d.flow.id % 17) / 17) * 1000
+          return d.timestamps.map((t: number) => t + offset)
+        },
+        getColor: isDisruptedGroup ? DISRUPTED_HEAD : headColor,
+        getWidth: (d: any) => d.width + 0.8,
+        widthUnits: 'pixels',
+        widthMinPixels: 1.5,
+        capRounded: true,
+        jointRounded: true,
+        fadeTrail: true,
+        trailLength: 220,
+        currentTime: isDisruptedGroup ? 700 : particleClock * LOOP,
+        pickable: false,
+        parameters: globeParams(globe) as any,
+      }),
+  )
+
+  return [routeLayer, ...particleLayers]
 }

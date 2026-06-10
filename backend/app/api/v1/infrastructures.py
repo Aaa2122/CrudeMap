@@ -11,15 +11,19 @@ router = APIRouter(prefix="/infrastructures", tags=["infrastructures"])
 @router.get("", response_model=list[InfrastructureOut])
 async def list_infrastructures(
     country: str | None = Query(None, description="Filter by country ISO"),
-    type: str | None = Query(None, description="Filter by type (port/terminal/pipeline)"),
+    type: str | None = Query(None, description="Filter by type (port/terminal/pipeline/refinery/lng_terminal)"),
+    commodity: str | None = Query(None, description="Filter by commodity (oil/gas)"),
     session: AsyncSession = Depends(get_session),
 ):
     repo = InfraRepository(session)
     if country:
-        return await repo.list_by_country(country)
-    items = await repo.list_all()
+        items = await repo.list_by_country(country)
+    else:
+        items = await repo.list_all()
     if type:
         items = [i for i in items if i.type == type]
+    if commodity:
+        items = [i for i in items if i.commodity == commodity]
     return items
 
 

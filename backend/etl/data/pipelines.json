@@ -1,0 +1,1733 @@
+[
+  {
+    "name": "Druzhba Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "RUS",
+    "operator": "Transneft",
+    "commodity": "oil",
+    "capacity_mt": 66.0,
+    "capacity_bcm": null,
+    "status": "limited",
+    "lat": 53.2,
+    "lon": 34.4,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          52.3,
+          54.9
+        ],
+        [
+          48.0,
+          53.8
+        ],
+        [
+          44.0,
+          53.3
+        ],
+        [
+          39.0,
+          53.0
+        ],
+        [
+          34.4,
+          53.2
+        ],
+        [
+          29.2,
+          52.0
+        ],
+        [
+          23.7,
+          52.1
+        ],
+        [
+          19.7,
+          52.55
+        ],
+        [
+          14.3,
+          53.06
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "ESPO Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "RUS",
+    "operator": "Transneft",
+    "commodity": "oil",
+    "capacity_mt": 80.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 54.0,
+    "lon": 123.9,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          98.0,
+          55.9
+        ],
+        [
+          105.0,
+          56.5
+        ],
+        [
+          113.0,
+          56.0
+        ],
+        [
+          119.0,
+          55.0
+        ],
+        [
+          123.9,
+          54.0
+        ],
+        [
+          129.0,
+          49.5
+        ],
+        [
+          131.5,
+          45.5
+        ],
+        [
+          133.05,
+          42.74
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "ESPO China Spur (Skovorodino-Daqing)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "RUS",
+    "operator": "Transneft / CNPC",
+    "commodity": "oil",
+    "capacity_mt": 30.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 50.2,
+    "lon": 124.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          123.9,
+          54.0
+        ],
+        [
+          125.3,
+          52.0
+        ],
+        [
+          124.5,
+          50.2
+        ],
+        [
+          125.0,
+          48.0
+        ],
+        [
+          125.0,
+          46.6
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Caspian Pipeline Consortium (CPC)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "KAZ",
+    "operator": "CPC Consortium",
+    "commodity": "oil",
+    "capacity_mt": 67.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 45.7,
+    "lon": 44.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          53.4,
+          46.15
+        ],
+        [
+          51.9,
+          47.1
+        ],
+        [
+          48.0,
+          46.3
+        ],
+        [
+          44.0,
+          45.7
+        ],
+        [
+          40.5,
+          45.4
+        ],
+        [
+          37.8,
+          44.72
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Baku-Tbilisi-Ceyhan (BTC)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "AZE",
+    "operator": "BP",
+    "commodity": "oil",
+    "capacity_mt": 50.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 41.0,
+    "lon": 43.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          49.9,
+          40.4
+        ],
+        [
+          46.5,
+          41.3
+        ],
+        [
+          44.8,
+          41.7
+        ],
+        [
+          43.0,
+          41.0
+        ],
+        [
+          41.3,
+          39.9
+        ],
+        [
+          38.5,
+          38.5
+        ],
+        [
+          35.57,
+          36.88
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Keystone Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "CAN",
+    "operator": "TC Energy",
+    "commodity": "oil",
+    "capacity_mt": 35.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 40.0,
+    "lon": -97.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -111.3,
+          52.67
+        ],
+        [
+          -104.6,
+          50.45
+        ],
+        [
+          -100.5,
+          46.5
+        ],
+        [
+          -97.0,
+          40.0
+        ],
+        [
+          -96.77,
+          35.98
+        ],
+        [
+          -95.3,
+          29.76
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Trans Mountain (TMX)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "CAN",
+    "operator": "Trans Mountain Corp",
+    "commodity": "oil",
+    "capacity_mt": 44.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 50.67,
+    "lon": -120.3,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -113.5,
+          53.55
+        ],
+        [
+          -116.5,
+          52.0
+        ],
+        [
+          -120.3,
+          50.67
+        ],
+        [
+          -123.0,
+          49.27
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Enbridge Mainline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "CAN",
+    "operator": "Enbridge",
+    "commodity": "oil",
+    "capacity_mt": 145.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 49.5,
+    "lon": -100.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -113.5,
+          53.55
+        ],
+        [
+          -108.0,
+          52.0
+        ],
+        [
+          -104.6,
+          50.45
+        ],
+        [
+          -100.0,
+          49.5
+        ],
+        [
+          -97.3,
+          49.0
+        ],
+        [
+          -92.1,
+          46.72
+        ],
+        [
+          -87.9,
+          41.9
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Colonial Pipeline",
+    "type": "pipeline",
+    "subtype": "product_pipeline",
+    "country_iso": "USA",
+    "operator": "Colonial Pipeline Co.",
+    "commodity": "products",
+    "capacity_mt": 125.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 33.75,
+    "lon": -84.39,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -95.3,
+          29.76
+        ],
+        [
+          -91.0,
+          30.5
+        ],
+        [
+          -86.8,
+          32.4
+        ],
+        [
+          -84.39,
+          33.75
+        ],
+        [
+          -79.79,
+          36.07
+        ],
+        [
+          -77.0,
+          38.6
+        ],
+        [
+          -74.25,
+          40.62
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Trans-Alaska Pipeline (TAPS)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "USA",
+    "operator": "Alyeska",
+    "commodity": "oil",
+    "capacity_mt": 25.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 64.84,
+    "lon": -147.7,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -148.7,
+          70.32
+        ],
+        [
+          -148.6,
+          68.0
+        ],
+        [
+          -147.7,
+          64.84
+        ],
+        [
+          -145.5,
+          63.0
+        ],
+        [
+          -146.35,
+          61.13
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Dakota Access Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "USA",
+    "operator": "Energy Transfer",
+    "commodity": "oil",
+    "capacity_mt": 28.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 44.0,
+    "lon": -96.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -103.2,
+          47.8
+        ],
+        [
+          -100.5,
+          46.0
+        ],
+        [
+          -96.5,
+          44.0
+        ],
+        [
+          -91.5,
+          41.5
+        ],
+        [
+          -88.0,
+          39.0
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "East-West Pipeline (Petroline)",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "SAU",
+    "operator": "Saudi Aramco",
+    "commodity": "oil",
+    "capacity_mt": 250.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 24.3,
+    "lon": 43.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          49.67,
+          25.93
+        ],
+        [
+          46.7,
+          24.8
+        ],
+        [
+          43.0,
+          24.3
+        ],
+        [
+          40.5,
+          24.1
+        ],
+        [
+          38.05,
+          24.09
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "SUMED Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "EGY",
+    "operator": "Arab Petroleum Pipelines",
+    "commodity": "oil",
+    "capacity_mt": 117.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 30.6,
+    "lon": 30.3,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          32.35,
+          29.6
+        ],
+        [
+          31.2,
+          30.0
+        ],
+        [
+          30.3,
+          30.6
+        ],
+        [
+          29.62,
+          31.06
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Kirkuk-Ceyhan Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "IRQ",
+    "operator": "North Oil Co. / BOTAS",
+    "commodity": "oil",
+    "capacity_mt": 35.0,
+    "capacity_bcm": null,
+    "status": "limited",
+    "lat": 37.0,
+    "lon": 40.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          44.39,
+          35.47
+        ],
+        [
+          42.5,
+          36.5
+        ],
+        [
+          40.0,
+          37.0
+        ],
+        [
+          37.5,
+          37.0
+        ],
+        [
+          35.57,
+          36.88
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Chad-Cameroon Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "TCD",
+    "operator": "ExxonMobil",
+    "commodity": "oil",
+    "capacity_mt": 11.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 4.5,
+    "lon": 12.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          16.8,
+          8.6
+        ],
+        [
+          14.0,
+          7.0
+        ],
+        [
+          12.0,
+          4.5
+        ],
+        [
+          9.91,
+          2.93
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Kazakhstan-China Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "KAZ",
+    "operator": "KazTransOil / CNPC",
+    "commodity": "oil",
+    "capacity_mt": 10.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 48.7,
+    "lon": 73.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          51.9,
+          47.1
+        ],
+        [
+          58.0,
+          48.0
+        ],
+        [
+          64.0,
+          48.5
+        ],
+        [
+          73.0,
+          48.7
+        ],
+        [
+          79.0,
+          46.5
+        ],
+        [
+          82.57,
+          45.17
+        ],
+        [
+          84.9,
+          44.3
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Baltic Pipeline System-2",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "RUS",
+    "operator": "Transneft",
+    "commodity": "oil",
+    "capacity_mt": 35.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 52.85,
+    "lon": 32.7,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          52.3,
+          54.9
+        ],
+        [
+          44.0,
+          54.5
+        ],
+        [
+          36.0,
+          53.5
+        ],
+        [
+          32.7,
+          52.85
+        ],
+        [
+          30.0,
+          56.5
+        ],
+        [
+          28.3,
+          59.66
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Myanmar-China Crude Pipeline",
+    "type": "pipeline",
+    "subtype": "crude_pipeline",
+    "country_iso": "MMR",
+    "operator": "CNPC",
+    "commodity": "oil",
+    "capacity_mt": 11.0,
+    "capacity_bcm": null,
+    "status": "active",
+    "lat": 24.0,
+    "lon": 97.85,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          93.55,
+          19.43
+        ],
+        [
+          95.0,
+          20.8
+        ],
+        [
+          96.1,
+          21.98
+        ],
+        [
+          97.85,
+          24.0
+        ],
+        [
+          100.0,
+          24.5
+        ],
+        [
+          102.7,
+          25.05
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Power of Siberia",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "RUS",
+    "operator": "Gazprom",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 38.0,
+    "status": "active",
+    "lat": 50.27,
+    "lon": 127.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          113.4,
+          62.0
+        ],
+        [
+          118.0,
+          58.0
+        ],
+        [
+          124.0,
+          54.0
+        ],
+        [
+          127.5,
+          50.27
+        ],
+        [
+          126.5,
+          45.75
+        ],
+        [
+          123.43,
+          41.8
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Nord Stream 1 & 2",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "RUS",
+    "operator": "Gazprom",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 110.0,
+    "status": "offline",
+    "lat": 56.5,
+    "lon": 19.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          28.75,
+          60.71
+        ],
+        [
+          26.0,
+          59.7
+        ],
+        [
+          22.0,
+          58.0
+        ],
+        [
+          19.0,
+          56.5
+        ],
+        [
+          16.0,
+          55.2
+        ],
+        [
+          13.44,
+          54.14
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "TurkStream",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "RUS",
+    "operator": "Gazprom",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 31.5,
+    "status": "active",
+    "lat": 42.5,
+    "lon": 31.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          37.35,
+          44.9
+        ],
+        [
+          34.0,
+          43.5
+        ],
+        [
+          31.0,
+          42.5
+        ],
+        [
+          28.1,
+          41.63
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Yamal-Europe Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "RUS",
+    "operator": "Gazprom",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 33.0,
+    "status": "offline",
+    "lat": 52.8,
+    "lon": 23.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          34.9,
+          57.04
+        ],
+        [
+          31.0,
+          55.5
+        ],
+        [
+          27.55,
+          53.9
+        ],
+        [
+          23.0,
+          52.8
+        ],
+        [
+          21.0,
+          52.23
+        ],
+        [
+          17.5,
+          52.4
+        ],
+        [
+          14.5,
+          52.55
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Blue Stream",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "RUS",
+    "operator": "Gazprom / BOTAS",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 16.0,
+    "status": "active",
+    "lat": 41.29,
+    "lon": 36.33,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          41.0,
+          45.2
+        ],
+        [
+          38.7,
+          44.32
+        ],
+        [
+          37.0,
+          42.8
+        ],
+        [
+          36.33,
+          41.29
+        ],
+        [
+          34.5,
+          40.5
+        ],
+        [
+          32.85,
+          39.93
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "TANAP",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "AZE",
+    "operator": "SOCAR / BOTAS",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 16.0,
+    "status": "active",
+    "lat": 39.9,
+    "lon": 41.3,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          49.9,
+          40.4
+        ],
+        [
+          46.5,
+          41.3
+        ],
+        [
+          44.8,
+          41.7
+        ],
+        [
+          41.3,
+          39.9
+        ],
+        [
+          37.0,
+          39.5
+        ],
+        [
+          33.0,
+          39.5
+        ],
+        [
+          30.5,
+          39.78
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Trans Adriatic Pipeline (TAP)",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "ITA",
+    "operator": "TAP AG",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 10.0,
+    "status": "active",
+    "lat": 40.8,
+    "lon": 22.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          30.5,
+          39.78
+        ],
+        [
+          26.1,
+          41.15
+        ],
+        [
+          22.5,
+          40.8
+        ],
+        [
+          19.8,
+          40.7
+        ],
+        [
+          18.38,
+          40.3
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Trans-Mediterranean (Transmed)",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "DZA",
+    "operator": "Sonatrach / Eni",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 33.0,
+    "status": "active",
+    "lat": 37.05,
+    "lon": 11.05,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          3.27,
+          32.93
+        ],
+        [
+          6.0,
+          34.5
+        ],
+        [
+          9.0,
+          36.0
+        ],
+        [
+          11.05,
+          37.05
+        ],
+        [
+          12.59,
+          37.65
+        ],
+        [
+          14.0,
+          38.0
+        ],
+        [
+          15.5,
+          38.2
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Medgaz",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "DZA",
+    "operator": "Sonatrach / Naturgy",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 10.0,
+    "status": "active",
+    "lat": 35.3,
+    "lon": -1.38,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          3.27,
+          32.93
+        ],
+        [
+          0.5,
+          34.5
+        ],
+        [
+          -1.38,
+          35.3
+        ],
+        [
+          -2.46,
+          36.84
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Maghreb-Europe (GME)",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "DZA",
+    "operator": "Sonatrach",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 12.0,
+    "status": "offline",
+    "lat": 35.9,
+    "lon": -5.4,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          3.27,
+          32.93
+        ],
+        [
+          0.0,
+          33.8
+        ],
+        [
+          -3.0,
+          34.5
+        ],
+        [
+          -5.4,
+          35.9
+        ],
+        [
+          -5.6,
+          36.05
+        ],
+        [
+          -4.8,
+          37.9
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Greenstream",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "LBY",
+    "operator": "Eni / NOC",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 8.0,
+    "status": "active",
+    "lat": 36.0,
+    "lon": 13.8,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          11.8,
+          32.9
+        ],
+        [
+          12.8,
+          34.5
+        ],
+        [
+          13.8,
+          36.0
+        ],
+        [
+          14.25,
+          37.07
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Central Asia-China Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "TKM",
+    "operator": "CNPC / Turkmengaz",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 55.0,
+    "status": "active",
+    "lat": 41.3,
+    "lon": 69.3,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          62.0,
+          36.9
+        ],
+        [
+          64.0,
+          39.0
+        ],
+        [
+          66.0,
+          40.5
+        ],
+        [
+          69.3,
+          41.3
+        ],
+        [
+          73.0,
+          42.5
+        ],
+        [
+          77.0,
+          43.5
+        ],
+        [
+          80.4,
+          44.2
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "West-East Gas Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "CHN",
+    "operator": "PetroChina",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 30.0,
+    "status": "active",
+    "lat": 34.3,
+    "lon": 108.9,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          80.4,
+          44.2
+        ],
+        [
+          88.0,
+          42.0
+        ],
+        [
+          95.0,
+          40.0
+        ],
+        [
+          103.83,
+          36.06
+        ],
+        [
+          108.9,
+          34.3
+        ],
+        [
+          114.3,
+          32.0
+        ],
+        [
+          118.8,
+          32.06
+        ],
+        [
+          121.47,
+          31.23
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Europipe I/II",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "NOR",
+    "operator": "Gassco",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 25.0,
+    "status": "active",
+    "lat": 56.0,
+    "lon": 5.5,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8,
+          60.55
+        ],
+        [
+          4.5,
+          58.0
+        ],
+        [
+          5.5,
+          56.0
+        ],
+        [
+          6.5,
+          54.5
+        ],
+        [
+          7.48,
+          53.65
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Langeled",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "NOR",
+    "operator": "Gassco",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 25.0,
+    "status": "active",
+    "lat": 56.0,
+    "lon": 1.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          6.6,
+          62.85
+        ],
+        [
+          4.0,
+          60.0
+        ],
+        [
+          2.0,
+          58.0
+        ],
+        [
+          1.0,
+          56.0
+        ],
+        [
+          0.2,
+          54.5
+        ],
+        [
+          -0.1,
+          53.65
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Franpipe",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "NOR",
+    "operator": "Gassco",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 19.0,
+    "status": "active",
+    "lat": 55.0,
+    "lon": 2.2,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          4.8,
+          60.55
+        ],
+        [
+          2.8,
+          58.2
+        ],
+        [
+          2.2,
+          55.0
+        ],
+        [
+          2.0,
+          53.0
+        ],
+        [
+          2.35,
+          51.03
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Dolphin Gas Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "QAT",
+    "operator": "Dolphin Energy",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 18.0,
+    "status": "active",
+    "lat": 24.76,
+    "lon": 54.65,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          51.55,
+          25.9
+        ],
+        [
+          52.8,
+          25.0
+        ],
+        [
+          54.65,
+          24.76
+        ],
+        [
+          55.8,
+          24.25
+        ],
+        [
+          56.3,
+          25.1
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "GASBOL (Bolivia-Brazil)",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "BOL",
+    "operator": "GTB / TBG",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 11.0,
+    "status": "active",
+    "lat": -23.55,
+    "lon": -46.63,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -63.18,
+          -17.78
+        ],
+        [
+          -57.65,
+          -19.0
+        ],
+        [
+          -52.0,
+          -21.0
+        ],
+        [
+          -46.63,
+          -23.55
+        ],
+        [
+          -49.0,
+          -26.0
+        ],
+        [
+          -51.2,
+          -30.03
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Myanmar-China Gas Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "MMR",
+    "operator": "CNPC",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 12.0,
+    "status": "active",
+    "lat": 24.0,
+    "lon": 97.85,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          93.55,
+          19.43
+        ],
+        [
+          95.0,
+          20.8
+        ],
+        [
+          96.1,
+          21.98
+        ],
+        [
+          97.85,
+          24.0
+        ],
+        [
+          100.0,
+          24.5
+        ],
+        [
+          102.7,
+          25.05
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Rockies Express",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "USA",
+    "operator": "Tallgrass Energy",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 23.0,
+    "status": "active",
+    "lat": 39.5,
+    "lon": -94.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -107.9,
+          40.04
+        ],
+        [
+          -104.8,
+          41.1
+        ],
+        [
+          -100.0,
+          40.5
+        ],
+        [
+          -94.0,
+          39.5
+        ],
+        [
+          -88.0,
+          39.5
+        ],
+        [
+          -84.0,
+          39.7
+        ],
+        [
+          -80.87,
+          39.77
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  },
+  {
+    "name": "Iran-Turkey Pipeline",
+    "type": "pipeline",
+    "subtype": "gas_pipeline",
+    "country_iso": "IRN",
+    "operator": "NIGC / BOTAS",
+    "commodity": "gas",
+    "capacity_mt": 0.0,
+    "capacity_bcm": 14.0,
+    "status": "active",
+    "lat": 39.2,
+    "lon": 44.0,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          51.4,
+          35.7
+        ],
+        [
+          48.3,
+          38.1
+        ],
+        [
+          44.0,
+          39.2
+        ],
+        [
+          41.5,
+          39.9
+        ],
+        [
+          39.7,
+          39.75
+        ]
+      ]
+    },
+    "source": "GEM Pipeline Tracker 2024",
+    "source_year": 2024,
+    "confidence": "high"
+  }
+]

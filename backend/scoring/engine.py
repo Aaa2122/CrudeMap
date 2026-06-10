@@ -16,13 +16,17 @@ from scoring.formulas import (
 CHOKEPOINT_SLUGS = [
     "hormuz", "malacca", "suez", "sumed",
     "bab_el_mandeb", "turkish_straits", "panama",
+    "danish_straits", "cape_of_good_hope", "gibraltar",
 ]
 
 
 def compute_and_write_scores(engine):
     with Session(engine) as session:
         countries = session.execute(text("SELECT * FROM countries")).mappings().all()
-        flows = session.execute(text("SELECT * FROM country_flows")).mappings().all()
+        # Oil scores only consider oil flows — gas flows would pollute HHI/route concentration
+        flows = session.execute(
+            text("SELECT * FROM country_flows WHERE commodity = 'oil'")
+        ).mappings().all()
         flows_list = [dict(f) for f in flows]
 
         for country in countries:
@@ -30,6 +34,10 @@ def compute_and_write_scores(engine):
             dep = dependency_score(
                 country["import_oil_mt"] or 0,
                 country["consumption_oil_mt"] or 0,
+            )
+            dep_gas = dependency_score(
+                country["import_gas_bcm"] or 0,
+                country["consumption_gas_bcm"] or 0,
             )
             hhi = supplier_hhi(flows_list, iso)
             route_concs = [
@@ -49,12 +57,13 @@ def compute_and_write_scores(engine):
                 text("""
                     UPDATE countries
                     SET dependency_score = :dep,
+                        dependency_score_gas = :dep_gas,
                         supplier_hhi = :hhi,
                         resilience_score = :res,
                         importance_score = :imp
                     WHERE iso = :iso
                 """),
-                {"dep": dep, "hhi": hhi, "res": res, "imp": imp, "iso": iso},
+                {"dep": dep, "dep_gas": dep_gas, "hhi": hhi, "res": res, "imp": imp, "iso": iso},
             )
 
         session.commit()

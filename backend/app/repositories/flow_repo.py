@@ -10,6 +10,12 @@ class FlowRepository(BaseRepository):
         result = await self.session.execute(select(CountryFlow))
         return result.scalars().all()
 
+    async def list_by_commodity(self, commodity: str) -> list[CountryFlow]:
+        result = await self.session.execute(
+            select(CountryFlow).where(CountryFlow.commodity == commodity)
+        )
+        return result.scalars().all()
+
     async def list_by_source(self, source_iso: str) -> list[CountryFlow]:
         result = await self.session.execute(
             select(CountryFlow).where(CountryFlow.source_iso == source_iso.upper())

@@ -1,9 +1,7 @@
 import { useCountry, useCountryFlows, useCountryChokeExposure, useCountryInfras } from '../../api/hooks/useCountries'
-import { useScenarioStore } from '../../store/scenarioStore'
 import { useMapStore } from '../../store/mapStore'
 import { SupplierBar } from '../Charts/SupplierBar'
 import { RouteDonut } from '../Charts/RouteDonut'
-import { WaterfallImpact } from '../Charts/WaterfallImpact'
 
 function resilience_label(score: number) {
   if (score >= 70) return { label: 'Resilient', color: '#22c55e' }
@@ -18,10 +16,8 @@ export function CountryPanel({ iso }: Props) {
   const { data: flows } = useCountryFlows(iso)
   const { data: exposure } = useCountryChokeExposure(iso)
   const { data: infras } = useCountryInfras(iso)
-  const { result: scenarioResult } = useScenarioStore()
   const { setSelected } = useMapStore()
 
-  const impact = scenarioResult?.impacts.find(i => i.country_iso === iso)
   const resLabel = country ? resilience_label(country.resilience_score) : null
 
   if (isLoading || !country) {
@@ -29,6 +25,9 @@ export function CountryPanel({ iso }: Props) {
   }
 
   const balanceNet = country.export_oil_mt - country.import_oil_mt
+  const gasBalanceNet = country.export_gas_bcm - country.import_gas_bcm
+  const hasGasData =
+    country.production_gas_bcm > 0 || country.import_gas_bcm > 0 || country.consumption_gas_bcm > 0
 
   return (
     <div className="p-4 space-y-4 text-text text-sm overflow-y-auto">
@@ -52,33 +51,62 @@ export function CountryPanel({ iso }: Props) {
           </span>
         </div>
 
-        {/* Key metrics grid */}
-        <div className="mt-3 grid grid-cols-2 gap-2">
+        {/* Oil balance */}
+        <CommodityHeader label="Crude oil" unit="Mt/yr" color="#DCA54A" />
+        <div className="mt-1.5 grid grid-cols-2 gap-2">
           <Stat label="Production" value={`${country.production_oil_mt} Mt`} />
           <Stat label="Consumption" value={`${country.consumption_oil_mt} Mt`} />
           <Stat label="Import" value={`${country.import_oil_mt} Mt`} />
           <Stat label="Export" value={`${country.export_oil_mt} Mt`} />
         </div>
-
-        {/* Balance + Importance row */}
         <div className="mt-2 grid grid-cols-2 gap-2">
           <div className="bg-bg border border-border rounded p-2 text-center">
-            <div className="text-[10px] text-text-muted uppercase">Balance</div>
+            <div className="text-[10px] text-text-muted uppercase">Oil balance</div>
             <div className={`text-sm font-bold ${balanceNet >= 0 ? 'text-safe' : 'text-disrupted'}`}>
               {balanceNet >= 0 ? '+' : ''}{balanceNet.toFixed(1)} Mt
             </div>
           </div>
           <div className="bg-bg border border-border rounded p-2 text-center">
-            <div className="text-[10px] text-text-muted uppercase">Importance</div>
-            <div className="text-sm font-bold text-primary">{Math.round(country.importance_score)}/100</div>
+            <div className="text-[10px] text-text-muted uppercase">Refining</div>
+            <div className="text-sm font-bold text-primary">{country.refining_capacity_mt} Mt</div>
           </div>
         </div>
+
+        {/* Gas balance */}
+        <CommodityHeader label="Natural gas" unit="bcm/yr" color="#46C8DC" />
+        {hasGasData ? (
+          <>
+            <div className="mt-1.5 grid grid-cols-2 gap-2">
+              <Stat label="Production" value={`${country.production_gas_bcm} bcm`} />
+              <Stat label="Consumption" value={`${country.consumption_gas_bcm} bcm`} />
+              <Stat label="Import" value={`${country.import_gas_bcm} bcm`} />
+              <Stat label="Export" value={`${country.export_gas_bcm} bcm`} />
+            </div>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <div className="bg-bg border border-border rounded p-2 text-center">
+                <div className="text-[10px] text-text-muted uppercase">Gas balance</div>
+                <div className={`text-sm font-bold ${gasBalanceNet >= 0 ? 'text-safe' : 'text-disrupted'}`}>
+                  {gasBalanceNet >= 0 ? '+' : ''}{gasBalanceNet.toFixed(1)} bcm
+                </div>
+              </div>
+              <div className="bg-bg border border-border rounded p-2 text-center">
+                <div className="text-[10px] text-text-muted uppercase">Gas dependency</div>
+                <div className="text-sm font-bold" style={{ color: country.dependency_score_gas >= 0.7 ? '#D9544D' : country.dependency_score_gas >= 0.4 ? '#D98143' : '#46A87C' }}>
+                  {Math.round(country.dependency_score_gas * 100)}%
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="mt-1.5 text-[11px] text-text-muted">No significant gas trade tracked.</p>
+        )}
       </div>
 
       {/* Vulnerability breakdown */}
       <Divider label="VULNERABILITY" />
       <div className="space-y-2">
-        <VulnBar label="Import dependency" value={country.dependency_score} />
+        <VulnBar label="Oil import dependency" value={country.dependency_score} />
+        {hasGasData && <VulnBar label="Gas import dependency" value={country.dependency_score_gas} />}
         <VulnBar label="Supplier concentration" value={Math.min(country.supplier_hhi / 10000, 1)} />
         {exposure && (
           <>
@@ -148,13 +176,17 @@ export function CountryPanel({ iso }: Props) {
         </p>
       </div>
 
-      {/* Scenario impact */}
-      {impact && (
-        <>
-          <Divider label="SCENARIO IMPACT" highlight />
-          <WaterfallImpact impact={impact} baseline_import_mt={impact.baseline_import_mt} />
-        </>
-      )}
+    </div>
+  )
+}
+
+function CommodityHeader({ label, unit, color }: { label: string; unit: string; color: string }) {
+  return (
+    <div className="mt-3 flex items-baseline justify-between">
+      <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color }}>
+        {label}
+      </span>
+      <span className="font-mono text-[9px] text-text-muted">{unit}</span>
     </div>
   )
 }

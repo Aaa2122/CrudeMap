@@ -23,10 +23,17 @@ class JsonLoader(DataLoader):
         return self._load("chokepoints.json")
 
     def load_infrastructures(self) -> list[dict]:
-        return self._load("infrastructures.json")
+        return (
+            self._load("infrastructures.json")
+            + self._load("pipelines.json")
+            + self._load("lng_terminals.json")
+        )
 
     def load_flows(self) -> list[dict]:
-        return self._load("flows.json")
+        return self._load("flows.json") + self._load("flows_gas.json")
+
+    def load_fields(self) -> list[dict]:
+        return self._load("fields.json")
 
     def load_scenarios(self) -> list[dict]:
         return self._load("scenarios.json")

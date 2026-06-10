@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     database_url: str = "postgresql+asyncpg://crudemap:crudemap@localhost:5432/crudemap"
+    etl_loader: str = "json"
 
     # Sync URL used only by Alembic and seed scripts
     @property
