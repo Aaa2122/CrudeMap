@@ -18,7 +18,7 @@ function getFeatureIso(feature: any): string | null {
   return iso ?? null
 }
 
-const DIMMED_COUNTRY_COLOR: [number, number, number, number] = [20, 27, 34, 82]
+const DIMMED_COUNTRY_COLOR: [number, number, number, number] = [13, 21, 31, 242]
 
 export function CountryChoroplethLayer({
   geojson,
@@ -63,15 +63,19 @@ export function CountryChoroplethLayer({
         : DIMMED_COUNTRY_COLOR
     },
     getLineColor: (feature: any) =>
-      feature.properties?.__iso === selectedIso ? [250, 204, 21, 255] : [83, 112, 128, 100],
-    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 2.4 : 0.7),
+      feature.properties?.__iso === selectedIso ? [220, 165, 74, 255] : [58, 84, 106, 135],
+    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 1.8 : 0.5),
     lineWidthUnits: 'pixels',
     autoHighlight: true,
     highlightColor: [255, 255, 255, 40],
     onHover,
     onClick,
+    // Smooth re-color when switching metric or commodity
+    transitions: {
+      getFillColor: 300,
+    },
     updateTriggers: {
-      getFillColor: [countries, selectedMetric],
+      getFillColor: [countries, selectedMetric, selectedIso],
       getLineColor: [selectedIso],
       getLineWidth: [selectedIso],
     },

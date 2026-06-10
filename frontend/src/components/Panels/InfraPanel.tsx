@@ -36,7 +36,19 @@ export function InfraPanel({ id }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        <Stat label="Capacity" value={infra.capacity_mt > 0 ? `${infra.capacity_mt} Mt/yr` : 'N/A'} />
+        <Stat
+          label="Capacity"
+          value={
+            infra.capacity_bcm
+              ? `${infra.capacity_bcm} bcm/yr`
+              : infra.capacity_mt > 0
+              ? `${infra.capacity_mt} Mt/yr`
+              : 'N/A'
+          }
+        />
+        {infra.geometry?.coordinates && (
+          <Stat label="Route length" value={`~${formatPipelineLength(infra.geometry.coordinates)} km`} />
+        )}
         <Stat label="Criticality" value={`${infra.criticality_score}/100`} valueColor={critColor} />
         <Stat label="Operator" value={infra.operator ?? '—'} />
         {infra.country_iso && (
@@ -70,6 +82,23 @@ export function InfraPanel({ id }: Props) {
       </div>
     </div>
   )
+}
+
+function formatPipelineLength(coordinates: [number, number][]): string {
+  let total = 0
+  for (let i = 1; i < coordinates.length; i += 1) {
+    const [lon1, lat1] = coordinates[i - 1]
+    const [lon2, lat2] = coordinates[i]
+    const dLat = ((lat2 - lat1) * Math.PI) / 180
+    const dLon = ((lon2 - lon1) * Math.PI) / 180
+    const h =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) ** 2
+    total += 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h)))
+  }
+  return Math.round(total / 50) * 50 >= 1000
+    ? `${(Math.round(total / 50) * 50).toLocaleString()}`
+    : `${Math.round(total / 50) * 50}`
 }
 
 function Stat({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {

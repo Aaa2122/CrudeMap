@@ -5,19 +5,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#009dff',
-        bg: '#0f1b23',
-        surface: '#162631',
-        border: '#2e546b',
-        amber: { DEFAULT: '#f59e0b', light: '#fbbf24' },
-        disrupted: '#ef4444',
-        rerouted: '#f97316',
-        safe: '#22c55e',
-        text: { DEFAULT: '#e2e8f0', muted: '#64748b' },
+        // "Intelligence terminal" palette — deep ocean ground, one cold accent,
+        // commodity accents (oil amber / gas cyan) applied locally.
+        primary: '#6FB7D6',
+        bg: '#050B12',
+        surface: '#0A131D',
+        border: '#1A2937',
+        amber: { DEFAULT: '#DCA54A', light: '#E9BC6F' },
+        gascyan: '#46C8DC',
+        disrupted: '#D9544D',
+        rerouted: '#D98143',
+        safe: '#46A87C',
+        text: { DEFAULT: '#D8E3EC', muted: '#5E7485' },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Archivo', 'system-ui', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
+      },
+      letterSpacing: {
+        caps: '0.18em',
       },
     },
   },

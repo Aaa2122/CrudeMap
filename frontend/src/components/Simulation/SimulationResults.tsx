@@ -21,7 +21,7 @@ export function SimulationResults() {
     : 0
 
   return (
-    <div className="absolute top-4 left-4 bg-surface border border-border rounded shadow-xl w-56 z-40 text-text text-xs">
+    <div className="absolute top-4 left-[232px] bg-surface border border-border rounded shadow-xl w-56 z-40 text-text text-xs">
       <div className="px-3 py-2 border-b border-border bg-white/5">
         <p className="text-[10px] font-bold uppercase tracking-widest text-primary">Impact Ranking</p>
         <p className="text-xs font-semibold truncate mt-0.5">{result.name}</p>

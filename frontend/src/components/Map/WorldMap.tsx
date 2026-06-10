@@ -1,21 +1,34 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import DeckGL from '@deck.gl/react'
 import { _GlobeView as GlobeView, FlyToInterpolator, MapView, WebMercatorViewport } from '@deck.gl/core'
-import { BitmapLayer } from '@deck.gl/layers'
-import { TileLayer } from '@deck.gl/geo-layers'
-import { Map as MapLibreMap } from 'react-map-gl/maplibre'
+import type { Infrastructure } from '../../api/types'
 import { useMapStore } from '../../store/mapStore'
 import { useScenarioStore } from '../../store/scenarioStore'
 import { useFlows } from '../../api/hooks/useFlows'
 import { useChokepoints } from '../../api/hooks/useChokepoints'
 import { useCountries } from '../../api/hooks/useCountries'
+import { useInfrastructures } from '../../api/hooks/useInfrastructures'
+import { useFieldsData } from '../../api/hooks/useFields'
+import { useStaticGeo } from '../../api/hooks/useStaticGeo'
 import { useWorldCountriesGeoJson } from '../../api/hooks/useWorldCountriesGeoJson'
 import { buildMetricScale } from './countryMetrics'
 import { CountryChoroplethLayer } from './CountryChoroplethLayer'
 import { FlowLayer } from './FlowLayer'
 import { ChokeLayer } from './ChokeLayer'
-import { InfraLayer } from './InfraLayer'
-import { MetricLegend } from './MetricLegend'
+import { InfraIconLayer } from './InfraIconLayer'
+import { PipelineLayer } from './PipelineLayer'
+import { FieldLayer } from './FieldLayer'
+import { ShippingLaneLayer } from './ShippingLaneLayer'
+import { MapLegend } from './MapLegend'
+import { GraticuleLayer, OceanLayer } from './gisBasemap'
+import { buildFlowPaths } from './flowGeometry'
+import {
+  containerPortsVisibleAtZoom,
+  fieldsVisibleAtZoom,
+  filterByLod,
+  labelsVisibleAtZoom,
+  quantizeZoom,
+} from './lod'
 
 const FLAT_VIEW_STATE = {
   longitude: 18,
@@ -33,10 +46,10 @@ const GLOBE_VIEW_STATE = {
   bearing: 0,
 }
 
-const BASEMAP_URL = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
 const DEFAULT_VIEWPORT_SIZE = { width: 1280, height: 720 }
 const COUNTRY_FIT_PADDING = 72
 const COUNTRY_FOCUS_ZOOM = 3.2
+const TOP_FLOWS_OVERVIEW = 60
 
 function getFeatureIso(feature: any): string | null {
   const properties = feature?.properties ?? {}
@@ -77,7 +90,7 @@ function getFeatureBounds(feature: any): [[number, number], [number, number]] | 
   return [[minLon, minLat], [maxLon, maxLat]]
 }
 
-function createAnimatedViewState(
+export function createAnimatedViewState(
   nextState: { longitude: number; latitude: number; zoom: number; pitch?: number; bearing?: number },
 ) {
   return {
@@ -94,19 +107,22 @@ export function WorldMap() {
     selected,
     setSelected,
     clearSelected,
-    showCountryLayer,
-    showFlowLayer,
-    showChokeLayer,
-    showInfraLayer,
+    commodity,
+    layers: layerVisibility,
     viewMode,
     selectedMetric,
-    flowMode,
     filters,
   } = useMapStore()
-  const { result: scenarioResult } = useScenarioStore()
-  const { data: flows } = useFlows()
+  const { activeSlug, result: scenarioResult } = useScenarioStore()
+  const { data: flows } = useFlows(commodity)
   const { data: chokepoints } = useChokepoints()
   const { data: countries } = useCountries()
+  const { data: infras } = useInfrastructures()
+  const { data: fields } = useFieldsData()
+  const { data: shippingLanes } = useStaticGeo(layerVisibility.shippingLanes ? 'shipping_lanes.geojson' : null)
+  const { data: containerPorts } = useStaticGeo(
+    layerVisibility.shippingLanes || layerVisibility.containerPorts ? 'container_ports.geojson' : null,
+  )
   const { data: countryGeoJson } = useWorldCountriesGeoJson()
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -114,6 +130,7 @@ export function WorldMap() {
   const [viewState, setViewState] = useState(() => FLAT_VIEW_STATE)
 
   const isGlobe = viewMode === 'globe'
+  const zoom = quantizeZoom(viewState.zoom ?? FLAT_VIEW_STATE.zoom)
 
   const [animTime, setAnimTime] = useState(0)
   const rafRef = useRef<number>(0)
@@ -122,14 +139,28 @@ export function WorldMap() {
   useEffect(() => {
     const animate = (timestamp: number) => {
       if (!startRef.current) startRef.current = timestamp
-      setAnimTime(((timestamp - startRef.current) % 3000) / 3000)
+      setAnimTime(((timestamp - startRef.current) % 6000) / 6000)
       rafRef.current = requestAnimationFrame(animate)
     }
     rafRef.current = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(rafRef.current)
   }, [])
 
-  const disrupted = new Set(scenarioResult?.disrupted_flow_ids ?? [])
+  const disrupted = useMemo(
+    () => new Set(scenarioResult?.disrupted_flow_ids ?? []),
+    [scenarioResult],
+  )
+
+  // Chokepoints named in the active scenario slug pulse red on the map
+  const disruptedChokeSlugs = useMemo(() => {
+    const slugs = new Set<string>()
+    if (activeSlug && scenarioResult) {
+      for (const cp of chokepoints ?? []) {
+        if (activeSlug.includes(cp.slug)) slugs.add(cp.slug)
+      }
+    }
+    return slugs
+  }, [activeSlug, scenarioResult, chokepoints])
 
   const countryCoords = useMemo(() => {
     const coords: Record<string, [number, number]> = {}
@@ -190,9 +221,11 @@ export function WorldMap() {
   }, [flows, filters, filteredIsos])
 
   const selectedCountryIso = selected?.type === 'country' ? selected.iso : null
+  const selectedInfraId = selected?.type === 'infrastructure' ? selected.id : null
+  const selectedFieldId = selected?.type === 'field' ? selected.id : null
 
   const visibleFlows = useMemo(() => {
-    if (!showFlowLayer) return []
+    if (!layerVisibility.flows) return []
 
     if (selectedCountryIso) {
       return filteredFlows.filter(
@@ -201,9 +234,55 @@ export function WorldMap() {
     }
 
     return [...filteredFlows]
-      .sort((left, right) => right.volume_mt - left.volume_mt)
-      .slice(0, 20)
-  }, [showFlowLayer, selectedCountryIso, filteredFlows, flowMode])
+      .sort((left, right) => {
+        const lv = left.commodity === 'gas' ? left.volume_bcm ?? 0 : left.volume_mt
+        const rv = right.commodity === 'gas' ? right.volume_bcm ?? 0 : right.volume_mt
+        return rv - lv
+      })
+      .slice(0, TOP_FLOWS_OVERVIEW)
+  }, [layerVisibility.flows, selectedCountryIso, filteredFlows])
+
+  // Routed geometry — recomputed only when flows/coords change, never per frame
+  const flowPaths = useMemo(
+    () => buildFlowPaths(visibleFlows, countryCoords, chokepoints ?? [], infras ?? []),
+    [visibleFlows, countryCoords, chokepoints, infras],
+  )
+
+  // Infrastructure split: pipelines draw as traces, the rest as icons.
+  // Commodity filter: oil mode shows oil+products assets, gas mode gas assets.
+  const matchesCommodity = useCallback(
+    (itemCommodity: string) =>
+      commodity === 'gas' ? itemCommodity === 'gas' : itemCommodity !== 'gas',
+    [commodity],
+  )
+
+  const pipelines = useMemo(
+    () =>
+      (infras ?? []).filter(
+        infra => infra.type === 'pipeline' && matchesCommodity(infra.commodity),
+      ),
+    [infras, matchesCommodity],
+  )
+
+  const pointInfras = useMemo(() => {
+    const wanted = (infra: Infrastructure) => {
+      if (infra.type === 'pipeline') return false
+      if (!matchesCommodity(infra.commodity)) return false
+      if (infra.type === 'lng_terminal') return layerVisibility.lngTerminals
+      if (infra.type === 'refinery') return layerVisibility.refineries
+      return layerVisibility.terminals
+    }
+    const list = (infras ?? []).filter(wanted)
+    return filterByLod(list, zoom, infra => infra.capacity_bcm ?? infra.capacity_mt ?? 0)
+  }, [infras, matchesCommodity, layerVisibility.lngTerminals, layerVisibility.refineries, layerVisibility.terminals, zoom])
+
+  const visibleFields = useMemo(() => {
+    if (!layerVisibility.fields || !fieldsVisibleAtZoom(zoom)) return []
+    const list = (fields ?? []).filter(
+      field => field.commodity === 'mixed' || matchesCommodity(field.commodity),
+    )
+    return filterByLod(list, zoom, field => (field.production_mt ?? 0) + (field.production_bcm ?? 0))
+  }, [fields, layerVisibility.fields, matchesCommodity, zoom])
 
   const metricScale = useMemo(
     () => buildMetricScale(filteredCountries, selectedMetric),
@@ -212,6 +291,25 @@ export function WorldMap() {
 
   useEffect(() => {
     const baseViewState = viewMode === 'globe' ? GLOBE_VIEW_STATE : FLAT_VIEW_STATE
+
+    // Point entities (infra, field, chokepoint): fly straight to them
+    if (selected && selected.type !== 'country') {
+      let point: { lat: number | null; lon: number | null } | undefined
+      if (selected.type === 'infrastructure') point = (infras ?? []).find(i => i.id === selected.id)
+      else if (selected.type === 'field') point = (fields ?? []).find(f => f.id === selected.id)
+      else if (selected.type === 'chokepoint') point = (chokepoints ?? []).find(c => c.slug === selected.slug)
+
+      if (point?.lat != null && point?.lon != null) {
+        setViewState(
+          createAnimatedViewState({
+            longitude: point.lon,
+            latitude: point.lat,
+            zoom: isGlobe ? 3.4 : 4.2,
+          }),
+        )
+      }
+      return
+    }
 
     if (!selectedCountryIso) {
       setViewState(createAnimatedViewState(baseViewState))
@@ -263,7 +361,7 @@ export function WorldMap() {
         zoom: fitted.zoom,
       }),
     )
-  }, [countries, geoFeaturesByIso, isGlobe, selectedCountryIso, viewMode, viewportSize])
+  }, [countries, geoFeaturesByIso, isGlobe, selected, selectedCountryIso, viewMode, viewportSize, infras, fields, chokepoints])
 
   const handleHover = useCallback((info: any) => {
     const tooltipText = info.object?.properties?.__tooltip ?? info.object?.__tooltip
@@ -274,27 +372,27 @@ export function WorldMap() {
     setTooltip(null)
   }, [])
 
-  const globeBaseLayer = isGlobe
-    ? new TileLayer({
-        id: 'globe-base-tiles',
-        data: 'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-        minZoom: 0,
-        maxZoom: 6,
-        tileSize: 256,
-        renderSubLayers: (props: any) => {
-          const { west, south, east, north } = props.tile.bbox
-          return new BitmapLayer(props, {
-            data: undefined,
-            image: props.data,
-            bounds: [west, south, east, north],
-          })
-        },
-      })
-    : null
+  const handleInfraClick = useCallback(
+    (info: any) => {
+      if (info.object) setSelected({ type: 'infrastructure', id: info.object.id })
+    },
+    [setSelected],
+  )
+
+  const handleFieldClick = useCallback(
+    (info: any) => {
+      if (info.object) setSelected({ type: 'field', id: info.object.id })
+    },
+    [setSelected],
+  )
+
+  const showLabels = labelsVisibleAtZoom(zoom)
 
   const layers = [
-    globeBaseLayer,
-    showCountryLayer &&
+    // Self-rendered GIS ground — no external tiles
+    OceanLayer(),
+    GraticuleLayer(),
+    layerVisibility.countries &&
       countryGeoJson &&
       CountryChoroplethLayer({
         geojson: countryGeoJson,
@@ -310,20 +408,58 @@ export function WorldMap() {
           }
         },
       }),
-    showFlowLayer &&
-      visibleFlows.length > 0 &&
+    layerVisibility.shippingLanes &&
+      ShippingLaneLayer({
+        lanes: shippingLanes ?? null,
+        ports: containerPorts ?? null,
+        showPorts: (layerVisibility.containerPorts || layerVisibility.shippingLanes) && containerPortsVisibleAtZoom(zoom),
+        showPortLabels: showLabels,
+        globe: isGlobe,
+        onHover: handleHover,
+      }),
+    layerVisibility.pipelines &&
+      pipelines.length > 0 &&
+      PipelineLayer({
+        pipelines,
+        selectedId: selectedInfraId,
+        globe: isGlobe,
+        onHover: handleHover,
+        onClick: handleInfraClick,
+      }),
+    layerVisibility.flows &&
+      flowPaths.length > 0 &&
       FlowLayer({
-        flows: visibleFlows,
+        flowPaths,
         disrupted,
-        countryCoords,
+        commodity,
+        animTime,
         onHover: handleHover,
         onClick: () => undefined,
-        globe: isGlobe,
-        animTime,
       }),
-    showChokeLayer &&
+    visibleFields.length > 0 &&
+      FieldLayer({
+        fields: visibleFields,
+        selectedId: selectedFieldId,
+        showLabels,
+        globe: isGlobe,
+        onHover: handleHover,
+        onClick: handleFieldClick,
+      }),
+    pointInfras.length > 0 &&
+      InfraIconLayer({
+        infras: pointInfras,
+        selectedId: selectedInfraId,
+        showLabels,
+        globe: isGlobe,
+        onHover: handleHover,
+        onClick: handleInfraClick,
+      }),
+    layerVisibility.chokepoints &&
       ChokeLayer({
         chokepoints: chokepoints ?? [],
+        disruptedSlugs: disruptedChokeSlugs,
+        animTime,
+        showLabels: zoom >= 2.2,
         onHover: handleHover,
         onClick: (info: any) => {
           if (info.object) {
@@ -331,8 +467,9 @@ export function WorldMap() {
           }
         },
       }),
-    showInfraLayer && InfraLayer({ onHover: handleHover }),
-  ].filter(Boolean)
+  ]
+    .filter(Boolean)
+    .flat()
 
   const views = isGlobe
     ? new GlobeView({ id: 'globe', resolution: 10 })
@@ -342,6 +479,14 @@ export function WorldMap() {
     selected?.type === 'country'
       ? (countries ?? []).find(country => country.iso === selected.iso)?.name
       : null
+
+  const flowsLabel = !layerVisibility.flows
+    ? 'Flows hidden'
+    : selectedCountryName
+    ? `Flows: ${selectedCountryName}`
+    : `Flows: top ${TOP_FLOWS_OVERVIEW} ${commodity} routes`
+
+  const isLoading = !countries || !countryGeoJson
 
   return (
     <div ref={containerRef} className="relative h-full w-full">
@@ -361,38 +506,35 @@ export function WorldMap() {
             setTooltip(null)
           }
         }}
-      >
-        {!isGlobe && <MapLibreMap mapStyle={BASEMAP_URL} />}
-      </DeckGL>
-
-      <MetricLegend
-        metric={selectedMetric}
-        scale={metricScale}
-        flowMode={showFlowLayer ? (selectedCountryIso ? 'selected' : 'top20') : 'off'}
-        selectedCountryName={selectedCountryName}
       />
 
-      {showFlowLayer && !selectedCountryIso && (
-        <div className="absolute bottom-4 left-[274px] z-40 rounded border border-border bg-surface/95 px-3 py-2 text-[11px] text-text-muted shadow-lg shadow-black/25 backdrop-blur">
-          Global routes are capped to the top 20. Click a country to isolate its flows, then click empty water to reset.
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-bg/60 backdrop-blur-sm">
+          <div className="flex items-center gap-3 rounded border border-border bg-surface/95 px-4 py-3 shadow-xl">
+            <span className="h-2 w-2 animate-ping rounded-full bg-primary" />
+            <span className="text-xs uppercase tracking-widest text-text-muted">Loading world data…</span>
+          </div>
         </div>
       )}
 
+      <MapLegend scale={metricScale} flowsLabel={flowsLabel} />
+
       {tooltip && (
         <div
-          className="absolute pointer-events-none z-50 max-w-[240px] rounded border border-border bg-surface/95 px-3 py-2 text-xs text-text shadow-xl shadow-black/30 backdrop-blur"
-          style={{ left: tooltip.x + 12, top: tooltip.y - 20 }}
+          className="terminal-card absolute pointer-events-none z-50 max-w-[250px] rounded-sm px-3 py-2"
+          style={{ left: tooltip.x + 14, top: tooltip.y - 16 }}
         >
           {tooltip.text.split('\n').map((line, index) => (
             <div
               key={`${line}-${index}`}
               className={
                 index === 0
-                  ? 'font-semibold text-white'
+                  ? 'text-[12px] font-semibold text-text'
                   : index === 1
-                  ? 'mt-1 text-primary'
-                  : 'text-text-muted'
+                  ? 'mt-0.5 font-mono text-[11px]'
+                  : 'font-mono text-[10px] text-text-muted'
               }
+              style={index === 1 ? { color: commodity === 'gas' ? '#46C8DC' : '#DCA54A' } : undefined}
             >
               {line}
             </div>
