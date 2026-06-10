@@ -169,7 +169,12 @@ export function SearchBox() {
                   </div>
                 )}
                 <button
-                  onClick={() => select(result)}
+                  // pointerdown (not click): selecting closes the dropdown, and a
+                  // click would race against the unmount/blur of its own row
+                  onPointerDown={event => {
+                    event.preventDefault()
+                    select(result)
+                  }}
                   onMouseEnter={() => setHighlighted(index)}
                   className={`flex w-full items-center gap-2.5 px-3 py-1.5 text-left transition-colors ${
                     index === highlighted ? 'bg-primary/15 text-text' : 'text-text-muted'

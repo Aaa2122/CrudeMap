@@ -1,7 +1,8 @@
-import { IconLayer, TextLayer } from '@deck.gl/layers'
+import { IconLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers'
 import { CollisionFilterExtension } from '@deck.gl/extensions'
 import type { OilGasField } from '../../api/types'
 import { TYPE_COLOR, getIcon } from './iconAtlas'
+import { globeParams, pointVisibleOnGlobe } from './globeCulling'
 
 type RGBA = [number, number, number, number]
 
@@ -15,6 +16,7 @@ interface Props {
   selectedId: number | null
   showLabels: boolean
   globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
   onClick: (info: any) => void
 }
@@ -27,9 +29,10 @@ function formatProduction(field: OilGasField): string {
 }
 
 /** Oil & gas fields: derrick (oil) / flame (gas) icons sized by production. */
-export function FieldLayer({ fields, selectedId, showLabels, globe, onHover, onClick }: Props) {
+export function FieldLayer({ fields, selectedId, showLabels, globe, cameraCenter, onHover, onClick }: Props) {
   const data = fields
     .filter(field => field.lat != null && field.lon != null)
+    .filter(field => !globe || pointVisibleOnGlobe([field.lon!, field.lat!], cameraCenter))
     .map(field => {
       const production = (field.production_mt ?? 0) + (field.production_bcm ?? 0)
       const isGas = field.commodity === 'gas'
@@ -42,6 +45,21 @@ export function FieldLayer({ fields, selectedId, showLabels, globe, onHover, onC
         __tooltip: `${field.name}${STATUS_SUFFIX[field.status] ?? ''}\n${field.field_type ?? 'field'} — ${formatProduction(field)}\n${field.operator ?? ''}`,
       }
     })
+
+  // Invisible round hit-target (icon glyph pixels are mostly transparent)
+  const hitLayer = new ScatterplotLayer({
+    id: 'field-hit',
+    data,
+    getPosition: (d: any) => d.position,
+    getRadius: 12,
+    radiusUnits: 'pixels',
+    getFillColor: [0, 0, 0, 1],
+    stroked: false,
+    pickable: true,
+    onHover,
+    onClick,
+    parameters: globeParams(globe) as any,
+  })
 
   const iconLayer = new IconLayer({
     id: 'field-icons',
@@ -62,13 +80,14 @@ export function FieldLayer({ fields, selectedId, showLabels, globe, onHover, onC
     highlightColor: [255, 255, 255, 90],
     onHover,
     onClick,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
       getSize: [selectedId],
       getColor: [selectedId],
     },
   })
 
-  const layers: any[] = [iconLayer]
+  const layers: any[] = [hitLayer, iconLayer]
 
   if (showLabels && !globe) {
     layers.push(

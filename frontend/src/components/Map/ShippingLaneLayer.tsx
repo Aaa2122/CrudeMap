@@ -1,5 +1,6 @@
 import { IconLayer, PathLayer, TextLayer } from '@deck.gl/layers'
 import { TYPE_COLOR, getIcon } from './iconAtlas'
+import { globeParams, pathVisibleOnGlobe, pointVisibleOnGlobe } from './globeCulling'
 
 type RGBA = [number, number, number, number]
 
@@ -12,15 +13,18 @@ interface Props {
   showPorts: boolean
   showPortLabels: boolean
   globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
 }
 
 /** Container shipping corridors (width = TEU volume) + major container ports. */
-export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, globe, onHover }: Props) {
+export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, globe, cameraCenter, onHover }: Props) {
   const layers: any[] = []
 
   if (lanes?.features?.length) {
-    const laneData = lanes.features.map((feature: any) => ({
+    const laneData = lanes.features
+      .filter((feature: any) => !globe || pathVisibleOnGlobe(feature.geometry.coordinates, cameraCenter))
+      .map((feature: any) => ({
       path: feature.geometry.coordinates,
       name: feature.properties.name,
       teu: feature.properties.teu_m,
@@ -42,12 +46,15 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
         autoHighlight: true,
         highlightColor: [147, 197, 253, 160],
         onHover,
+        parameters: globeParams(globe) as any,
       }),
     )
   }
 
   if (showPorts && ports?.features?.length) {
-    const portData = ports.features.map((feature: any) => ({
+    const portData = ports.features
+      .filter((feature: any) => !globe || pointVisibleOnGlobe(feature.geometry.coordinates, cameraCenter))
+      .map((feature: any) => ({
       position: feature.geometry.coordinates as [number, number],
       name: feature.properties.name,
       teu: feature.properties.teu_m,
@@ -68,6 +75,7 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
         autoHighlight: true,
         highlightColor: [255, 255, 255, 90],
         onHover,
+        parameters: globeParams(globe) as any,
       }),
     )
 

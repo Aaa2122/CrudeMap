@@ -1,6 +1,7 @@
 import { PathLayer } from '@deck.gl/layers'
 import { PathStyleExtension } from '@deck.gl/extensions'
 import type { Infrastructure } from '../../api/types'
+import { globeParams, pathVisibleOnGlobe } from './globeCulling'
 
 type RGBA = [number, number, number, number]
 
@@ -13,6 +14,7 @@ interface Props {
   pipelines: Infrastructure[]
   selectedId: number | null
   globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
   onClick: (info: any) => void
 }
@@ -31,9 +33,10 @@ function formatCapacity(p: Infrastructure): string {
 }
 
 /** Pipelines as real geographic traces; gas dashed, offline greyed out. */
-export function PipelineLayer({ pipelines, selectedId, globe, onHover, onClick }: Props) {
+export function PipelineLayer({ pipelines, selectedId, globe, cameraCenter, onHover, onClick }: Props) {
   const data = pipelines
     .filter(p => p.geometry?.coordinates && p.geometry.coordinates.length >= 2)
+    .filter(p => !globe || pathVisibleOnGlobe(p.geometry!.coordinates, cameraCenter))
     .map(p => ({
       ...p,
       path: p.geometry!.coordinates,
@@ -55,6 +58,7 @@ export function PipelineLayer({ pipelines, selectedId, globe, onHover, onClick }
     jointRounded: true,
     capRounded: true,
     pickable: false,
+    parameters: globeParams(globe) as any,
   })
 
   const lineLayer = new PathLayer({
@@ -75,6 +79,7 @@ export function PipelineLayer({ pipelines, selectedId, globe, onHover, onClick }
     getDashArray: (d: any) => (d.dashed ? [6, 4] : [0, 0]),
     extensions: [new PathStyleExtension({ dash: true })],
     dashJustified: true,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
       getColor: [selectedId],
       getWidth: [selectedId],

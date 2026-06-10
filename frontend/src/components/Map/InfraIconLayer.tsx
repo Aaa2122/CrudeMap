@@ -1,13 +1,15 @@
-import { IconLayer, TextLayer } from '@deck.gl/layers'
+import { IconLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers'
 import { CollisionFilterExtension } from '@deck.gl/extensions'
 import type { Infrastructure } from '../../api/types'
 import { getIcon, infraColor, infraIconKey } from './iconAtlas'
+import { globeParams, pointVisibleOnGlobe } from './globeCulling'
 
 interface Props {
   infras: Infrastructure[]
   selectedId: number | null
   showLabels: boolean
   globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
   onClick: (info: any) => void
 }
@@ -26,9 +28,10 @@ const TYPE_LABEL: Record<string, string> = {
 }
 
 /** Point infrastructure (terminals, ports, refineries, LNG) as tinted SVG icons. */
-export function InfraIconLayer({ infras, selectedId, showLabels, globe, onHover, onClick }: Props) {
+export function InfraIconLayer({ infras, selectedId, showLabels, globe, cameraCenter, onHover, onClick }: Props) {
   const data = infras
     .filter(infra => infra.lat != null && infra.lon != null)
+    .filter(infra => !globe || pointVisibleOnGlobe([infra.lon!, infra.lat!], cameraCenter))
     .map(infra => {
       const capacity = infra.capacity_bcm ?? infra.capacity_mt ?? 0
       return {
@@ -38,6 +41,23 @@ export function InfraIconLayer({ infras, selectedId, showLabels, globe, onHover,
         __tooltip: `${infra.name}\n${TYPE_LABEL[infra.type ?? ''] ?? infra.type} — ${formatCapacity(infra)}\n${infra.operator ?? ''} | ${infra.status}`,
       }
     })
+
+  // Invisible round hit-target: icon glyphs are mostly transparent pixels,
+  // which deck.gl picking ignores — without this, clicks fall through to the
+  // country polygon underneath.
+  const hitLayer = new ScatterplotLayer({
+    id: 'infra-hit',
+    data,
+    getPosition: (d: any) => d.position,
+    getRadius: 13,
+    radiusUnits: 'pixels',
+    getFillColor: [0, 0, 0, 1],
+    stroked: false,
+    pickable: true,
+    onHover,
+    onClick,
+    parameters: globeParams(globe) as any,
+  })
 
   const iconLayer = new IconLayer({
     id: 'infra-icons',
@@ -53,13 +73,14 @@ export function InfraIconLayer({ infras, selectedId, showLabels, globe, onHover,
     highlightColor: [255, 255, 255, 90],
     onHover,
     onClick,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
       getSize: [selectedId],
       getColor: [selectedId],
     },
   })
 
-  const layers: any[] = [iconLayer]
+  const layers: any[] = [hitLayer, iconLayer]
 
   if (showLabels && !globe) {
     layers.push(

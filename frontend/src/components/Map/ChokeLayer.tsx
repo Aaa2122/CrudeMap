@@ -1,6 +1,7 @@
 import { IconLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers'
 import type { ChokepointBrief } from '../../api/types'
 import { getIcon } from './iconAtlas'
+import { globeParams, pointVisibleOnGlobe } from './globeCulling'
 
 type RGBA = [number, number, number, number]
 
@@ -16,6 +17,8 @@ interface Props {
   disruptedSlugs: Set<string>
   animTime: number
   showLabels: boolean
+  globe: boolean
+  cameraCenter: [number, number]
   onHover: (info: any) => void
   onClick: (info: any) => void
 }
@@ -24,9 +27,10 @@ interface Props {
  * Maritime chokepoints: halo sized by transit volume, warning-diamond icon,
  * plus an animated pulsing ring on critical/disrupted straits.
  */
-export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, onHover, onClick }: Props) {
+export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, globe, cameraCenter, onHover, onClick }: Props) {
   const data = chokepoints
     .filter(chokepoint => chokepoint.lat != null && chokepoint.lon != null)
+    .filter(chokepoint => !globe || pointVisibleOnGlobe([chokepoint.lon!, chokepoint.lat!], cameraCenter))
     .map(chokepoint => {
       const isDisrupted = disruptedSlugs.has(chokepoint.slug)
       return {
@@ -48,10 +52,12 @@ export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, 
     getFillColor: (d: any) => [d.color[0], d.color[1], d.color[2], 28] as RGBA,
     stroked: false,
     pickable: false,
+    parameters: globeParams(globe) as any,
   })
 
-  // Expanding ring on critical or scenario-disrupted chokepoints
-  const pulse = animTime % 1
+  // Expanding ring on critical or scenario-disrupted chokepoints (3s pulse
+  // derived from the 60s shared clock)
+  const pulse = (animTime * 20) % 1
   const pulseLayer = new ScatterplotLayer({
     id: 'choke-pulse',
     data: data.filter((d: any) => d.pulses),
@@ -64,6 +70,7 @@ export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, 
     getLineWidth: 1.6,
     lineWidthUnits: 'pixels',
     pickable: false,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
       getRadius: [pulse],
       getLineColor: [pulse],
@@ -84,6 +91,7 @@ export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, 
     highlightColor: [255, 255, 255, 90],
     onHover,
     onClick,
+    parameters: globeParams(globe) as any,
     updateTriggers: {
       getColor: [disruptedSlugs.size],
     },
@@ -111,6 +119,7 @@ export function ChokeLayer({ chokepoints, disruptedSlugs, animTime, showLabels, 
         characterSet: 'auto',
         billboard: true,
         pickable: false,
+        parameters: globeParams(globe) as any,
       }),
     )
   }

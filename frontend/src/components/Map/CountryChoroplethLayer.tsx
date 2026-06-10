@@ -1,12 +1,14 @@
 import { GeoJsonLayer } from '@deck.gl/layers'
 import type { CountryBrief, CountryMetricKey } from '../../api/types'
 import { buildMetricScale, formatMetricValue, getCountryMetricValue } from './countryMetrics'
+import { globeParams } from './globeCulling'
 
 interface Props {
   geojson: any
   countries: CountryBrief[]
   selectedMetric: CountryMetricKey
   selectedIso?: string | null
+  globe?: boolean
   onHover: (info: any) => void
   onClick: (info: any) => void
 }
@@ -25,6 +27,7 @@ export function CountryChoroplethLayer({
   countries,
   selectedMetric,
   selectedIso,
+  globe = false,
   onHover,
   onClick,
 }: Props) {
@@ -70,6 +73,9 @@ export function CountryChoroplethLayer({
     highlightColor: [255, 255, 255, 40],
     onHover,
     onClick,
+    // Globe: paint in layer order — coarse polygons dip inside the sphere
+    // and would otherwise occlude surface overlays via the depth buffer
+    parameters: globeParams(globe) as any,
     // Smooth re-color when switching metric or commodity
     transitions: {
       getFillColor: 300,

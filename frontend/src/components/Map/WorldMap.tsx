@@ -21,7 +21,10 @@ import { FieldLayer } from './FieldLayer'
 import { ShippingLaneLayer } from './ShippingLaneLayer'
 import { MapLegend } from './MapLegend'
 import { GraticuleLayer, OceanLayer } from './gisBasemap'
+import { angularDistanceDeg } from './globeCulling'
 import { buildFlowPaths } from './flowGeometry'
+import { VesselLayer } from './VesselLayer'
+import { buildFleet } from './vesselFleet'
 import {
   containerPortsVisibleAtZoom,
   fieldsVisibleAtZoom,
@@ -90,7 +93,27 @@ function getFeatureBounds(feature: any): [[number, number], [number, number]] | 
   return [[minLon, minLat], [maxLon, maxLat]]
 }
 
-export function createAnimatedViewState(
+export // Rough feature centroid + angular span, cached per feature for hemisphere culling
+const featureGeomCache = new WeakMap<object, { centroid: [number, number]; spanDeg: number }>()
+
+function getFeatureCullingInfo(feature: any): { centroid: [number, number]; spanDeg: number } {
+  const cached = featureGeomCache.get(feature)
+  if (cached) return cached
+  const bounds = getFeatureBounds(feature)
+  const info = bounds
+    ? {
+        centroid: [
+          (bounds[0][0] + bounds[1][0]) / 2,
+          (bounds[0][1] + bounds[1][1]) / 2,
+        ] as [number, number],
+        spanDeg: Math.max(bounds[1][0] - bounds[0][0], bounds[1][1] - bounds[0][1]),
+      }
+    : { centroid: [0, 0] as [number, number], spanDeg: 360 }
+  featureGeomCache.set(feature, info)
+  return info
+}
+
+function createAnimatedViewState(
   nextState: { longitude: number; latitude: number; zoom: number; pitch?: number; bearing?: number },
 ) {
   return {
@@ -131,15 +154,27 @@ export function WorldMap() {
 
   const isGlobe = viewMode === 'globe'
   const zoom = quantizeZoom(viewState.zoom ?? FLAT_VIEW_STATE.zoom)
+  // Quantized camera center — drives hemisphere culling in globe mode only
+  const cameraCenter = useMemo<[number, number]>(
+    () => [
+      Math.round((viewState.longitude ?? 0) / 4) * 4,
+      Math.round((viewState.latitude ?? 0) / 4) * 4,
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [Math.round((viewState.longitude ?? 0) / 4), Math.round((viewState.latitude ?? 0) / 4)],
+  )
 
   const [animTime, setAnimTime] = useState(0)
   const rafRef = useRef<number>(0)
   const startRef = useRef<number>(0)
 
+  // One clock cycle = one vessel voyage (60s); faster consumers (particles,
+  // pulses) derive their own rate from integer multiples so the wrap stays
+  // continuous.
   useEffect(() => {
     const animate = (timestamp: number) => {
       if (!startRef.current) startRef.current = timestamp
-      setAnimTime(((timestamp - startRef.current) % 6000) / 6000)
+      setAnimTime(((timestamp - startRef.current) % 60000) / 60000)
       rafRef.current = requestAnimationFrame(animate)
     }
     rafRef.current = requestAnimationFrame(animate)
@@ -178,6 +213,18 @@ export function WorldMap() {
       .filter((entry: [string | null, any]): entry is [string, any] => Boolean(entry[0]))
     return new globalThis.Map(entries)
   }, [countryGeoJson])
+
+  // In globe mode land renders without depth testing (coarse polygons dip
+  // inside the sphere) — cull far-hemisphere countries so they can't ghost.
+  const renderGeoJson = useMemo(() => {
+    if (!countryGeoJson || !isGlobe) return countryGeoJson
+    const features = (countryGeoJson.features ?? []).filter((feature: any) => {
+      const { centroid, spanDeg } = getFeatureCullingInfo(feature)
+      const margin = Math.min(125, 85 + spanDeg / 2)
+      return angularDistanceDeg(centroid, cameraCenter) < margin
+    })
+    return { ...countryGeoJson, features }
+  }, [countryGeoJson, isGlobe, cameraCenter])
 
   useEffect(() => {
     const node = containerRef.current
@@ -247,6 +294,9 @@ export function WorldMap() {
     () => buildFlowPaths(visibleFlows, countryCoords, chokepoints ?? [], infras ?? []),
     [visibleFlows, countryCoords, chokepoints, infras],
   )
+
+  // Simulated live fleet sailing the routed flows
+  const fleet = useMemo(() => buildFleet(flowPaths, disrupted), [flowPaths, disrupted])
 
   // Infrastructure split: pipelines draw as traces, the rest as icons.
   // Commodity filter: oil mode shows oil+products assets, gas mode gas assets.
@@ -393,12 +443,13 @@ export function WorldMap() {
     OceanLayer(),
     GraticuleLayer(),
     layerVisibility.countries &&
-      countryGeoJson &&
+      renderGeoJson &&
       CountryChoroplethLayer({
-        geojson: countryGeoJson,
+        geojson: renderGeoJson,
         countries: filteredCountries,
         selectedMetric,
         selectedIso: selected?.type === 'country' ? selected.iso : null,
+        globe: isGlobe,
         onHover: handleHover,
         onClick: (info: any) => {
           const iso = info.object?.properties?.__iso
@@ -415,6 +466,7 @@ export function WorldMap() {
         showPorts: (layerVisibility.containerPorts || layerVisibility.shippingLanes) && containerPortsVisibleAtZoom(zoom),
         showPortLabels: showLabels,
         globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
       }),
     layerVisibility.pipelines &&
@@ -423,6 +475,7 @@ export function WorldMap() {
         pipelines,
         selectedId: selectedInfraId,
         globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
         onClick: handleInfraClick,
       }),
@@ -433,8 +486,21 @@ export function WorldMap() {
         disrupted,
         commodity,
         animTime,
+        globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
         onClick: () => undefined,
+      }),
+    layerVisibility.vessels &&
+      layerVisibility.flows &&
+      fleet.length > 0 &&
+      VesselLayer({
+        vessels: fleet,
+        commodity,
+        clock: animTime,
+        globe: isGlobe,
+        cameraCenter,
+        onHover: handleHover,
       }),
     visibleFields.length > 0 &&
       FieldLayer({
@@ -442,6 +508,7 @@ export function WorldMap() {
         selectedId: selectedFieldId,
         showLabels,
         globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
         onClick: handleFieldClick,
       }),
@@ -451,6 +518,7 @@ export function WorldMap() {
         selectedId: selectedInfraId,
         showLabels,
         globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
         onClick: handleInfraClick,
       }),
@@ -460,6 +528,8 @@ export function WorldMap() {
         disruptedSlugs: disruptedChokeSlugs,
         animTime,
         showLabels: zoom >= 2.2,
+        globe: isGlobe,
+        cameraCenter,
         onHover: handleHover,
         onClick: (info: any) => {
           if (info.object) {
@@ -496,6 +566,7 @@ export function WorldMap() {
         controller
         layers={layers}
         views={views}
+        pickingRadius={5}
         onViewStateChange={({ viewState: nextViewState }: any) => {
           setTooltip(null)
           setViewState(nextViewState)
