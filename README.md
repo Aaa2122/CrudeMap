@@ -81,6 +81,17 @@ Validate seed files after editing:
 docker compose run --rm backend python -m etl.validate_seeds
 ```
 
+### Scaling up precision (free public sources)
+
+The dataset can be upgraded to research-grade precision without paid feeds:
+
+| What | Source (free) | How |
+|---|---|---|
+| Pipelines (exact routes), LNG terminals, fields | [Global Energy Monitor trackers](https://globalenergymonitor.org/projects/) (GOIT / GGIT / GOGET downloads) | `python -m etl.import_gem --pipelines gem.geojson --lng-terminals gem.csv --fields goget.csv` then validate + re-seed |
+| Country oil balances | Energy Institute Statistical Review, JODI, EIA Open Data | drop normalized exports in `etl/sources/` and run `python -m etl.refresh --write-seed` |
+| Bilateral crude flows | UN Comtrade (HS 2709) | same refresh pipeline (`comtrade.csv` in `etl/sources/`) |
+| Live vessel positions | [aisstream.io](https://aisstream.io) (free API key) | the current "live sim" fleet derives from flow volumes; a real AIS websocket can replace `vesselFleet.ts` positions |
+
 ## Extending
 
 - **New data source**: implement `DataLoader` in `backend/etl/loaders/` and pass it to `seed(loader=MyLoader())`
