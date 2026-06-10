@@ -75,5 +75,38 @@
     "risk_level": "low",
     "source": "EIA 2024",
     "source_year": 2024
+  },
+  {
+    "slug": "danish_straits",
+    "name": "Danish Straits",
+    "lat": 55.5,
+    "lon": 11.0,
+    "oil_transit_mbd": 3.2,
+    "pct_world_trade": 3.2,
+    "risk_level": "low",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "cape_of_good_hope",
+    "name": "Cape of Good Hope",
+    "lat": -34.4,
+    "lon": 18.5,
+    "oil_transit_mbd": 6.7,
+    "pct_world_trade": 6.7,
+    "risk_level": "low",
+    "source": "EIA 2024",
+    "source_year": 2024
+  },
+  {
+    "slug": "gibraltar",
+    "name": "Strait of Gibraltar",
+    "lat": 35.95,
+    "lon": -5.6,
+    "oil_transit_mbd": 4.5,
+    "pct_world_trade": 4.5,
+    "risk_level": "low",
+    "source": "EIA 2024",
+    "source_year": 2024
   }
 ]
