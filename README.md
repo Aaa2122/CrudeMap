@@ -63,8 +63,6 @@ npm install
 npm run dev
 ```
 
-- App: http://localhost:5173
-- API: http://localhost:8000 — Swagger at `/docs`
 
 ## Using the map
 
