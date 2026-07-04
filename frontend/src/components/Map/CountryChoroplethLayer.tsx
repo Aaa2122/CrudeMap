@@ -2,6 +2,7 @@ import { GeoJsonLayer } from '@deck.gl/layers'
 import type { CountryBrief, CountryMetricKey } from '../../api/types'
 import { buildMetricScale, formatMetricValue, getCountryMetricValue } from './countryMetrics'
 import { globeParams } from './globeCulling'
+import { HAIRLINE, SELECTED, withAlpha } from './mapTheme'
 
 interface Props {
   geojson: any
@@ -66,11 +67,11 @@ export function CountryChoroplethLayer({
         : DIMMED_COUNTRY_COLOR
     },
     getLineColor: (feature: any) =>
-      feature.properties?.__iso === selectedIso ? [220, 165, 74, 255] : [58, 84, 106, 135],
-    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 1.8 : 0.5),
+      feature.properties?.__iso === selectedIso ? SELECTED : HAIRLINE,
+    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 1.5 : 0.5),
     lineWidthUnits: 'pixels',
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 40],
+    highlightColor: withAlpha(SELECTED, 40),
     onHover,
     onClick,
     // Globe: paint in layer order — coarse polygons dip inside the sphere

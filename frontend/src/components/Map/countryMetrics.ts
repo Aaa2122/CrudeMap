@@ -1,4 +1,5 @@
 import type { Commodity, CountryBrief, CountryDetail, CountryMetricKey } from '../../api/types'
+import { NO_DATA } from './mapTheme'
 
 type CountryMetricDatum = CountryBrief | CountryDetail
 type RGBA = [number, number, number, number]
@@ -24,68 +25,66 @@ export interface MetricScale {
   getBucketLabel: (value: number | null | undefined) => string
 }
 
-// Land IS the basemap now (custom GIS ground) — fills are near-opaque,
-// ramps are restrained single-hue luminance scales.
+// Land IS the basemap now (custom GIS ground) — fills are near-opaque.
+// Ramps are data encodings: desaturated luminance scales only.
 const VOLUME_PALETTE: RGBA[] = [
-  [16, 28, 41, 242],
-  [24, 45, 64, 242],
-  [37, 73, 99, 242],
-  [66, 116, 148, 242],
-  [129, 178, 205, 242],
+  [14, 24, 35, 242],
+  [22, 40, 56, 242],
+  [35, 63, 86, 242],
+  [60, 100, 130, 242],
+  [112, 156, 184, 242],
 ]
 
 const RISK_PALETTE: RGBA[] = [
-  [33, 29, 25, 242],
-  [66, 48, 31, 242],
-  [115, 72, 38, 242],
-  [172, 94, 45, 242],
+  [26, 30, 35, 242],
+  [52, 48, 50, 242],
+  [96, 64, 62, 242],
+  [160, 80, 72, 242],
   [217, 84, 77, 242],
 ]
 
 const RESILIENCE_PALETTE: RGBA[] = [
-  [25, 35, 30, 242],
-  [33, 61, 47, 242],
-  [44, 94, 68, 242],
-  [62, 134, 95, 242],
-  [110, 187, 142, 242],
+  [22, 30, 27, 242],
+  [30, 50, 41, 242],
+  [42, 76, 60, 242],
+  [64, 112, 86, 242],
+  [104, 160, 126, 242],
 ]
 
 const SCORE_PALETTE: RGBA[] = [
-  [22, 31, 46, 242],
-  [33, 54, 80, 242],
-  [48, 84, 119, 242],
-  [78, 124, 163, 242],
-  [142, 181, 214, 242],
+  [20, 28, 40, 242],
+  [30, 48, 68, 242],
+  [44, 74, 102, 242],
+  [70, 110, 142, 242],
+  [124, 160, 188, 242],
 ]
 
 // Teal ramp for natural gas volumes — visually distinct from the oil blue ramp
 const GAS_VOLUME_PALETTE: RGBA[] = [
-  [15, 31, 34, 242],
-  [22, 53, 56, 242],
-  [31, 84, 85, 242],
-  [48, 128, 124, 242],
-  [110, 195, 186, 242],
+  [13, 28, 32, 242],
+  [19, 46, 51, 242],
+  [28, 72, 78, 242],
+  [44, 110, 117, 242],
+  [96, 170, 178, 242],
 ]
 
 // Diverging ramps for net balance (production − consumption):
 // importers cold steel-blue <- neutral dark -> exporters in the commodity hue
 const OIL_BALANCE_PALETTE: RGBA[] = [
-  [62, 110, 152, 242], // strong net importer
-  [37, 64, 92, 242],
-  [20, 30, 43, 242], // balanced
-  [108, 80, 42, 242],
-  [200, 146, 62, 242], // strong net exporter
+  [56, 96, 130, 242], // strong net importer (cold steel)
+  [34, 58, 80, 242],
+  [19, 28, 39, 242], // balanced
+  [96, 74, 42, 242],
+  [188, 142, 66, 242], // strong net exporter (amber family)
 ]
 
 const GAS_BALANCE_PALETTE: RGBA[] = [
-  [62, 110, 152, 242],
-  [37, 64, 92, 242],
-  [20, 30, 43, 242],
-  [28, 88, 86, 242],
-  [70, 172, 162, 242],
+  [56, 96, 130, 242],
+  [34, 58, 80, 242],
+  [19, 28, 39, 242],
+  [28, 80, 80, 242],
+  [72, 158, 152, 242], // strong net exporter (cyan family)
 ]
-
-const NO_DATA_COLOR: RGBA = [13, 22, 33, 242]
 
 const METRIC_CONFIG: Record<CountryMetricKey, MetricConfig> = {
   oil_balance: {
@@ -297,9 +296,9 @@ export function buildMetricScale(countries: CountryMetricDatum[], metric: Countr
   return {
     label: config.label,
     shortLabel: config.shortLabel,
-    legendItems: [...legendItems, { color: NO_DATA_COLOR, label: 'No data' }],
+    legendItems: [...legendItems, { color: NO_DATA, label: 'No data' }],
     getColor: value => {
-      if (isNoData(value)) return NO_DATA_COLOR
+      if (isNoData(value)) return NO_DATA
       const bucket = thresholds.findIndex(threshold => value! <= threshold)
       return config.palette[bucket === -1 ? config.palette.length - 1 : bucket]
     },
