@@ -1,5 +1,5 @@
 /**
- * Single source of truth for every color drawn on the map.
+ * Single source of truth for every color drawn on the (light) map.
  *
  * Hue budget: exactly three functional accents (oil amber, gas cyan,
  * alert red) over a neutral ink/steel base. Choropleth ramps live in
@@ -9,27 +9,27 @@
 
 export type RGBA = [number, number, number, number]
 
-// ---- Neutral base -------------------------------------------------------
-export const OCEAN: RGBA = [6, 14, 24, 255]
-export const GRATICULE: RGBA = [112, 150, 182, 10]
-export const HAIRLINE: RGBA = [46, 66, 84, 100] // country borders, thin strokes
-export const HAIRLINE_STRONG: RGBA = [70, 96, 118, 160]
-export const NEUTRAL_MARK: RGBA = [148, 167, 184, 205] // default infrastructure mark
-export const NEUTRAL_MARK_DIM: RGBA = [104, 122, 138, 150] // offline / declining
-export const LABEL: RGBA = [190, 204, 216, 225]
-export const LABEL_MUTED: RGBA = [140, 158, 173, 205]
-export const LABEL_HALO: RGBA = [8, 14, 21, 235]
-export const NO_DATA: RGBA = [13, 22, 33, 242]
-export const LAND_DIM: RGBA = [13, 21, 31, 242] // countries outside the current selection
+// ---- Neutral base (light map: pearl water, off-white land, ink labels) ----
+export const OCEAN: RGBA = [229, 234, 239, 255]
+export const GRATICULE: RGBA = [70, 90, 110, 14]
+export const HAIRLINE: RGBA = [120, 130, 140, 90] // country borders, thin strokes
+export const HAIRLINE_STRONG: RGBA = [95, 105, 115, 150]
+export const NEUTRAL_MARK: RGBA = [110, 120, 130, 205] // default infrastructure mark
+export const NEUTRAL_MARK_DIM: RGBA = [150, 158, 166, 150] // offline / declining
+export const LABEL: RGBA = [45, 55, 65, 230]
+export const LABEL_MUTED: RGBA = [90, 100, 110, 210]
+export const LABEL_HALO: RGBA = [255, 255, 255, 235]
+export const NO_DATA: RGBA = [237, 235, 231, 242]
+export const LAND_DIM: RGBA = [228, 228, 226, 242] // countries outside the current selection
 
 // ---- Functional accents (the ONLY hues) ---------------------------------
-export const OIL: RGBA = [220, 165, 74, 255] // #DCA54A — brand amber
-export const GAS: RGBA = [70, 200, 220, 255] // #46C8DC — brand cyan
-export const ALERT: RGBA = [217, 84, 77, 255] // #D9544D — brand red
+export const OIL: RGBA = [183, 122, 75, 255] // #B77A4B — soft copper
+export const GAS: RGBA = [74, 155, 170, 255] // #4A9BAA — calm blue-green
+export const ALERT: RGBA = [222, 91, 78, 255] // #DE5B4E — softened red
 
 // ---- Interaction states --------------------------------------------------
-export const SELECTED: RGBA = [255, 255, 255, 255]
-export const HIGHLIGHT: RGBA = [255, 255, 255, 60] // deck.gl autoHighlight
+export const SELECTED: RGBA = [29, 29, 31, 255] // ink — white is invisible on light
+export const HIGHLIGHT: RGBA = [29, 29, 31, 30] // deck.gl autoHighlight tint
 
 // ---- Helpers --------------------------------------------------------------
 export function withAlpha(color: RGBA, alpha: number): RGBA {
