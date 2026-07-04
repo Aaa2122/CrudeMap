@@ -1,6 +1,7 @@
 import type { CountryMetricKey } from '../../api/types'
 import { useMapStore } from '../../store/mapStore'
 import { getMetricOptions, type MetricScale } from './countryMetrics'
+import { ALERT, GAS, NEUTRAL_MARK, NEUTRAL_MARK_DIM, OIL, accentFor, toCss, withAlpha } from './mapTheme'
 
 interface Props {
   scale: MetricScale
@@ -13,14 +14,10 @@ interface KeyRow {
   shape: 'dot' | 'line' | 'dash'
 }
 
-function rgba(color: [number, number, number, number]): string {
-  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] / 255})`
-}
-
 /** Bottom-left map key: metric selector + ramp + active-layer legend. */
 export function MapLegend({ scale, flowsLabel }: Props) {
   const { commodity, layers, selectedMetric, setSelectedMetric } = useMapStore()
-  const accent = commodity === 'gas' ? '#46C8DC' : '#DCA54A'
+  const accent = toCss(accentFor(commodity))
 
   const keyRows: KeyRow[] = []
   if (layers.flows) {
@@ -29,29 +26,39 @@ export function MapLegend({ scale, flowsLabel }: Props) {
   if (layers.vessels && layers.flows) {
     keyRows.push({
       label: commodity === 'gas' ? 'LNG carriers · simulated live' : 'Tankers · simulated live',
-      color: commodity === 'gas' ? '#9FE8F2' : '#F2CE8C',
+      color: accent,
       shape: 'dot',
     })
   }
   if (layers.pipelines) {
     keyRows.push(
       commodity === 'gas'
-        ? { label: 'Gas pipelines · offline = grey', color: '#46C8DC', shape: 'dash' }
-        : { label: 'Crude pipelines', color: '#3EA080', shape: 'line' },
+        ? { label: 'Gas pipelines · dashed', color: toCss(NEUTRAL_MARK), shape: 'dash' }
+        : { label: 'Crude pipelines', color: toCss(NEUTRAL_MARK), shape: 'line' },
     )
   }
-  if (layers.terminals && commodity === 'oil') keyRows.push({ label: 'Terminals & ports', color: '#DCA54A', shape: 'dot' })
-  if (layers.lngTerminals && commodity === 'gas') keyRows.push({ label: 'LNG terminals', color: '#46C8DC', shape: 'dot' })
-  if (layers.refineries && commodity === 'oil') keyRows.push({ label: 'Refineries', color: '#CB6E90', shape: 'dot' })
+  if (layers.terminals && commodity === 'oil') {
+    keyRows.push({ label: 'Terminals · ports (ring)', color: toCss(OIL), shape: 'dot' })
+  }
+  if (layers.lngTerminals && commodity === 'gas') {
+    keyRows.push({ label: 'LNG terminals', color: toCss(GAS), shape: 'dot' })
+  }
+  if (layers.refineries && commodity === 'oil') {
+    keyRows.push({ label: 'Refineries (square)', color: toCss(NEUTRAL_MARK), shape: 'dot' })
+  }
   if (layers.fields) {
     keyRows.push(
       commodity === 'gas'
-        ? { label: 'Gas fields · zoom in', color: '#DD9658', shape: 'dot' }
-        : { label: 'Oil fields · zoom in', color: '#97C166', shape: 'dot' },
+        ? { label: 'Gas fields · zoom in', color: toCss(GAS), shape: 'dot' }
+        : { label: 'Oil fields · zoom in', color: toCss(OIL), shape: 'dot' },
     )
   }
-  if (layers.chokepoints) keyRows.push({ label: 'Chokepoints · size = risk', color: '#D9544D', shape: 'dot' })
-  if (layers.shippingLanes) keyRows.push({ label: 'Container corridors · width = TEU', color: '#608EC4', shape: 'line' })
+  if (layers.chokepoints) {
+    keyRows.push({ label: 'Chokepoints · red = critical', color: toCss(withAlpha(ALERT, 235)), shape: 'dot' })
+  }
+  if (layers.shippingLanes) {
+    keyRows.push({ label: 'Container corridors · width = TEU', color: toCss(NEUTRAL_MARK_DIM), shape: 'line' })
+  }
 
   return (
     <div className="terminal-card absolute left-4 bottom-4 z-40 w-[248px] rounded-sm px-3.5 py-3">
@@ -75,7 +82,7 @@ export function MapLegend({ scale, flowsLabel }: Props) {
       {/* Compact color ramp */}
       <div className="mt-2 flex h-1.5 overflow-hidden rounded-sm">
         {scale.legendItems.slice(0, -1).map(item => (
-          <span key={item.color.join('-')} className="flex-1" style={{ backgroundColor: rgba(item.color) }} />
+          <span key={item.color.join('-')} className="flex-1" style={{ backgroundColor: toCss(item.color) }} />
         ))}
       </div>
       <div className="mt-1 flex justify-between font-mono text-[9px] text-text-muted">
