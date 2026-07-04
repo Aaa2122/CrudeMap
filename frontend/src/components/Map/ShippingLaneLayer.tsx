@@ -72,7 +72,7 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
         billboard: true,
         pickable: true,
         autoHighlight: true,
-        highlightColor: [255, 255, 255, 90],
+        highlightColor: HIGHLIGHT,
         onHover,
         parameters: globeParams(globe) as any,
       }),

@@ -20,6 +20,7 @@ export const LABEL: RGBA = [190, 204, 216, 225]
 export const LABEL_MUTED: RGBA = [140, 158, 173, 205]
 export const LABEL_HALO: RGBA = [8, 14, 21, 235]
 export const NO_DATA: RGBA = [13, 22, 33, 242]
+export const LAND_DIM: RGBA = [13, 21, 31, 242] // countries outside the current selection
 
 // ---- Functional accents (the ONLY hues) ---------------------------------
 export const OIL: RGBA = [220, 165, 74, 255] // #DCA54A — brand amber
