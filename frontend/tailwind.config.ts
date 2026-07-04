@@ -5,25 +5,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        // "Intelligence terminal" palette — deep ocean ground, one cold accent,
-        // commodity accents (oil amber / gas cyan) applied locally.
-        primary: '#6FB7D6',
-        bg: '#050B12',
-        surface: '#0A131D',
-        border: '#1A2937',
-        amber: { DEFAULT: '#DCA54A', light: '#E9BC6F' },
-        gascyan: '#46C8DC',
-        disrupted: '#D9544D',
-        rerouted: '#D98143',
-        safe: '#46A87C',
-        text: { DEFAULT: '#D8E3EC', muted: '#5E7485' },
+        // Light "Apple" palette — pearl ground, white surfaces, ink text,
+        // soft copper (oil) / blue-green (gas) accents.
+        primary: '#3B7BC4', // interactive blue (links, focus)
+        bg: '#F5F5F7',
+        surface: '#FFFFFF',
+        border: 'rgba(0,0,0,0.08)',
+        inset: '#F2F2F4', // iOS inset-group background inside white cards
+        oil: '#B77A4B',
+        gas: '#4A9BAA',
+        alert: '#DE5B4E',
+        safe: '#3E9E6E',
+        // Transitional aliases — deleted in the cleanup task once all
+        // component usages are migrated to the tokens above.
+        amber: { DEFAULT: '#B77A4B', light: '#C89468' },
+        gascyan: '#4A9BAA',
+        disrupted: '#DE5B4E',
+        rerouted: '#E08D4C',
+        text: { DEFAULT: '#1D1D1F', muted: '#6E6E73' },
       },
       fontFamily: {
-        sans: ['Archivo', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
       },
+      borderRadius: {
+        ctl: '12px',
+        card: '16px',
+        panel: '20px',
+      },
+      boxShadow: {
+        float: '0 8px 30px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)',
+        pop: '0 16px 48px rgba(0,0,0,0.14)',
+      },
       letterSpacing: {
-        caps: '0.18em',
+        caps: '0.18em', // transitional — removed with .caps-label in cleanup
       },
     },
   },

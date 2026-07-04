@@ -11,9 +11,9 @@ html, body, #root {
   padding: 0;
   width: 100%;
   height: 100%;
-  background: #050B12;
-  color: #D8E3EC;
-  font-family: 'Archivo', system-ui, sans-serif;
+  background: #F5F5F7;
+  color: #1D1D1F;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -36,53 +36,71 @@ html, body, #root {
   vertical-align: middle;
 }
 
-/* Wordmark / section headers — expanded grotesque */
-.display-caps {
-  font-family: 'Archivo', sans-serif;
-  font-stretch: 125%;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+/* White floating card — the one elevation used by all map overlays/panels */
+.floating-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-/* Ocean ground under the custom GIS basemap: deep vignette */
+/* Translucent blurred bar (header) */
+.glass-bar {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Small muted section heading, sentence case */
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6E6E73;
+}
+
+/* Light ground under the map canvas */
 .ocean-ground {
-  background:
-    radial-gradient(120% 90% at 50% 38%, #081320 0%, #050B12 58%, #030710 100%);
+  background: radial-gradient(120% 90% at 50% 38%, #EEF1F4 0%, #E8EDF2 58%, #E2E8EE 100%);
   position: relative;
 }
 
-/* Hairline card — the one panel chrome used everywhere */
+/* ── Transitional aliases (deleted in cleanup once unmigrated components are gone) ── */
 .terminal-card {
-  background: rgba(8, 16, 25, 0.88);
-  border: 1px solid #1A2937;
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  backdrop-filter: none;
 }
-
-/* Caps label used for every section heading */
 .caps-label {
-  font-size: 9px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #6E6E73;
+}
+.display-caps {
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #5E7485;
+  text-transform: none;
+  letter-spacing: -0.01em;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar — light */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1A2937;
-  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2C4154;
+  background: rgba(0, 0, 0, 0.24);
 }
 
 select, input {
