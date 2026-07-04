@@ -551,9 +551,9 @@ export function WorldMap() {
 
       {isLoading && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-bg/60 backdrop-blur-sm">
-          <div className="flex items-center gap-3 rounded border border-border bg-surface/95 px-4 py-3 shadow-xl">
+          <div className="floating-card flex items-center gap-3 px-5 py-3.5">
             <span className="h-2 w-2 animate-ping rounded-full bg-primary" />
-            <span className="text-xs uppercase tracking-widest text-text-muted">Loading world data…</span>
+            <span className="text-[12px] text-text-muted">Loading world data…</span>
           </div>
         </div>
       )}
@@ -562,7 +562,7 @@ export function WorldMap() {
 
       {tooltip && (
         <div
-          className="terminal-card absolute pointer-events-none z-50 max-w-[250px] rounded-sm px-3 py-2"
+          className="floating-card absolute pointer-events-none z-50 max-w-[260px] !rounded-ctl px-3.5 py-2.5"
           style={{ left: tooltip.x + 14, top: tooltip.y - 16 }}
         >
           {tooltip.text.split('\n').map((line, index) => (

@@ -1,7 +1,8 @@
 import type { CountryMetricKey } from '../../api/types'
 import { useMapStore } from '../../store/mapStore'
 import { getMetricOptions, type MetricScale } from './countryMetrics'
-import { ALERT, GAS, NEUTRAL_MARK, NEUTRAL_MARK_DIM, OIL, accentFor, toCss, withAlpha } from './mapTheme'
+import { ALERT, GAS, NEUTRAL_MARK, NEUTRAL_MARK_DIM, OIL, toCss, withAlpha } from './mapTheme'
+import { accentHex } from '../../uiTheme'
 
 interface Props {
   scale: MetricScale
@@ -17,7 +18,7 @@ interface KeyRow {
 /** Bottom-left map key: metric selector + ramp + active-layer legend. */
 export function MapLegend({ scale, flowsLabel }: Props) {
   const { commodity, layers, selectedMetric, setSelectedMetric } = useMapStore()
-  const accent = toCss(accentFor(commodity))
+  const accent = accentHex(commodity)
 
   const keyRows: KeyRow[] = []
   if (layers.flows) {
@@ -61,10 +62,13 @@ export function MapLegend({ scale, flowsLabel }: Props) {
   }
 
   return (
-    <div className="terminal-card absolute left-4 bottom-4 z-40 w-[248px] rounded-sm px-3.5 py-3">
+    <div className="floating-card absolute left-4 bottom-4 z-40 w-[252px] px-4 py-3.5">
       <div className="flex items-center justify-between">
-        <span className="caps-label">Choropleth</span>
-        <span className="font-mono text-[9px] uppercase tracking-caps" style={{ color: accent }}>
+        <span className="text-[12px] font-semibold text-text">Choropleth</span>
+        <span
+          className="rounded-full px-2 py-0.5 font-mono text-[9px] uppercase"
+          style={{ background: `${accent}1f`, color: accent }}
+        >
           {commodity}
         </span>
       </div>
@@ -72,7 +76,7 @@ export function MapLegend({ scale, flowsLabel }: Props) {
       <select
         value={selectedMetric}
         onChange={e => setSelectedMetric(e.target.value as CountryMetricKey)}
-        className="mt-1.5 w-full appearance-none rounded-sm border border-border bg-bg/70 px-2 py-1 text-[12px] font-medium text-text focus:border-primary/60 focus:outline-none"
+        className="mt-2 w-full appearance-none rounded-ctl border-none bg-inset px-3 py-1.5 text-[12px] font-medium text-text focus:outline-none focus:ring-2 focus:ring-primary/30"
       >
         {getMetricOptions(commodity).map(option => (
           <option key={option.key} value={option.key}>{option.label}</option>
@@ -80,7 +84,7 @@ export function MapLegend({ scale, flowsLabel }: Props) {
       </select>
 
       {/* Compact color ramp */}
-      <div className="mt-2 flex h-1.5 overflow-hidden rounded-sm">
+      <div className="mt-2.5 flex h-2 overflow-hidden rounded-full">
         {scale.legendItems.slice(0, -1).map(item => (
           <span key={item.color.join('-')} className="flex-1" style={{ backgroundColor: toCss(item.color) }} />
         ))}
@@ -93,7 +97,7 @@ export function MapLegend({ scale, flowsLabel }: Props) {
       {keyRows.length > 0 && (
         <div className="mt-2.5 space-y-1.5 border-t border-border pt-2.5">
           {keyRows.map(row => (
-            <div key={row.label} className="flex items-center gap-2 text-[10px] text-text-muted">
+            <div key={row.label} className="flex items-center gap-2 text-[11px] text-text-muted">
               {row.shape === 'dot' ? (
                 <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: row.color }} />
               ) : (
@@ -115,7 +119,7 @@ export function MapLegend({ scale, flowsLabel }: Props) {
         </div>
       )}
 
-      <div className="mt-2.5 border-t border-border pt-2 font-mono text-[9px] uppercase tracking-caps text-text-muted">
+      <div className="mt-2.5 border-t border-border pt-2 text-[10px] text-text-muted">
         {flowsLabel}
       </div>
     </div>
