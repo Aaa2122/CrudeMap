@@ -131,21 +131,6 @@ export default function App() {
         )}
       </div>
 
-      {/* ── Footer: status strip ── */}
-      <footer className="shrink-0 border-t border-border bg-surface/90 flex items-center justify-between px-5 h-8 backdrop-blur">
-        <span className="font-mono text-[9px] uppercase tracking-caps text-text-muted">
-          {commodity === 'gas' ? 'Natural gas network' : 'Crude oil network'} · curated 2024 dataset
-        </span>
-        <div className="flex items-center gap-4 shrink-0">
-          <div className="flex items-center gap-1.5">
-            <div className="w-1 h-1 rounded-full bg-safe" />
-            <span className="caps-label !text-safe">Live</span>
-          </div>
-          <div className="h-3 w-px bg-border" />
-          <span className="font-mono text-[9px] text-text-muted">v1.2.0</span>
-        </div>
-      </footer>
-
       {showSources && <DataSourcesModal onClose={() => setShowSources(false)} />}
     </div>
   )
