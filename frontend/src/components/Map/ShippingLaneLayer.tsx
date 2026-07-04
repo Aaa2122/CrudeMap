@@ -1,11 +1,10 @@
 import { IconLayer, PathLayer, TextLayer } from '@deck.gl/layers'
 import { TYPE_COLOR, getIcon } from './iconAtlas'
 import { globeParams, pathVisibleOnGlobe, pointVisibleOnGlobe } from './globeCulling'
+import { HIGHLIGHT, LABEL_HALO, LABEL_MUTED, NEUTRAL_MARK, withAlpha, type RGBA } from './mapTheme'
 
-type RGBA = [number, number, number, number]
-
-// Steel blue, low alpha — reads as "background traffic" under the energy layers
-const LANE_COLOR: RGBA = [96, 142, 196, 95]
+// Background traffic: neutral, very low alpha, hairline.
+const LANE_COLOR: RGBA = withAlpha(NEUTRAL_MARK, 55)
 
 interface Props {
   lanes: any | null
@@ -28,7 +27,7 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
       path: feature.geometry.coordinates,
       name: feature.properties.name,
       teu: feature.properties.teu_m,
-      width: 1 + Math.min(4, Math.log1p(feature.properties.teu_m) * 1.15),
+      width: 0.6 + Math.min(2.2, Math.log1p(feature.properties.teu_m) * 0.7),
       __tooltip: `${feature.properties.name}\nContainer corridor — ~${feature.properties.teu_m.toFixed(0)}M TEU/yr`,
     }))
 
@@ -44,7 +43,7 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
         capRounded: true,
         pickable: true,
         autoHighlight: true,
-        highlightColor: [147, 197, 253, 160],
+        highlightColor: HIGHLIGHT,
         onHover,
         parameters: globeParams(globe) as any,
       }),
@@ -67,7 +66,7 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
         data: portData,
         getPosition: (d: any) => d.position,
         getIcon: () => getIcon('container_port'),
-        getSize: (d: any) => 13 + Math.min(7, Math.log1p(d.teu) * 1.8),
+        getSize: (d: any) => 10 + Math.min(5, Math.log1p(d.teu) * 1.3),
         getColor: TYPE_COLOR.container_port,
         sizeUnits: 'pixels',
         billboard: true,
@@ -92,9 +91,9 @@ export function ShippingLaneLayer({ lanes, ports, showPorts, showPortLabels, glo
           getTextAnchor: 'start',
           getAlignmentBaseline: 'center',
           getPixelOffset: [12, 0],
-          getColor: [165, 190, 220, 215],
+          getColor: LABEL_MUTED,
           outlineWidth: 2,
-          outlineColor: [10, 16, 24, 235],
+          outlineColor: LABEL_HALO,
           fontSettings: { sdf: true },
         characterSet: 'auto',
           billboard: true,
