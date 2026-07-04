@@ -20,6 +20,7 @@ import { FieldLayer } from './FieldLayer'
 import { ShippingLaneLayer } from './ShippingLaneLayer'
 import { MapLegend } from './MapLegend'
 import { GraticuleLayer, OceanLayer } from './gisBasemap'
+import { accentFor, toCss } from './mapTheme'
 import { angularDistanceDeg } from './globeCulling'
 import { buildFlowPaths } from './flowGeometry'
 import { VesselLayer } from './VesselLayer'
@@ -574,7 +575,7 @@ export function WorldMap() {
                   ? 'mt-0.5 font-mono text-[11px]'
                   : 'font-mono text-[10px] text-text-muted'
               }
-              style={index === 1 ? { color: commodity === 'gas' ? '#46C8DC' : '#DCA54A' } : undefined}
+              style={index === 1 ? { color: toCss(accentFor(commodity)) } : undefined}
             >
               {line}
             </div>

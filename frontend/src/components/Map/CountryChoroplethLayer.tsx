@@ -2,6 +2,7 @@ import { GeoJsonLayer } from '@deck.gl/layers'
 import type { CountryBrief, CountryMetricKey } from '../../api/types'
 import { buildMetricScale, formatMetricValue, getCountryMetricValue } from './countryMetrics'
 import { globeParams } from './globeCulling'
+import { HAIRLINE, LAND_DIM, SELECTED, withAlpha } from './mapTheme'
 
 interface Props {
   geojson: any
@@ -20,20 +21,20 @@ function getFeatureIso(feature: any): string | null {
   return iso ?? null
 }
 
-const DIMMED_COUNTRY_COLOR: [number, number, number, number] = [13, 21, 31, 242]
+const DIMMED_COUNTRY_COLOR = LAND_DIM
 
-export function CountryChoroplethLayer({
-  geojson,
-  countries,
-  selectedMetric,
-  selectedIso,
-  globe = false,
-  onHover,
-  onClick,
-}: Props) {
-  const scale = buildMetricScale(countries, selectedMetric)
+// WorldMap re-renders every animation frame; rebuilding the features array
+// each time gives deck.gl a new data identity per frame, which forces a full
+// attribute refresh and restarts fill-color transitions before they can
+// finish (fills freeze on stale colors). Cache by the inputs that matter.
+let featuresCache: { key: string; geojson: any; countries: CountryBrief[]; features: any[] } | null = null
+
+function buildFeatures(geojson: any, countries: CountryBrief[], selectedMetric: CountryMetricKey, scale: ReturnType<typeof buildMetricScale>) {
+  const key = selectedMetric
+  if (featuresCache && featuresCache.geojson === geojson && featuresCache.countries === countries && featuresCache.key === key) {
+    return featuresCache.features
+  }
   const countriesByIso = new Map(countries.map(country => [country.iso, country]))
-
   const features = (geojson?.features ?? []).map((feature: any) => {
     const iso = getFeatureIso(feature)
     const country = iso ? countriesByIso.get(iso) : null
@@ -51,6 +52,21 @@ export function CountryChoroplethLayer({
       },
     }
   })
+  featuresCache = { key, geojson, countries, features }
+  return features
+}
+
+export function CountryChoroplethLayer({
+  geojson,
+  countries,
+  selectedMetric,
+  selectedIso,
+  globe = false,
+  onHover,
+  onClick,
+}: Props) {
+  const scale = buildMetricScale(countries, selectedMetric)
+  const features = buildFeatures(geojson, countries, selectedMetric, scale)
 
   return new GeoJsonLayer({
     id: 'country-choropleth',
@@ -66,20 +82,16 @@ export function CountryChoroplethLayer({
         : DIMMED_COUNTRY_COLOR
     },
     getLineColor: (feature: any) =>
-      feature.properties?.__iso === selectedIso ? [220, 165, 74, 255] : [58, 84, 106, 135],
-    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 1.8 : 0.5),
+      feature.properties?.__iso === selectedIso ? SELECTED : HAIRLINE,
+    getLineWidth: (feature: any) => (feature.properties?.__iso === selectedIso ? 1.5 : 0.5),
     lineWidthUnits: 'pixels',
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 40],
+    highlightColor: withAlpha(SELECTED, 40),
     onHover,
     onClick,
     // Globe: paint in layer order — coarse polygons dip inside the sphere
     // and would otherwise occlude surface overlays via the depth buffer
     parameters: globeParams(globe) as any,
-    // Smooth re-color when switching metric or commodity
-    transitions: {
-      getFillColor: 300,
-    },
     updateTriggers: {
       getFillColor: [countries, selectedMetric, selectedIso],
       getLineColor: [selectedIso],

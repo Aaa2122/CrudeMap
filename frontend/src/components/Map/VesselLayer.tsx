@@ -3,12 +3,7 @@ import type { Commodity } from '../../api/types'
 import { getIcon } from './iconAtlas'
 import { globeParams, pointVisibleOnGlobe } from './globeCulling'
 import { vesselPosition, type Vessel } from './vesselFleet'
-
-type RGBA = [number, number, number, number]
-
-const OIL_VESSEL: RGBA = [242, 206, 140, 240]
-const GAS_VESSEL: RGBA = [159, 232, 242, 240]
-const DISRUPTED_VESSEL: RGBA = [217, 84, 77, 240]
+import { ALERT, HIGHLIGHT, accentFor, withAlpha } from './mapTheme'
 
 interface Props {
   vessels: Vessel[]
@@ -20,16 +15,16 @@ interface Props {
 }
 
 const CLASS_SIZE: Record<string, number> = {
-  VLCC: 15,
-  Suezmax: 13,
-  Aframax: 11,
-  'Q-Flex LNG carrier': 14,
-  'LNG carrier': 12,
+  VLCC: 11,
+  Suezmax: 10,
+  Aframax: 9,
+  'Q-Flex LNG carrier': 10,
+  'LNG carrier': 9,
 }
 
 /** Simulated live fleet: vessels sailing along the routed flows. */
 export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, onHover }: Props) {
-  const baseColor = commodity === 'gas' ? GAS_VESSEL : OIL_VESSEL
+  const baseColor = withAlpha(accentFor(commodity), 225)
 
   const data = vessels
     .map(vessel => {
@@ -63,14 +58,14 @@ export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, on
     data,
     getPosition: (d: any) => d.position,
     getIcon: () => getIcon('vessel'),
-    getSize: (d: any) => CLASS_SIZE[d.vclass] ?? 12,
-    getColor: (d: any) => (d.isDisrupted ? DISRUPTED_VESSEL : baseColor),
+    getSize: (d: any) => CLASS_SIZE[d.vclass] ?? 9,
+    getColor: (d: any) => (d.isDisrupted ? withAlpha(ALERT, 235) : baseColor),
     getAngle: (d: any) => -d.bearing,
     sizeUnits: 'pixels',
     billboard: false,
     pickable: true,
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 110],
+    highlightColor: HIGHLIGHT,
     onHover,
     parameters: globeParams(globe) as any,
     updateTriggers: {

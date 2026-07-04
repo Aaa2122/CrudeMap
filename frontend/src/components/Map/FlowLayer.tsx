@@ -3,15 +3,7 @@ import { TripsLayer } from '@deck.gl/geo-layers'
 import type { Commodity } from '../../api/types'
 import type { FlowPathDatum } from './flowGeometry'
 import { globeParams, pathVisibleOnGlobe } from './globeCulling'
-
-type RGBA = [number, number, number, number]
-
-const OIL_BASE: RGBA = [220, 165, 74, 62] // restrained amber underlay
-const OIL_HEAD: RGBA = [242, 206, 140, 220]
-const GAS_BASE: RGBA = [70, 200, 220, 58] // restrained cyan underlay
-const GAS_HEAD: RGBA = [159, 232, 242, 220]
-const DISRUPTED_BASE: RGBA = [217, 84, 77, 88]
-const DISRUPTED_HEAD: RGBA = [240, 130, 124, 225]
+import { ALERT, HIGHLIGHT, accentFor, flowWidth, withAlpha } from './mapTheme'
 
 interface Props {
   flowPaths: FlowPathDatum[]
@@ -53,27 +45,28 @@ export function FlowLayer({ flowPaths, disrupted, commodity, animTime, globe, ca
     return {
       ...d,
       isDisrupted,
-      width: 0.7 + Math.min(2.2, Math.log1p(volumeOf(d)) * 0.5),
+      width: flowWidth(volumeOf(d)),
       __tooltip: `${d.flow.source_iso} -> ${d.flow.target_iso}${isDisrupted ? ' — DISRUPTED' : ''}\n${formatVolume(d)} ${commodity}\n${viaText}`,
     }
   })
 
-  const baseColor = commodity === 'gas' ? GAS_BASE : OIL_BASE
-  const headColor = commodity === 'gas' ? GAS_HEAD : OIL_HEAD
+  const accent = accentFor(commodity)
+  const baseColor = withAlpha(accent, 46) // static underlay: barely-there
+  const headColor = withAlpha(accent, 200) // particle heads
 
   const routeLayer = new PathLayer({
     id: 'flow-routes',
     data,
     getPath: (d: any) => d.path,
-    getColor: (d: any) => (d.isDisrupted ? DISRUPTED_BASE : baseColor),
+    getColor: (d: any) => (d.isDisrupted ? withAlpha(ALERT, 90) : baseColor),
     getWidth: (d: any) => d.width,
     widthUnits: 'pixels',
-    widthMinPixels: 1,
+    widthMinPixels: 0.5,
     jointRounded: true,
     capRounded: true,
     pickable: true,
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 110],
+    highlightColor: HIGHLIGHT,
     onHover,
     onClick,
     parameters: globeParams(globe) as any,
@@ -84,8 +77,9 @@ export function FlowLayer({ flowPaths, disrupted, commodity, animTime, globe, ca
 
   // Per-flow phase offset (id % 17) staggers departures; disrupted flows
   // freeze (currentTime pinned) to read as "stopped".
-  // The shared clock cycles in 60s; particles run 10 cycles per clock cycle.
-  const particleClock = (animTime * 10) % 1
+  // The shared clock cycles in 60s; particles run 4 cycles per clock cycle
+  // (integer multiple so the wrap stays continuous).
+  const particleClock = (animTime * 4) % 1
   const LOOP = 2000
   const particleLayers = [false, true].map(
     isDisruptedGroup =>
@@ -97,14 +91,14 @@ export function FlowLayer({ flowPaths, disrupted, commodity, animTime, globe, ca
           const offset = ((d.flow.id % 17) / 17) * 1000
           return d.timestamps.map((t: number) => t + offset)
         },
-        getColor: isDisruptedGroup ? DISRUPTED_HEAD : headColor,
-        getWidth: (d: any) => d.width + 0.8,
+        getColor: isDisruptedGroup ? withAlpha(ALERT, 210) : headColor,
+        getWidth: (d: any) => d.width + 0.4,
         widthUnits: 'pixels',
-        widthMinPixels: 1.5,
+        widthMinPixels: 1,
         capRounded: true,
         jointRounded: true,
         fadeTrail: true,
-        trailLength: 220,
+        trailLength: 140,
         currentTime: isDisruptedGroup ? 700 : particleClock * LOOP,
         pickable: false,
         parameters: globeParams(globe) as any,
