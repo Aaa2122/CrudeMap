@@ -3,6 +3,7 @@ import { CollisionFilterExtension } from '@deck.gl/extensions'
 import type { Infrastructure } from '../../api/types'
 import { getIcon, infraColor, infraIconKey } from './iconAtlas'
 import { globeParams, pointVisibleOnGlobe } from './globeCulling'
+import { HIGHLIGHT, LABEL, LABEL_HALO, SELECTED } from './mapTheme'
 
 interface Props {
   infras: Infrastructure[]
@@ -49,7 +50,7 @@ export function InfraIconLayer({ infras, selectedId, showLabels, globe, cameraCe
     id: 'infra-hit',
     data,
     getPosition: (d: any) => d.position,
-    getRadius: 13,
+    getRadius: 11,
     radiusUnits: 'pixels',
     getFillColor: [0, 0, 0, 1],
     stroked: false,
@@ -64,13 +65,13 @@ export function InfraIconLayer({ infras, selectedId, showLabels, globe, cameraCe
     data,
     getPosition: (d: any) => d.position,
     getIcon: (d: any) => getIcon(infraIconKey(d)),
-    getSize: (d: any) => (d.id === selectedId ? 30 : 17 + Math.min(9, Math.log1p(d.capacityRank) * 1.9)),
-    getColor: (d: any) => (d.id === selectedId ? [255, 255, 255, 255] : infraColor(d)),
+    getSize: (d: any) => (d.id === selectedId ? 20 : 10 + Math.min(5, Math.log1p(d.capacityRank) * 1.1)),
+    getColor: (d: any) => (d.id === selectedId ? SELECTED : infraColor(d)),
     sizeUnits: 'pixels',
     billboard: true,
     pickable: true,
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 90],
+    highlightColor: HIGHLIGHT,
     onHover,
     onClick,
     parameters: globeParams(globe) as any,
@@ -89,15 +90,15 @@ export function InfraIconLayer({ infras, selectedId, showLabels, globe, cameraCe
         data,
         getPosition: (d: any) => d.position,
         getText: (d: any) => d.name,
-        getSize: 11,
+        getSize: 10,
         sizeUnits: 'pixels',
         fontFamily: 'Archivo, sans-serif',
         getTextAnchor: 'start',
         getAlignmentBaseline: 'center',
         getPixelOffset: [14, 0],
-        getColor: [226, 232, 240, 235],
+        getColor: LABEL,
         outlineWidth: 2,
-        outlineColor: [10, 16, 24, 235],
+        outlineColor: LABEL_HALO,
         fontSettings: { sdf: true },
         characterSet: 'auto',
         billboard: true,

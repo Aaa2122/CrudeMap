@@ -3,8 +3,7 @@ import { CollisionFilterExtension } from '@deck.gl/extensions'
 import type { OilGasField } from '../../api/types'
 import { TYPE_COLOR, getIcon } from './iconAtlas'
 import { globeParams, pointVisibleOnGlobe } from './globeCulling'
-
-type RGBA = [number, number, number, number]
+import { HIGHLIGHT, LABEL_HALO, LABEL_MUTED, SELECTED, withAlpha, type RGBA } from './mapTheme'
 
 const STATUS_SUFFIX: Record<string, string> = {
   declining: ' (declining)',
@@ -66,18 +65,18 @@ export function FieldLayer({ fields, selectedId, showLabels, globe, cameraCenter
     data,
     getPosition: (d: any) => d.position,
     getIcon: (d: any) => getIcon(d.iconKey),
-    getSize: (d: any) => (d.id === selectedId ? 28 : 14 + Math.min(8, Math.log1p(d.production) * 1.6)),
+    getSize: (d: any) => (d.id === selectedId ? 18 : 8 + Math.min(4, Math.log1p(d.production) * 0.9)),
     getColor: (d: any) =>
       d.id === selectedId
-        ? ([255, 255, 255, 255] as RGBA)
+        ? SELECTED
         : d.status === 'declining'
-        ? ([d.color[0], d.color[1], d.color[2], 150] as RGBA)
+        ? withAlpha(d.color, 140)
         : d.color,
     sizeUnits: 'pixels',
     billboard: true,
     pickable: true,
     autoHighlight: true,
-    highlightColor: [255, 255, 255, 90],
+    highlightColor: HIGHLIGHT,
     onHover,
     onClick,
     parameters: globeParams(globe) as any,
@@ -96,15 +95,15 @@ export function FieldLayer({ fields, selectedId, showLabels, globe, cameraCenter
         data,
         getPosition: (d: any) => d.position,
         getText: (d: any) => d.name,
-        getSize: 10.5,
+        getSize: 9.5,
         sizeUnits: 'pixels',
         fontFamily: 'Archivo, sans-serif',
         getTextAnchor: 'start',
         getAlignmentBaseline: 'center',
         getPixelOffset: [13, 0],
-        getColor: [203, 213, 225, 225],
+        getColor: LABEL_MUTED,
         outlineWidth: 2,
-        outlineColor: [10, 16, 24, 235],
+        outlineColor: LABEL_HALO,
         fontSettings: { sdf: true },
         characterSet: 'auto',
         billboard: true,
