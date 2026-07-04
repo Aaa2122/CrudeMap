@@ -1,4 +1,5 @@
 import { PathLayer, SolidPolygonLayer } from '@deck.gl/layers'
+import { GRATICULE, OCEAN } from './mapTheme'
 
 /**
  * Fully self-rendered GIS ground — no external tiles, no OSM/CARTO.
@@ -9,8 +10,6 @@ import { PathLayer, SolidPolygonLayer } from '@deck.gl/layers'
 
 type LonLat = [number, number]
 
-const OCEAN_COLOR: [number, number, number, number] = [6, 14, 24, 255]
-const GRATICULE_COLOR: [number, number, number, number] = [112, 150, 182, 16]
 const GRATICULE_STEP = 30 // degrees between lines
 const SAMPLE_STEP = 5 // degrees between vertices (keeps lines curved on globe)
 
@@ -53,7 +52,7 @@ export function OceanLayer() {
     id: 'gis-ocean',
     data: OCEAN_CELLS,
     getPolygon: (d: LonLat[]) => d,
-    getFillColor: OCEAN_COLOR,
+    getFillColor: OCEAN,
     pickable: false,
     // Never occlude land: coarse country polygons sag below the sphere
     // surface in GlobeView and would be hidden by the densely-gridded ocean.
@@ -66,8 +65,8 @@ export function GraticuleLayer() {
     id: 'gis-graticule',
     data: GRATICULE_PATHS,
     getPath: (d: LonLat[]) => d,
-    getColor: GRATICULE_COLOR,
-    getWidth: 0.6,
+    getColor: GRATICULE,
+    getWidth: 0.5,
     widthUnits: 'pixels',
     pickable: false,
   })
