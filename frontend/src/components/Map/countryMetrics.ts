@@ -25,65 +25,64 @@ export interface MetricScale {
   getBucketLabel: (value: number | null | undefined) => string
 }
 
-// Land IS the basemap now (custom GIS ground) — fills are near-opaque.
-// Ramps are data encodings: desaturated luminance scales only.
+// Light map: ramps run pale → saturated-soft. Alpha 242 everywhere.
 const VOLUME_PALETTE: RGBA[] = [
-  [14, 24, 35, 242],
-  [22, 40, 56, 242],
-  [35, 63, 86, 242],
-  [60, 100, 130, 242],
-  [112, 156, 184, 242],
+  [227, 233, 239, 242],
+  [186, 201, 216, 242],
+  [141, 166, 192, 242],
+  [104, 136, 166, 242],
+  [78, 124, 166, 242],
 ]
 
 const RISK_PALETTE: RGBA[] = [
-  [26, 30, 35, 242],
-  [52, 48, 50, 242],
-  [96, 64, 62, 242],
-  [160, 80, 72, 242],
-  [217, 84, 77, 242],
+  [239, 238, 234, 242],
+  [233, 203, 193, 242],
+  [229, 166, 150, 242],
+  [226, 128, 113, 242],
+  [222, 91, 78, 242],
 ]
 
 const RESILIENCE_PALETTE: RGBA[] = [
-  [22, 30, 27, 242],
-  [30, 50, 41, 242],
-  [42, 76, 60, 242],
-  [64, 112, 86, 242],
-  [104, 160, 126, 242],
+  [239, 238, 234, 242],
+  [200, 222, 208, 242],
+  [157, 201, 175, 242],
+  [107, 175, 140, 242],
+  [62, 158, 110, 242],
 ]
 
 const SCORE_PALETTE: RGBA[] = [
-  [20, 28, 40, 242],
-  [30, 48, 68, 242],
-  [44, 74, 102, 242],
-  [70, 110, 142, 242],
-  [124, 160, 188, 242],
+  [231, 235, 240, 242],
+  [192, 204, 217, 242],
+  [150, 172, 193, 242],
+  [110, 142, 170, 242],
+  [84, 120, 152, 242],
 ]
 
 // Teal ramp for natural gas volumes — visually distinct from the oil blue ramp
 const GAS_VOLUME_PALETTE: RGBA[] = [
-  [13, 28, 32, 242],
-  [19, 46, 51, 242],
-  [28, 72, 78, 242],
-  [44, 110, 117, 242],
-  [96, 170, 178, 242],
+  [226, 237, 238, 242],
+  [178, 209, 212, 242],
+  [128, 178, 184, 242],
+  [90, 150, 158, 242],
+  [62, 141, 155, 242],
 ]
 
 // Diverging ramps for net balance (production − consumption):
-// importers cold steel-blue <- neutral dark -> exporters in the commodity hue
+// importer blue <- near-white neutral -> exporter in the commodity hue
 const OIL_BALANCE_PALETTE: RGBA[] = [
-  [56, 96, 130, 242], // strong net importer (cold steel)
-  [34, 58, 80, 242],
-  [19, 28, 39, 242], // balanced
-  [96, 74, 42, 242],
-  [188, 142, 66, 242], // strong net exporter (amber family)
+  [78, 124, 166, 242], // strong net importer (data blue)
+  [150, 175, 199, 242],
+  [239, 238, 234, 242], // balanced (near-white)
+  [209, 178, 148, 242],
+  [183, 122, 75, 242], // strong net exporter (copper)
 ]
 
 const GAS_BALANCE_PALETTE: RGBA[] = [
-  [56, 96, 130, 242],
-  [34, 58, 80, 242],
-  [19, 28, 39, 242],
-  [28, 80, 80, 242],
-  [72, 158, 152, 242], // strong net exporter (cyan family)
+  [78, 124, 166, 242],
+  [150, 175, 199, 242],
+  [239, 238, 234, 242],
+  [156, 196, 201, 242],
+  [62, 141, 155, 242], // strong net exporter (blue-green)
 ]
 
 const METRIC_CONFIG: Record<CountryMetricKey, MetricConfig> = {
