@@ -139,7 +139,7 @@ export function SearchBox() {
 
   return (
     <div ref={rootRef} className="relative w-[260px]">
-      <div className="flex h-7 items-center gap-2 rounded-sm border border-border bg-bg/60 px-2.5 focus-within:border-primary/60">
+      <div className="flex h-8 items-center gap-2 rounded-full bg-inset px-3 transition-shadow focus-within:ring-2 focus-within:ring-primary/30">
         <span className="material-symbols-outlined text-text-muted" style={{ fontSize: '0.9rem' }}>search</span>
         <input
           ref={inputRef}
@@ -153,18 +153,18 @@ export function SearchBox() {
           placeholder="Search the network…"
           className="w-full bg-transparent text-[12px] text-text placeholder:text-text-muted/60 focus:outline-none"
         />
-        <kbd className="rounded-sm border border-border px-1 font-mono text-[9px] text-text-muted">/</kbd>
+        <kbd className="rounded-md bg-surface px-1.5 font-mono text-[9px] text-text-muted shadow-sm">/</kbd>
       </div>
 
       {open && results.length > 0 && (
-        <div className="terminal-card absolute left-0 right-0 top-full z-50 mt-1 max-h-[340px] overflow-y-auto rounded-sm py-1">
+        <div className="floating-card absolute left-0 right-0 top-full z-50 mt-2 max-h-[340px] overflow-y-auto py-1.5">
           {results.map((result, index) => {
             const showGroup = result.group !== lastGroup
             lastGroup = result.group
             return (
               <div key={`${result.group}-${result.label}-${index}`}>
                 {showGroup && (
-                  <div className="px-3 pt-1.5 pb-0.5 text-[9px] font-bold uppercase tracking-[0.2em] text-text-muted">
+                  <div className="section-label px-3.5 pt-2 pb-0.5">
                     {result.group}
                   </div>
                 )}
@@ -176,8 +176,8 @@ export function SearchBox() {
                     select(result)
                   }}
                   onMouseEnter={() => setHighlighted(index)}
-                  className={`flex w-full items-center gap-2.5 px-3 py-1.5 text-left transition-colors ${
-                    index === highlighted ? 'bg-primary/15 text-text' : 'text-text-muted'
+                  className={`mx-1 flex w-[calc(100%-8px)] items-center gap-2.5 rounded-lg px-3.5 py-1.5 text-left transition-colors ${
+                    index === highlighted ? 'bg-inset text-text' : 'text-text-muted'
                   }`}
                 >
                   <span className="material-symbols-outlined text-primary" style={{ fontSize: '0.95rem' }}>

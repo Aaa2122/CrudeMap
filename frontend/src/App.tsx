@@ -45,23 +45,17 @@ export default function App() {
     <div className="flex flex-col h-screen overflow-hidden font-sans bg-bg text-text">
 
       {/* ── Header ── */}
-      <header className="flex items-center justify-between border-b border-border bg-surface/90 px-5 h-12 shrink-0 gap-4 backdrop-blur">
-        <div className="flex items-center gap-5 min-w-0">
+      <header className="glass-bar z-50 flex h-[52px] shrink-0 items-center justify-between gap-4 px-5">
+        <div className="flex min-w-0 items-center gap-5">
           {/* Wordmark */}
-          <div className="flex items-baseline gap-2 select-none">
-            <span className="display-caps text-[15px]" style={{ color: isGas ? '#46C8DC' : '#DCA54A' }}>
-              CrudeMap
-            </span>
-            <span className="font-mono text-[9px] tracking-caps uppercase text-text-muted">
-              energy flows
-            </span>
+          <div className="flex select-none items-baseline gap-2">
+            <span className="text-[16px] font-semibold tracking-tight text-text">CrudeMap</span>
+            <span className="text-[11px] text-text-muted">Energy flows</span>
           </div>
 
           <CommodityToggle />
 
-          <div className="h-5 w-px bg-border" />
-
-          <nav className="flex gap-5">
+          <nav className="flex items-center rounded-full bg-inset p-0.5">
             {(
               [
                 { key: 'network', label: 'Map' },
@@ -71,10 +65,10 @@ export default function App() {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`text-[11px] font-semibold uppercase tracking-caps pb-0.5 transition-colors border-b ${
+                className={`h-7 rounded-full px-3.5 text-[12px] font-medium transition-all ${
                   activeTab === tab.key
-                    ? 'text-text border-text'
-                    : 'text-text-muted border-transparent hover:text-text'
+                    ? 'bg-surface text-text shadow-float'
+                    : 'text-text-muted hover:text-text'
                 }`}
               >
                 {tab.label}
@@ -83,18 +77,18 @@ export default function App() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <SearchBox />
 
           <button
             onClick={() => setViewMode(viewMode === 'flat' ? 'globe' : 'flat')}
-            className={`flex items-center gap-1.5 text-[10px] font-semibold h-7 px-2.5 rounded-sm border transition-colors uppercase tracking-caps ${
+            className={`flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] font-medium transition-colors ${
               viewMode === 'globe'
-                ? 'border-primary/50 text-primary'
-                : 'border-border text-text-muted hover:text-text hover:border-text-muted'
+                ? 'bg-inset text-text'
+                : 'text-text-muted hover:bg-inset hover:text-text'
             }`}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '0.85rem' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '0.95rem' }}>
               {viewMode === 'globe' ? 'public' : 'map'}
             </span>
             {viewMode === 'globe' ? 'Globe' : 'Flat'}
@@ -103,9 +97,9 @@ export default function App() {
           <button
             onClick={() => setShowSources(true)}
             title="Data sources & methodology"
-            className="w-7 h-7 rounded-sm border border-transparent flex items-center justify-center text-text-muted hover:text-text hover:border-border transition-colors"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-inset hover:text-text"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>info</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '1.05rem' }}>info</span>
           </button>
         </div>
       </header>
