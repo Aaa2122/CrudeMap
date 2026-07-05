@@ -25,6 +25,8 @@ import { angularDistanceDeg } from './globeCulling'
 import { buildFlowPaths } from './flowGeometry'
 import { VesselLayer } from './VesselLayer'
 import { buildFleet } from './vesselFleet'
+import { AisVesselLayer } from './AisVesselLayer'
+import { useAisVessels } from '../../api/hooks/useAisVessels'
 import {
   containerPortsVisibleAtZoom,
   fieldsVisibleAtZoom,
@@ -148,6 +150,7 @@ export function WorldMap() {
     layerVisibility.shippingLanes || layerVisibility.containerPorts ? 'container_ports.geojson' : null,
   )
   const { data: countryGeoJson } = useWorldCountriesGeoJson()
+  const { vessels: aisVessels } = useAisVessels()
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [viewportSize, setViewportSize] = useState(DEFAULT_VIEWPORT_SIZE)
@@ -468,6 +471,16 @@ export function WorldMap() {
         vessels: fleet,
         commodity,
         clock: animTime,
+        globe: isGlobe,
+        cameraCenter,
+        onHover: handleHover,
+      }),
+    layerVisibility.aisLive &&
+      aisVessels.size > 0 &&
+      AisVesselLayer({
+        vessels: aisVessels,
+        commodity,
+        nowMs: Date.now(),
         globe: isGlobe,
         cameraCenter,
         onHover: handleHover,
