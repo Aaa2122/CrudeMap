@@ -470,7 +470,7 @@ export function WorldMap() {
       VesselLayer({
         vessels: fleet,
         commodity,
-        clock: animTime,
+        nowMs: Date.now(),
         globe: isGlobe,
         cameraCenter,
         onHover: handleHover,

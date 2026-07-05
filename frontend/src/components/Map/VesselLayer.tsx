@@ -8,7 +8,7 @@ import { ALERT, HIGHLIGHT, accentFor, withAlpha } from './mapTheme'
 interface Props {
   vessels: Vessel[]
   commodity: Commodity
-  clock: number
+  nowMs: number
   globe: boolean
   cameraCenter: [number, number]
   onHover: (info: any) => void
@@ -23,17 +23,19 @@ const CLASS_SIZE: Record<string, number> = {
 }
 
 /** Simulated live fleet: vessels sailing along the routed flows. */
-export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, onHover }: Props) {
+export function VesselLayer({ vessels, commodity, nowMs, globe, cameraCenter, onHover }: Props) {
   const baseColor = withAlpha(accentFor(commodity), 150) // simulated = ghosted vs live AIS
+  const nowSec = nowMs / 1000
 
   const data = vessels
     .map(vessel => {
-      const { position, bearing, progress } = vesselPosition(vessel, clock)
+      const { position, bearing, progress } = vesselPosition(vessel, nowSec)
+      const speed = vessel.isDisrupted ? 'holding' : `${vessel.speedKn} kn`
       return {
         ...vessel,
         position,
         bearing,
-        __tooltip: `M/T ${vessel.name} — ${vessel.vclass}${vessel.isDisrupted ? ' — HOLDING' : ''}\n${vessel.dwt} · ${vessel.cargo}\n${vessel.flow.flow.source_iso} → ${vessel.flow.flow.target_iso} · ${Math.round(progress * 100)}% of voyage`,
+        __tooltip: `M/T ${vessel.name} — ${vessel.vclass}${vessel.isDisrupted ? ' — HOLDING' : ''} · simulated\n${vessel.dwt} · ${vessel.cargo} · ${speed}\n${vessel.flow.flow.source_iso} → ${vessel.flow.flow.target_iso} · ${Math.round(progress * 100)}% of voyage`,
       }
     })
     .filter(d => !globe || pointVisibleOnGlobe(d.position, cameraCenter))
@@ -50,7 +52,7 @@ export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, on
     pickable: true,
     onHover,
     parameters: globeParams(globe) as any,
-    updateTriggers: { getPosition: [clock] },
+    updateTriggers: { getPosition: [nowMs] },
   })
 
   const iconLayer = new IconLayer({
@@ -69,8 +71,8 @@ export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, on
     onHover,
     parameters: globeParams(globe) as any,
     updateTriggers: {
-      getPosition: [clock],
-      getAngle: [clock],
+      getPosition: [nowMs],
+      getAngle: [nowMs],
       getColor: [commodity],
     },
   })

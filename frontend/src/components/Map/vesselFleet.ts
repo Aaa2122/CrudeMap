@@ -1,10 +1,16 @@
 import type { FlowPathDatum } from './flowGeometry'
+import { distKm } from './geo'
 
 /**
  * Simulated live fleet: discrete vessels (with identity — name, class,
  * tonnage, cargo) sailing along the routed trade flows. Vessel count per
- * route scales with annual volume; positions advance continuously with the
- * shared animation clock (one full voyage per clock cycle, staggered phases).
+ * route scales with annual volume.
+ *
+ * Vessels move at a credible, near-real ground speed (~13-19 kn by class) —
+ * the SAME speed for every vessel of a class — so a long haul genuinely takes
+ * far longer than a short hop (no teleporting long routes). Wall-clock time is
+ * lightly compressed by SIM_TIME_COMPRESSION so motion is perceptible without
+ * looking fast.
  */
 
 export interface Vessel {
@@ -16,7 +22,25 @@ export interface Vessel {
   flow: FlowPathDatum
   phase: number
   isDisrupted: boolean
+  routeKm: number
+  speedKn: number
 }
+
+// Realistic laden cruising speeds by class (knots).
+const CLASS_SPEED_KN: Record<string, number> = {
+  VLCC: 13,
+  Suezmax: 14,
+  Aframax: 14.5,
+  'LNG carrier': 18,
+  'Q-Flex LNG carrier': 19,
+}
+
+const KN_TO_KM_S = 1.852 / 3600 // 1 knot in km per second
+
+// Wall-clock seconds are multiplied by this before applying real ship speed.
+// At 1500, the longest voyages (~15,000 km) take ~25 min on screen and short
+// hops a few minutes — slow and credible. Single knob to retune the pace.
+export const SIM_TIME_COMPRESSION = 1500
 
 const NAME_A = [
   'Astro', 'Gulf', 'Nordic', 'Pacific', 'Cape', 'Eagle', 'Stena', 'Crystal',
@@ -47,10 +71,16 @@ function vesselIdentity(seed: number, isGas: boolean, volume: number) {
   return { name, vclass: 'Aframax', dwt: '~110,000 dwt', cargo: 'crude oil' }
 }
 
+function routeLengthKm(path: [number, number][]): number {
+  let total = 0
+  for (let i = 1; i < path.length; i += 1) total += distKm(path[i - 1], path[i])
+  return total
+}
+
 export function buildFleet(flowPaths: FlowPathDatum[], disrupted: Set<number>): Vessel[] {
   const vessels: Vessel[] = []
   for (const datum of flowPaths) {
-    const { flow, timestamps } = datum
+    const { flow, timestamps, path } = datum
     if (flow.transport_mode !== 'seaborne') continue
     if (timestamps.length < 6) continue // too short to sail
 
@@ -58,15 +88,19 @@ export function buildFleet(flowPaths: FlowPathDatum[], disrupted: Set<number>): 
     const volume = isGas ? flow.volume_bcm ?? 0 : flow.volume_mt
     const count = Math.max(1, Math.min(5, Math.round(volume / (isGas ? 8 : 22))))
     const isDisrupted = disrupted.has(flow.id)
+    const routeKm = Math.max(1, routeLengthKm(path))
 
     for (let i = 0; i < count; i += 1) {
       const seed = flow.id * 31 + i * 101
+      const identity = vesselIdentity(seed, isGas, volume)
       vessels.push({
         id: `${flow.id}-${i}`,
-        ...vesselIdentity(seed, isGas, volume),
+        ...identity,
         flow: datum,
         phase: hash(seed + 13),
         isDisrupted,
+        routeKm,
+        speedKn: CLASS_SPEED_KN[identity.vclass] ?? 13,
       })
     }
   }
@@ -79,11 +113,23 @@ export interface VesselPosition {
   progress: number
 }
 
-/** Locate a vessel along its route at the given clock value (0..1 cycle). */
-export function vesselPosition(vessel: Vessel, clock: number): VesselPosition {
+/**
+ * Locate a vessel along its route at wall-clock time `nowSec` (seconds).
+ * Distance covered = real ship speed × compressed elapsed time, so every
+ * vessel of a class shares one ground speed and long routes take longer.
+ * Route `timestamps` are cumulative distance (normalized 0..1000), so a
+ * distance fraction maps straight onto them.
+ */
+export function vesselPosition(vessel: Vessel, nowSec: number): VesselPosition {
   const { path, timestamps } = vessel.flow
   // Disrupted routes: vessels hold position mid-voyage
-  const progress = vessel.isDisrupted ? vessel.phase : (clock + vessel.phase) % 1
+  let progress: number
+  if (vessel.isDisrupted) {
+    progress = vessel.phase
+  } else {
+    const travelledKm = nowSec * vessel.speedKn * KN_TO_KM_S * SIM_TIME_COMPRESSION
+    progress = ((vessel.phase * vessel.routeKm + travelledKm) % vessel.routeKm) / vessel.routeKm
+  }
   const target = progress * 1000
 
   // Timestamps grow ~linearly with index — start near the estimate
