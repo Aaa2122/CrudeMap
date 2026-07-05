@@ -24,7 +24,7 @@ const CLASS_SIZE: Record<string, number> = {
 
 /** Simulated live fleet: vessels sailing along the routed flows. */
 export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, onHover }: Props) {
-  const baseColor = withAlpha(accentFor(commodity), 225)
+  const baseColor = withAlpha(accentFor(commodity), 150) // simulated = ghosted vs live AIS
 
   const data = vessels
     .map(vessel => {
@@ -58,7 +58,7 @@ export function VesselLayer({ vessels, commodity, clock, globe, cameraCenter, on
     data,
     getPosition: (d: any) => d.position,
     getIcon: () => getIcon('vessel'),
-    getSize: (d: any) => CLASS_SIZE[d.vclass] ?? 9,
+    getSize: (d: any) => CLASS_SIZE[d.vclass] ?? 8,
     getColor: (d: any) => (d.isDisrupted ? withAlpha(ALERT, 235) : baseColor),
     getAngle: (d: any) => -d.bearing,
     sizeUnits: 'pixels',
