@@ -2,11 +2,19 @@ import { useCountry, useCountryFlows, useCountryChokeExposure, useCountryInfras 
 import { useMapStore } from '../../store/mapStore'
 import { SupplierBar } from '../Charts/SupplierBar'
 import { RouteDonut } from '../Charts/RouteDonut'
+import { InsetGroup, InsetRow, MeterBar, Pill, SectionLabel } from './panelKit'
+import { statusColor, ui } from '../../uiTheme'
 
-function resilience_label(score: number) {
-  if (score >= 70) return { label: 'Resilient', color: '#22c55e' }
-  if (score >= 40) return { label: 'Moderate', color: '#f97316' }
-  return { label: 'Vulnerable', color: '#ef4444' }
+function resilienceInfo(score: number) {
+  if (score >= 70) return { label: 'Resilient', color: ui.safe }
+  if (score >= 40) return { label: 'Moderate', color: ui.orange }
+  return { label: 'Vulnerable', color: ui.alert }
+}
+
+function vulnColor(pct: number) {
+  if (pct >= 70) return ui.alert
+  if (pct >= 40) return ui.orange
+  return ui.safe
 }
 
 interface Props { iso: string }
@@ -18,207 +26,153 @@ export function CountryPanel({ iso }: Props) {
   const { data: infras } = useCountryInfras(iso)
   const { setSelected } = useMapStore()
 
-  const resLabel = country ? resilience_label(country.resilience_score) : null
-
   if (isLoading || !country) {
-    return <div className="p-4 text-text-muted text-sm">Loading…</div>
+    return <div className="p-5 text-sm text-text-muted">Loading…</div>
   }
 
+  const res = resilienceInfo(country.resilience_score)
   const balanceNet = country.export_oil_mt - country.import_oil_mt
   const gasBalanceNet = country.export_gas_bcm - country.import_gas_bcm
   const hasGasData =
     country.production_gas_bcm > 0 || country.import_gas_bcm > 0 || country.consumption_gas_bcm > 0
 
   return (
-    <div className="p-4 space-y-4 text-text text-sm overflow-y-auto">
+    <div className="space-y-4 overflow-y-auto px-5 pb-5 text-sm text-text">
       {/* Header */}
-      <div>
-        <div className="flex items-start justify-between">
-          <div>
-            <h2 className="text-base font-semibold">{country.name}</h2>
-            <p className="text-text-muted text-xs">
-              {country.region} · {country.role}
-              {country.data_level === 'A' && (
-                <span className="ml-1 text-[9px] bg-border/50 text-text-muted px-1 rounded">MACRO</span>
-              )}
-            </p>
-          </div>
-          <span
-            className="text-xs font-medium px-2 py-0.5 rounded"
-            style={{ background: resLabel?.color + '22', color: resLabel?.color }}
-          >
-            {resLabel?.label}
-          </span>
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-[17px] font-semibold tracking-tight">{country.name}</h2>
+          <p className="mt-0.5 text-[12px] text-text-muted">
+            {country.region} · {country.role}
+          </p>
         </div>
+        <Pill color={res.color}>{res.label}</Pill>
+      </div>
 
-        {/* Oil balance */}
-        <CommodityHeader label="Crude oil" unit="Mt/yr" color="#DCA54A" />
-        <div className="mt-1.5 grid grid-cols-2 gap-2">
-          <Stat label="Production" value={`${country.production_oil_mt} Mt`} />
-          <Stat label="Consumption" value={`${country.consumption_oil_mt} Mt`} />
-          <Stat label="Import" value={`${country.import_oil_mt} Mt`} />
-          <Stat label="Export" value={`${country.export_oil_mt} Mt`} />
+      {/* Crude oil */}
+      <div className="space-y-1.5">
+        <div className="flex items-baseline justify-between">
+          <SectionLabel>Crude oil</SectionLabel>
+          <span className="font-mono text-[10px] text-text-muted">Mt/yr</span>
         </div>
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          <div className="bg-bg border border-border rounded p-2 text-center">
-            <div className="text-[10px] text-text-muted uppercase">Oil balance</div>
-            <div className={`text-sm font-bold ${balanceNet >= 0 ? 'text-safe' : 'text-disrupted'}`}>
-              {balanceNet >= 0 ? '+' : ''}{balanceNet.toFixed(1)} Mt
-            </div>
-          </div>
-          <div className="bg-bg border border-border rounded p-2 text-center">
-            <div className="text-[10px] text-text-muted uppercase">Refining</div>
-            <div className="text-sm font-bold text-primary">{country.refining_capacity_mt} Mt</div>
-          </div>
-        </div>
+        <InsetGroup>
+          <InsetRow label="Production" value={country.production_oil_mt} />
+          <InsetRow label="Consumption" value={country.consumption_oil_mt} />
+          <InsetRow label="Import" value={country.import_oil_mt} />
+          <InsetRow label="Export" value={country.export_oil_mt} />
+          <InsetRow
+            label="Net balance"
+            value={`${balanceNet >= 0 ? '+' : ''}${balanceNet.toFixed(1)}`}
+            valueColor={balanceNet >= 0 ? ui.safe : ui.alert}
+          />
+          <InsetRow label="Refining capacity" value={country.refining_capacity_mt} />
+        </InsetGroup>
+      </div>
 
-        {/* Gas balance */}
-        <CommodityHeader label="Natural gas" unit="bcm/yr" color="#46C8DC" />
+      {/* Natural gas */}
+      <div className="space-y-1.5">
+        <div className="flex items-baseline justify-between">
+          <SectionLabel>Natural gas</SectionLabel>
+          <span className="font-mono text-[10px] text-text-muted">bcm/yr</span>
+        </div>
         {hasGasData ? (
-          <>
-            <div className="mt-1.5 grid grid-cols-2 gap-2">
-              <Stat label="Production" value={`${country.production_gas_bcm} bcm`} />
-              <Stat label="Consumption" value={`${country.consumption_gas_bcm} bcm`} />
-              <Stat label="Import" value={`${country.import_gas_bcm} bcm`} />
-              <Stat label="Export" value={`${country.export_gas_bcm} bcm`} />
-            </div>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <div className="bg-bg border border-border rounded p-2 text-center">
-                <div className="text-[10px] text-text-muted uppercase">Gas balance</div>
-                <div className={`text-sm font-bold ${gasBalanceNet >= 0 ? 'text-safe' : 'text-disrupted'}`}>
-                  {gasBalanceNet >= 0 ? '+' : ''}{gasBalanceNet.toFixed(1)} bcm
-                </div>
-              </div>
-              <div className="bg-bg border border-border rounded p-2 text-center">
-                <div className="text-[10px] text-text-muted uppercase">Gas dependency</div>
-                <div className="text-sm font-bold" style={{ color: country.dependency_score_gas >= 0.7 ? '#D9544D' : country.dependency_score_gas >= 0.4 ? '#D98143' : '#46A87C' }}>
-                  {Math.round(country.dependency_score_gas * 100)}%
-                </div>
-              </div>
-            </div>
-          </>
+          <InsetGroup>
+            <InsetRow label="Production" value={country.production_gas_bcm} />
+            <InsetRow label="Consumption" value={country.consumption_gas_bcm} />
+            <InsetRow label="Import" value={country.import_gas_bcm} />
+            <InsetRow label="Export" value={country.export_gas_bcm} />
+            <InsetRow
+              label="Net balance"
+              value={`${gasBalanceNet >= 0 ? '+' : ''}${gasBalanceNet.toFixed(1)}`}
+              valueColor={gasBalanceNet >= 0 ? ui.safe : ui.alert}
+            />
+            <InsetRow
+              label="Import dependency"
+              value={`${Math.round(country.dependency_score_gas * 100)}%`}
+              valueColor={vulnColor(Math.round(country.dependency_score_gas * 100))}
+            />
+          </InsetGroup>
         ) : (
-          <p className="mt-1.5 text-[11px] text-text-muted">No significant gas trade tracked.</p>
+          <p className="text-[12px] text-text-muted">No significant gas trade tracked.</p>
         )}
       </div>
 
-      {/* Vulnerability breakdown */}
-      <Divider label="VULNERABILITY" />
+      {/* Vulnerability */}
       <div className="space-y-2">
-        <VulnBar label="Oil import dependency" value={country.dependency_score} />
-        {hasGasData && <VulnBar label="Gas import dependency" value={country.dependency_score_gas} />}
-        <VulnBar label="Supplier concentration" value={Math.min(country.supplier_hhi / 10000, 1)} />
+        <SectionLabel>Vulnerability</SectionLabel>
+        <VulnRow label="Oil import dependency" value={country.dependency_score} />
+        {hasGasData && <VulnRow label="Gas import dependency" value={country.dependency_score_gas} />}
+        <VulnRow label="Supplier concentration" value={Math.min(country.supplier_hhi / 10000, 1)} />
         {exposure && (
           <>
-            <VulnBar label="Hormuz exposure" value={exposure.hormuz ?? 0} />
-            <VulnBar label="Malacca exposure" value={exposure.malacca ?? 0} />
+            <VulnRow label="Hormuz exposure" value={exposure.hormuz ?? 0} />
+            <VulnRow label="Malacca exposure" value={exposure.malacca ?? 0} />
           </>
         )}
       </div>
 
       {/* Top suppliers */}
-      <Divider label="TOP SUPPLIERS" />
-      {flows && flows.length > 0
-        ? <SupplierBar flows={flows} targetIso={iso} />
-        : <p className="text-text-muted text-xs">No import flows</p>
-      }
+      <div className="space-y-1.5">
+        <SectionLabel>Top suppliers</SectionLabel>
+        {flows && flows.length > 0
+          ? <SupplierBar flows={flows} targetIso={iso} />
+          : <p className="text-[12px] text-text-muted">No import flows</p>}
+      </div>
 
       {/* Route exposure */}
-      <Divider label="ROUTE EXPOSURE" />
-      {exposure
-        ? <RouteDonut exposure={exposure} />
-        : <p className="text-text-muted text-xs">Loading…</p>
-      }
+      <div className="space-y-1.5">
+        <SectionLabel>Route exposure</SectionLabel>
+        {exposure ? <RouteDonut exposure={exposure} /> : <p className="text-[12px] text-text-muted">Loading…</p>}
+      </div>
 
       {/* Key infrastructures */}
       {infras && infras.length > 0 && (
-        <>
-          <Divider label={`INFRASTRUCTURES (${infras.length})`} />
+        <div className="space-y-1.5">
+          <SectionLabel>Infrastructures ({infras.length})</SectionLabel>
           <div className="space-y-1">
-            {infras.slice(0, 8).map(inf => {
-              const statusColor = inf.status === 'active' ? '#22c55e' : inf.status === 'limited' ? '#f97316' : '#ef4444'
-              return (
-                <button
-                  key={inf.id}
-                  onClick={() => setSelected({ type: 'infrastructure', id: inf.id })}
-                  className="w-full flex items-center gap-2 px-2 py-1.5 bg-bg border border-border rounded hover:border-primary/50 transition-colors text-left"
-                >
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: '0.85rem' }}>
-                    {inf.type === 'pipeline' ? 'schema' : inf.type === 'terminal' ? 'anchor' : 'factory'}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[11px] font-medium truncate">{inf.name}</div>
-                    <div className="text-[9px] text-text-muted">{inf.type} · {inf.subtype}</div>
-                  </div>
-                  <div
-                    className="w-1.5 h-1.5 rounded-full shrink-0"
-                    style={{ background: statusColor }}
-                  />
-                </button>
-              )
-            })}
+            {infras.slice(0, 8).map(inf => (
+              <button
+                key={inf.id}
+                onClick={() => setSelected({ type: 'infrastructure', id: inf.id })}
+                className="flex w-full items-center gap-2.5 rounded-ctl bg-inset px-3 py-2 text-left transition-colors hover:bg-black/[0.05]"
+              >
+                <span className="material-symbols-outlined text-text-muted" style={{ fontSize: '0.9rem' }}>
+                  {inf.type === 'pipeline' ? 'schema' : inf.type === 'terminal' ? 'anchor' : 'factory'}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[12px] font-medium">{inf.name}</div>
+                  <div className="text-[10px] text-text-muted">{inf.type} · {inf.subtype}</div>
+                </div>
+                <div className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: statusColor(inf.status) }} />
+              </button>
+            ))}
           </div>
-        </>
+        </div>
       )}
 
       {/* Data provenance */}
-      <div className="mt-2 pt-2 border-t border-border">
-        <p className="text-[10px] text-text-muted flex items-center gap-1">
-          <span className="material-symbols-outlined" style={{ fontSize: '0.7rem' }}>info</span>
-          {country.source} · {country.source_year} ·
-          <span className={`font-medium ${
-            country.confidence === 'high' ? 'text-safe' :
-            country.confidence === 'medium' ? 'text-amber' :
-            'text-disrupted'
-          }`}>
-            {country.confidence}
-          </span>
-        </p>
-      </div>
-
+      <p className="flex items-center gap-1 border-t border-border pt-3 text-[11px] text-text-muted">
+        <span className="material-symbols-outlined" style={{ fontSize: '0.75rem' }}>info</span>
+        {country.source} · {country.source_year} ·
+        <span
+          className="font-medium"
+          style={{ color: country.confidence === 'high' ? ui.safe : country.confidence === 'medium' ? ui.orange : ui.alert }}
+        >
+          {country.confidence}
+        </span>
+      </p>
     </div>
   )
 }
 
-function CommodityHeader({ label, unit, color }: { label: string; unit: string; color: string }) {
-  return (
-    <div className="mt-3 flex items-baseline justify-between">
-      <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color }}>
-        {label}
-      </span>
-      <span className="font-mono text-[9px] text-text-muted">{unit}</span>
-    </div>
-  )
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-bg border border-border rounded p-2 text-center">
-      <div className="text-[10px] text-text-muted uppercase">{label}</div>
-      <div className="text-sm font-semibold">{value}</div>
-    </div>
-  )
-}
-
-function VulnBar({ label, value }: { label: string; value: number }) {
+function VulnRow({ label, value }: { label: string; value: number }) {
   const pct = Math.round(value * 100)
-  const color = pct >= 70 ? '#ef4444' : pct >= 40 ? '#f97316' : '#22c55e'
+  const color = vulnColor(pct)
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-[10px] text-text-muted w-32 shrink-0 truncate">{label}</span>
-      <div className="flex-1 bg-bg rounded-full h-1.5 overflow-hidden">
-        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: color }} />
-      </div>
-      <span className="text-[10px] w-8 text-right font-medium" style={{ color }}>{pct}%</span>
-    </div>
-  )
-}
-
-function Divider({ label, highlight }: { label: string; highlight?: boolean }) {
-  return (
-    <div className={`flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest ${highlight ? 'text-amber' : 'text-text-muted'}`}>
-      <span>{label}</span>
-      <div className="flex-1 border-t border-border" />
+    <div className="flex items-center gap-2.5">
+      <span className="w-36 shrink-0 truncate text-[11px] text-text-muted">{label}</span>
+      <MeterBar pct={pct} color={color} />
+      <span className="w-9 text-right font-mono text-[11px] font-medium" style={{ color }}>{pct}%</span>
     </div>
   )
 }

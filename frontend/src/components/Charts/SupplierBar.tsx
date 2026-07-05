@@ -1,9 +1,18 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import type { Flow } from '../../api/types'
+import { ui } from '../../uiTheme'
 
 interface Props {
   flows: Flow[]
   targetIso: string
+}
+
+const TOOLTIP_STYLE = {
+  background: '#FFFFFF',
+  border: '1px solid rgba(0,0,0,0.08)',
+  borderRadius: 12,
+  fontSize: 11,
+  boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
 }
 
 export function SupplierBar({ flows, targetIso }: Props) {
@@ -23,15 +32,18 @@ export function SupplierBar({ flows, targetIso }: Props) {
   return (
     <ResponsiveContainer width="100%" height={160}>
       <BarChart data={data} layout="vertical" margin={{ left: 0, right: 16, top: 0, bottom: 0 }}>
-        <XAxis type="number" domain={[0, 100]} tick={{ fill: '#64748b', fontSize: 10 }} unit="%" />
-        <YAxis type="category" dataKey="name" tick={{ fill: '#e2e8f0', fontSize: 11 }} width={36} />
+        <XAxis type="number" domain={[0, 100]} tick={{ fill: ui.axis, fontSize: 10 }} unit="%" />
+        <YAxis type="category" dataKey="name" tick={{ fill: ui.ink, fontSize: 11 }} width={36} />
         <Tooltip
-          contentStyle={{ background: '#111118', border: '1px solid #1f1f2e', fontSize: 11 }}
+          contentStyle={TOOLTIP_STYLE}
           formatter={(v: number, _: string, p: any) => [`${v}% (${p.payload.mt} Mt)`, 'Share']}
         />
-        <Bar dataKey="pct" radius={[0, 3, 3, 0]}>
+        <Bar dataKey="pct" radius={[0, 6, 6, 0]}>
           {data.map((_, i) => (
-            <Cell key={i} fill={i === 0 ? '#f59e0b' : `rgba(245,158,11,${0.7 - i * 0.08})`} />
+            <Cell
+              key={i}
+              fill={i === 0 ? ui.oil : `${ui.oil}${Math.round((0.75 - i * 0.08) * 255).toString(16).padStart(2, '0')}`}
+            />
           ))}
         </Bar>
       </BarChart>

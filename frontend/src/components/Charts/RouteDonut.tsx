@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
+import { ui } from '../../uiTheme'
 
 const CHOKEPOINT_LABELS: Record<string, string> = {
   hormuz: 'Hormuz',
@@ -10,7 +11,15 @@ const CHOKEPOINT_LABELS: Record<string, string> = {
   panama: 'Panama',
 }
 
-const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#84cc16', '#22d3ee', '#818cf8', '#e879f9']
+const COLORS = [ui.alert, ui.orange, ui.oil, ui.safe, ui.gas, ui.blue, ui.neutral]
+
+const TOOLTIP_STYLE = {
+  background: '#FFFFFF',
+  border: '1px solid rgba(0,0,0,0.08)',
+  borderRadius: 12,
+  fontSize: 11,
+  boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+}
 
 interface Props {
   exposure: Record<string, number>
@@ -29,7 +38,7 @@ export function RouteDonut({ exposure }: Props) {
   // Add "Direct/Other" if total < 100%
   const total = entries.reduce((s, e) => s + e.value, 0)
   if (total < 95) {
-    entries.push({ name: 'Direct/Other', value: 100 - total, color: '#334155' })
+    entries.push({ name: 'Direct/Other', value: 100 - total, color: '#C9CDD2' })
   }
 
   if (entries.length === 0) {
@@ -51,13 +60,13 @@ export function RouteDonut({ exposure }: Props) {
           {entries.map((e, i) => <Cell key={i} fill={e.color} />)}
         </Pie>
         <Tooltip
-          contentStyle={{ background: '#111118', border: '1px solid #1f1f2e', fontSize: 11 }}
+          contentStyle={TOOLTIP_STYLE}
           formatter={(v: number) => [`${v}%`, 'Via']}
         />
         <Legend
           iconType="circle"
           iconSize={8}
-          wrapperStyle={{ fontSize: 10, color: '#94a3b8' }}
+          wrapperStyle={{ fontSize: 10, color: ui.muted }}
         />
       </PieChart>
     </ResponsiveContainer>

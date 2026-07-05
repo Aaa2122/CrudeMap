@@ -1,11 +1,7 @@
 import { useField } from '../../api/hooks/useFields'
 import { useMapStore } from '../../store/mapStore'
-
-const STATUS_COLOR: Record<string, string> = {
-  producing: '#22c55e',
-  declining: '#f97316',
-  developing: '#38bdf8',
-}
+import { InsetGroup, InsetRow, Pill } from './panelKit'
+import { statusColor, ui } from '../../uiTheme'
 
 const TYPE_LABEL: Record<string, string> = {
   conventional: 'Conventional',
@@ -24,65 +20,47 @@ export function FieldPanel({ id }: Props) {
   const { setSelected } = useMapStore()
 
   if (isLoading || !field) {
-    return <div className="p-4 text-text-muted text-sm">Loading…</div>
+    return <div className="p-5 text-sm text-text-muted">Loading…</div>
   }
 
-  const statusColor = STATUS_COLOR[field.status] ?? '#64748b'
   const isGas = field.commodity === 'gas'
 
   return (
-    <div className="p-4 space-y-4 text-text text-sm overflow-y-auto">
-      <div>
-        <div className="flex items-start justify-between">
-          <h2 className="text-base font-semibold">{field.name}</h2>
-          <span
-            className="text-xs font-medium px-2 py-0.5 rounded capitalize"
-            style={{ background: statusColor + '22', color: statusColor }}
-          >
-            {field.status}
-          </span>
+    <div className="space-y-4 overflow-y-auto px-5 pb-5 text-sm text-text">
+      <div className="flex items-start justify-between">
+        <div>
+          <h2 className="text-[17px] font-semibold tracking-tight">{field.name}</h2>
+          <p className="mt-0.5 text-[12px] text-text-muted">
+            {isGas ? 'Gas field' : field.commodity === 'mixed' ? 'Oil & gas field' : 'Oil field'} ·{' '}
+            {TYPE_LABEL[field.field_type ?? ''] ?? field.field_type}
+          </p>
         </div>
-        <p className="text-text-muted text-xs mt-0.5">
-          {isGas ? 'Gas field' : field.commodity === 'mixed' ? 'Oil & gas field' : 'Oil field'} ·{' '}
-          {TYPE_LABEL[field.field_type ?? ''] ?? field.field_type}
-        </p>
+        <Pill color={statusColor(field.status)}>{field.status}</Pill>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <InsetGroup>
         {field.production_mt != null && field.production_mt > 0 && (
-          <Stat label="Oil production" value={`${field.production_mt.toFixed(0)} Mt/yr`} />
+          <InsetRow label="Oil production" value={`${field.production_mt.toFixed(0)} Mt/yr`} />
         )}
         {field.production_bcm != null && field.production_bcm > 0 && (
-          <Stat label="Gas production" value={`${field.production_bcm.toFixed(0)} bcm/yr`} />
+          <InsetRow label="Gas production" value={`${field.production_bcm.toFixed(0)} bcm/yr`} />
         )}
-        <Stat label="Discovered" value={field.discovered_year ? String(field.discovered_year) : '—'} />
-        <Stat label="Operator" value={field.operator ?? '—'} />
+        <InsetRow label="Discovered" value={field.discovered_year ? String(field.discovered_year) : '—'} />
+        <InsetRow label="Operator" value={field.operator ?? '—'} />
         {field.country_iso && (
-          <button
+          <InsetRow
+            label="Country"
+            value={field.country_iso}
+            valueColor={ui.blue}
             onClick={() => setSelected({ type: 'country', iso: field.country_iso! })}
-            className="bg-bg border border-border rounded p-2 text-left hover:border-primary/50 transition-colors"
-          >
-            <div className="text-[10px] text-text-muted uppercase">Country</div>
-            <div className="text-sm font-medium text-primary">{field.country_iso}</div>
-          </button>
+          />
         )}
-      </div>
+      </InsetGroup>
 
-      <div className="mt-2 pt-2 border-t border-border">
-        <p className="text-[10px] text-text-muted flex items-center gap-1">
-          <span className="material-symbols-outlined" style={{ fontSize: '0.7rem' }}>info</span>
-          {field.source} · {field.confidence} confidence
-        </p>
-      </div>
-    </div>
-  )
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-bg border border-border rounded p-2">
-      <div className="text-[10px] text-text-muted uppercase">{label}</div>
-      <div className="text-sm font-medium break-words">{value}</div>
+      <p className="flex items-center gap-1 border-t border-border pt-3 text-[11px] text-text-muted">
+        <span className="material-symbols-outlined" style={{ fontSize: '0.75rem' }}>info</span>
+        {field.source} · {field.confidence} confidence
+      </p>
     </div>
   )
 }

@@ -14,12 +14,15 @@ import { useFieldsData } from '../../api/hooks/useFields'
 import { useFlows } from '../../api/hooks/useFlows'
 import { useInfrastructures } from '../../api/hooks/useInfrastructures'
 import { useMapStore } from '../../store/mapStore'
+import { accentHex, riskColor, ui } from '../../uiTheme'
+import { MeterBar, Pill } from '../Panels/panelKit'
 
-const RISK_COLOR: Record<string, string> = {
-  critical: '#ef4444',
-  high: '#f97316',
-  medium: '#eab308',
-  low: '#64a1bb',
+const TOOLTIP_STYLE = {
+  background: '#FFFFFF',
+  border: '1px solid rgba(0,0,0,0.08)',
+  borderRadius: 12,
+  fontSize: 12,
+  boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
 }
 
 /** "System Overview" tab — KPIs, top corridors, chokepoint risk board. */
@@ -33,7 +36,7 @@ export function OverviewDashboard() {
 
   const isGas = commodity === 'gas'
   const unit = isGas ? 'bcm/yr' : 'Mt/yr'
-  const accent = isGas ? '#22d3ee' : '#f59e0b'
+  const accent = accentHex(commodity)
 
   const volumeOf = (flow: { volume_mt: number; volume_bcm: number | null }) =>
     isGas ? flow.volume_bcm ?? 0 : flow.volume_mt
@@ -93,67 +96,67 @@ export function OverviewDashboard() {
       <div className="mx-auto max-w-[1200px] space-y-5">
         {/* KPI cards */}
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
-          <Kpi label={`World ${commodity} production`} value={stats.productionTotal.toLocaleString(undefined, { maximumFractionDigits: 0 })} unit={unit} accent={accent} />
-          <Kpi label="Tracked trade volume" value={stats.tradeTotal.toLocaleString(undefined, { maximumFractionDigits: 0 })} unit={unit} accent={accent} />
-          <Kpi label="Trade flows" value={String(stats.flowCount)} unit="routes" accent={accent} />
-          <Kpi label="Infrastructure assets" value={String(stats.infraCount)} unit="tracked" accent={accent} />
-          <Kpi label="Pipelines traced" value={String(stats.pipelineCount)} unit="routes" accent={accent} />
-          <Kpi label="Producing fields" value={String(stats.fieldCount)} unit="mapped" accent={accent} />
+          <Kpi label={`World ${commodity} production`} value={stats.productionTotal.toLocaleString(undefined, { maximumFractionDigits: 0 })} unit={unit} />
+          <Kpi label="Tracked trade volume" value={stats.tradeTotal.toLocaleString(undefined, { maximumFractionDigits: 0 })} unit={unit} />
+          <Kpi label="Trade flows" value={String(stats.flowCount)} unit="routes" />
+          <Kpi label="Infrastructure assets" value={String(stats.infraCount)} unit="tracked" />
+          <Kpi label="Pipelines traced" value={String(stats.pipelineCount)} unit="routes" />
+          <Kpi label="Producing fields" value={String(stats.fieldCount)} unit="mapped" />
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Top corridors */}
-          <section className="rounded border border-border bg-surface p-4">
-            <h2 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
+          <section className="rounded-card border border-border bg-surface p-5 shadow-float">
+            <h2 className="text-[13px] font-semibold text-text">
               Top {commodity} trade corridors
             </h2>
             <div className="mt-3 h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topCorridors} layout="vertical" margin={{ left: 18, right: 24, top: 4, bottom: 4 }}>
-                  <XAxis type="number" tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} />
+                  <XAxis type="number" tick={{ fill: ui.axis, fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis
                     type="category"
                     dataKey="name"
                     width={86}
-                    tick={{ fill: '#e2e8f0', fontSize: 11, fontFamily: 'JetBrains Mono' }}
+                    tick={{ fill: ui.ink, fontSize: 11, fontFamily: 'IBM Plex Mono' }}
                     axisLine={false}
                     tickLine={false}
                   />
                   <Tooltip
-                    cursor={{ fill: 'rgba(255,255,255,0.04)' }}
-                    contentStyle={{ background: '#162631', border: '1px solid #2e546b', borderRadius: 4, fontSize: 12 }}
+                    cursor={{ fill: 'rgba(0,0,0,0.03)' }}
+                    contentStyle={TOOLTIP_STYLE}
                     formatter={(value: number) => [`${value} ${unit}`, 'Volume']}
                   />
-                  <Bar dataKey="volume" radius={[0, 3, 3, 0]}>
+                  <Bar dataKey="volume" radius={[0, 6, 6, 0]}>
                     {topCorridors.map(entry => (
-                      <Cell key={entry.name} fill={entry.mode === 'pipeline' ? '#10b981' : accent} />
+                      <Cell key={entry.name} fill={entry.mode === 'pipeline' ? ui.neutral : accent} />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-1 flex gap-4 text-[10px] text-text-muted">
+            <div className="mt-1 flex gap-4 text-[11px] text-text-muted">
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-sm" style={{ background: accent }} /> Seaborne
+                <span className="h-2 w-2 rounded-full" style={{ background: accent }} /> Seaborne
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-sm bg-[#10b981]" /> Pipeline
+                <span className="h-2 w-2 rounded-full" style={{ background: ui.neutral }} /> Pipeline
               </span>
             </div>
           </section>
 
           {/* Chokepoint risk board */}
-          <section className="rounded border border-border bg-surface p-4">
-            <h2 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
+          <section className="rounded-card border border-border bg-surface p-5 shadow-float">
+            <h2 className="text-[13px] font-semibold text-text">
               Maritime chokepoint risk
             </h2>
             <table className="mt-3 w-full text-left text-xs">
               <thead>
-                <tr className="text-[9px] uppercase tracking-wider text-text-muted">
-                  <th className="pb-2 font-bold">Chokepoint</th>
-                  <th className="pb-2 text-right font-bold">Oil transit</th>
-                  <th className="pb-2 text-right font-bold">World trade</th>
-                  <th className="pb-2 text-right font-bold">Risk</th>
+                <tr className="section-label">
+                  <th className="pb-2 font-medium">Chokepoint</th>
+                  <th className="pb-2 text-right font-medium">Oil transit</th>
+                  <th className="pb-2 text-right font-medium">World trade</th>
+                  <th className="pb-2 text-right font-medium">Risk</th>
                 </tr>
               </thead>
               <tbody>
@@ -161,18 +164,13 @@ export function OverviewDashboard() {
                   <tr
                     key={cp.slug}
                     onClick={() => setSelected({ type: 'chokepoint', slug: cp.slug })}
-                    className="cursor-pointer border-t border-border/60 text-text transition-colors hover:bg-white/5"
+                    className="cursor-pointer border-t border-border text-text transition-colors hover:bg-inset"
                   >
                     <td className="py-1.5 font-medium">{cp.name}</td>
                     <td className="py-1.5 text-right font-mono text-text-muted">{cp.oil_transit_mbd} Mb/d</td>
                     <td className="py-1.5 text-right font-mono text-text-muted">{cp.pct_world_trade}%</td>
                     <td className="py-1.5 text-right">
-                      <span
-                        className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase"
-                        style={{ background: `${RISK_COLOR[cp.risk_level]}22`, color: RISK_COLOR[cp.risk_level] }}
-                      >
-                        {cp.risk_level}
-                      </span>
+                      <Pill color={riskColor(cp.risk_level)}>{cp.risk_level}</Pill>
                     </td>
                   </tr>
                 ))}
@@ -181,8 +179,8 @@ export function OverviewDashboard() {
           </section>
 
           {/* Top producers */}
-          <section className="rounded border border-border bg-surface p-4">
-            <h2 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
+          <section className="rounded-card border border-border bg-surface p-5 shadow-float">
+            <h2 className="text-[13px] font-semibold text-text">
               Top {commodity} producers
             </h2>
             <div className="mt-3 space-y-1.5">
@@ -193,16 +191,11 @@ export function OverviewDashboard() {
                   <button
                     key={c.iso}
                     onClick={() => setSelected({ type: 'country', iso: c.iso })}
-                    className="flex w-full items-center gap-2 text-left"
+                    className="-mx-1 flex w-[calc(100%+8px)] items-center gap-2 rounded-lg px-1 py-0.5 text-left transition-colors hover:bg-inset"
                   >
                     <span className="w-9 font-mono text-[10px] text-text-muted">{c.iso}</span>
                     <span className="w-32 truncate text-xs text-text">{c.name}</span>
-                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-bg">
-                      <span
-                        className="block h-full rounded-full"
-                        style={{ width: `${(value / (max || 1)) * 100}%`, background: accent }}
-                      />
-                    </span>
+                    <MeterBar pct={(value / (max || 1)) * 100} color={accent} />
                     <span className="w-20 text-right font-mono text-[10px] text-text-muted">
                       {value.toFixed(0)} {isGas ? 'bcm' : 'Mt'}
                     </span>
@@ -213,8 +206,8 @@ export function OverviewDashboard() {
           </section>
 
           {/* Net balance leaders */}
-          <section className="rounded border border-border bg-surface p-4">
-            <h2 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
+          <section className="rounded-card border border-border bg-surface p-5 shadow-float">
+            <h2 className="text-[13px] font-semibold text-text">
               Largest net {commodity} importers
             </h2>
             <div className="mt-3 space-y-1.5">
@@ -228,20 +221,15 @@ export function OverviewDashboard() {
                 .filter(x => x.deficit > 0)
                 .sort((a, b) => b.deficit - a.deficit)
                 .slice(0, 8)
-                .map(({ c, deficit }, i, arr) => (
+                .map(({ c, deficit }, _i, arr) => (
                   <button
                     key={c.iso}
                     onClick={() => setSelected({ type: 'country', iso: c.iso })}
-                    className="flex w-full items-center gap-2 text-left"
+                    className="-mx-1 flex w-[calc(100%+8px)] items-center gap-2 rounded-lg px-1 py-0.5 text-left transition-colors hover:bg-inset"
                   >
                     <span className="w-9 font-mono text-[10px] text-text-muted">{c.iso}</span>
                     <span className="w-32 truncate text-xs text-text">{c.name}</span>
-                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-bg">
-                      <span
-                        className="block h-full rounded-full bg-[#3E6E98]"
-                        style={{ width: `${(deficit / (arr[0]?.deficit || 1)) * 100}%` }}
-                      />
-                    </span>
+                    <MeterBar pct={(deficit / (arr[0]?.deficit || 1)) * 100} color={ui.blue} />
                     <span className="w-20 text-right font-mono text-[10px] text-text-muted">
                       −{deficit.toFixed(0)} {isGas ? 'bcm' : 'Mt'}
                     </span>
@@ -255,14 +243,12 @@ export function OverviewDashboard() {
   )
 }
 
-function Kpi({ label, value, unit, accent }: { label: string; value: string; unit: string; accent: string }) {
+function Kpi({ label, value, unit }: { label: string; value: string; unit: string }) {
   return (
-    <div className="rounded border border-border bg-surface p-3">
-      <div className="text-[9px] font-bold uppercase tracking-wider text-text-muted">{label}</div>
-      <div className="mt-1 font-mono text-xl font-bold" style={{ color: accent }}>
-        {value}
-      </div>
-      {unit && <div className="text-[10px] text-text-muted">{unit}</div>}
+    <div className="rounded-card border border-border bg-surface p-4 shadow-float">
+      <div className="text-[11px] font-medium text-text-muted">{label}</div>
+      <div className="mt-1 text-[22px] font-semibold tracking-tight text-text">{value}</div>
+      {unit && <div className="text-[11px] text-text-muted">{unit}</div>}
     </div>
   )
 }
