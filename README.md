@@ -32,8 +32,9 @@ rendered in-app from GeoJSON. No OSM, no tile server, full visual control —
 including a tile-free globe mode.
 
 🎨 **Country choropleth = net balance** — countries are colored by
-production − consumption: net exporters glow in the commodity hue, net
-importers in steel blue. Who pumps and who burns, at a glance.
+production − consumption: net exporters in the commodity hue (copper for oil,
+teal for gas), net importers in steel blue. Who pumps and who burns, at a
+glance.
 
 ⚓ **~260 mapped assets** — export/import terminals, refineries, LNG
 liquefaction/regas terminals, 70+ producing fields (Ghawar, Permian, North
