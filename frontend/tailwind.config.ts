@@ -16,12 +16,6 @@ export default {
         gas: '#4A9BAA',
         alert: '#DE5B4E',
         safe: '#3E9E6E',
-        // Transitional aliases — deleted in the cleanup task once all
-        // component usages are migrated to the tokens above.
-        amber: { DEFAULT: '#B77A4B', light: '#C89468' },
-        gascyan: '#4A9BAA',
-        disrupted: '#DE5B4E',
-        rerouted: '#E08D4C',
         text: { DEFAULT: '#1D1D1F', muted: '#6E6E73' },
       },
       fontFamily: {
@@ -36,9 +30,6 @@ export default {
       boxShadow: {
         float: '0 8px 30px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)',
         pop: '0 16px 48px rgba(0,0,0,0.14)',
-      },
-      letterSpacing: {
-        caps: '0.18em', // transitional — removed with .caps-label in cleanup
       },
     },
   },

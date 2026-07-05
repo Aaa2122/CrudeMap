@@ -65,28 +65,6 @@ html, body, #root {
   position: relative;
 }
 
-/* ── Transitional aliases (deleted in cleanup once unmigrated components are gone) ── */
-.terminal-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  backdrop-filter: none;
-}
-.caps-label {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0;
-  color: #6E6E73;
-}
-.display-caps {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  text-transform: none;
-  letter-spacing: -0.01em;
-}
-
 /* Custom scrollbar — light */
 ::-webkit-scrollbar {
   width: 5px;
