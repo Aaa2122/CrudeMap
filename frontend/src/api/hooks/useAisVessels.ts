@@ -28,14 +28,23 @@ export function useAisVessels(): { vessels: Map<number, LiveVessel> } {
   const setAisStatus = useMapStore(s => s.setAisStatus)
 
   useEffect(() => {
+    // `enabled` (backend has a key) and `wsOpen` (this WS is up) are tracked
+    // independently and both published on every status write, so a late
+    // /ais/status response can't clobber the live WS `connected` state.
     let enabled = false
+    let wsOpen = false
+    const publish = () => setAisStatus({ enabled, connected: wsOpen, count: vesselsRef.current.size })
+
     apiClient
       .get('/ais/status')
       .then(res => {
         enabled = Boolean(res.data?.enabled)
-        setAisStatus({ enabled, connected: false, count: res.data?.vessel_count ?? 0 })
+        publish()
       })
-      .catch(() => setAisStatus({ enabled: false, connected: false, count: 0 }))
+      .catch(() => {
+        enabled = false
+        publish()
+      })
 
     let ws: WebSocket | null = null
     let closed = false
@@ -46,9 +55,8 @@ export function useAisVessels(): { vessels: Map<number, LiveVessel> } {
       ws = new WebSocket(`${wsBase()}/api/v1/ais/stream`)
       ws.onopen = () => {
         retry = 1000
-        // `enabled` reflects whether the backend actually has an AIS key; the
-        // WS route exists regardless, so don't infer enabled from a successful open.
-        setAisStatus({ enabled, connected: true, count: vesselsRef.current.size })
+        wsOpen = true
+        publish()
       }
       ws.onmessage = event => {
         const m: AisMessage = JSON.parse(event.data)
@@ -69,7 +77,8 @@ export function useAisVessels(): { vessels: Map<number, LiveVessel> } {
         })
       }
       ws.onclose = () => {
-        setAisStatus({ enabled, connected: false, count: vesselsRef.current.size })
+        wsOpen = false
+        publish()
         if (!closed) {
           setTimeout(connect, retry)
           retry = Math.min(retry * 2, 30000)
