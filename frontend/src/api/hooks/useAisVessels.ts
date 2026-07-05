@@ -46,7 +46,9 @@ export function useAisVessels(): { vessels: Map<number, LiveVessel> } {
       ws = new WebSocket(`${wsBase()}/api/v1/ais/stream`)
       ws.onopen = () => {
         retry = 1000
-        setAisStatus({ enabled: true, connected: true, count: vesselsRef.current.size })
+        // `enabled` reflects whether the backend actually has an AIS key; the
+        // WS route exists regardless, so don't infer enabled from a successful open.
+        setAisStatus({ enabled, connected: true, count: vesselsRef.current.size })
       }
       ws.onmessage = event => {
         const m: AisMessage = JSON.parse(event.data)
