@@ -23,9 +23,13 @@ Russia ships to Asia from Sakhalin and to Europe from the Baltic — the
 departure terminal is picked by destination. Pipeline trade rides the traced
 pipeline geometry instead.
 
-🚢 **Live tanker fleet (simulated)** — named vessels (VLCCs, Suezmaxes, LNG
-carriers) with tonnage and cargo sail the routes continuously, oriented by
-heading, hoverable for voyage details.
+🚢 **Live tanker fleet** — named vessels (VLCCs, Suezmaxes, LNG carriers) with
+tonnage and cargo sail the routes continuously, oriented by heading, hoverable
+for voyage details. Add a free [AISStream.io](https://aisstream.io) API key
+(`AISSTREAM_API_KEY`) to overlay **real tankers moving in real time**; when a
+vessel sails out of AIS range its marker continues in simulation toward its
+declared destination, then snaps back to live when it reappears. No key ⇒
+simulated traffic only.
 
 🌍 **Custom GIS basemap** — ocean, graticule, continents and borders are
 rendered in-app from GeoJSON. No OSM, no tile server, full visual control —
@@ -56,6 +60,9 @@ Requires Docker + Node 20.
 ```bash
 # 1. Database + API (runs migrations and seeds automatically)
 docker compose up -d
+
+# Optional — live AIS tankers (free key from https://aisstream.io):
+export AISSTREAM_API_KEY=your_free_key   # then re-run: docker compose up -d
 
 # 2. Frontend
 cd frontend
