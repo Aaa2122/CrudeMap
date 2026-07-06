@@ -21,7 +21,7 @@ interface Props {
 
 /** Compact, collapsed-by-default layer control (top-left). */
 export function LayersPanel({ counts }: Props) {
-  const { layers, toggleLayer, commodity } = useMapStore()
+  const { layers, toggleLayer, commodity, aisStatus } = useMapStore()
   const [open, setOpen] = useState(false)
 
   const isGas = commodity === 'gas'
@@ -35,8 +35,9 @@ export function LayersPanel({ counts }: Props) {
     {
       title: 'Flows',
       rows: [
+        { key: 'aisLive', label: 'Live tankers (AIS)', color: accent, count: aisStatus.count || undefined },
         { key: 'flows', label: isGas ? 'Gas trade flows' : 'Oil trade flows', color: accent, count: counts.flows },
-        { key: 'vessels', label: isGas ? 'LNG carriers (live sim)' : 'Tankers (live sim)', color: accent, count: counts.vessels },
+        { key: 'vessels', label: 'Simulated traffic', color: ui.neutral, count: counts.vessels },
         { key: 'pipelines', label: isGas ? 'Gas pipelines' : 'Oil pipelines', color: ui.neutral, count: counts.pipelines },
       ],
     },
@@ -71,6 +72,13 @@ export function LayersPanel({ counts }: Props) {
       >
         <span className="text-[12px] font-semibold text-text">Layers</span>
         <span className="flex items-center gap-2">
+          {aisStatus.enabled && (
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              title={aisStatus.connected ? 'AIS live' : 'AIS reconnecting'}
+              style={{ background: aisStatus.connected ? ui.safe : ui.orange }}
+            />
+          )}
           <span className="font-mono text-[9px] text-text-muted">{activeCount} on</span>
           <span className="material-symbols-outlined text-text-muted" style={{ fontSize: '0.95rem' }}>
             {open ? 'remove' : 'add'}

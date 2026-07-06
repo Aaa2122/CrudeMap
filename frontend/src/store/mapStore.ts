@@ -7,6 +7,7 @@ export type LayerKey =
   | 'countries'
   | 'flows'
   | 'vessels'
+  | 'aisLive'
   | 'pipelines'
   | 'terminals'
   | 'refineries'
@@ -15,6 +16,12 @@ export type LayerKey =
   | 'chokepoints'
   | 'shippingLanes'
   | 'containerPorts'
+
+export interface AisStatus {
+  enabled: boolean
+  connected: boolean
+  count: number
+}
 
 // Country color answers "who pumps vs who burns" by default
 export const DEFAULT_METRIC: Record<Commodity, CountryMetricKey> = {
@@ -28,12 +35,14 @@ interface MapStore {
   layers: Record<LayerKey, boolean>
   viewMode: ViewMode
   selectedMetric: CountryMetricKey
+  aisStatus: AisStatus
   setSelected: (entity: SelectableEntity) => void
   clearSelected: () => void
   setCommodity: (commodity: Commodity) => void
   toggleLayer: (layer: LayerKey) => void
   setViewMode: (mode: ViewMode) => void
   setSelectedMetric: (metric: CountryMetricKey) => void
+  setAisStatus: (status: AisStatus) => void
 }
 
 // Lean defaults — refineries and maritime extras are opt-in to keep the
@@ -42,6 +51,7 @@ const defaultLayers: Record<LayerKey, boolean> = {
   countries: true,
   flows: true,
   vessels: true,
+  aisLive: true,
   pipelines: true,
   terminals: true,
   refineries: false,
@@ -58,6 +68,7 @@ export const useMapStore = create<MapStore>(set => ({
   layers: { ...defaultLayers },
   viewMode: 'flat',
   selectedMetric: DEFAULT_METRIC.oil,
+  aisStatus: { enabled: false, connected: false, count: 0 },
 
   setSelected: entity => set({ selected: entity }),
   clearSelected: () => set({ selected: null }),
@@ -71,4 +82,6 @@ export const useMapStore = create<MapStore>(set => ({
 
   toggleLayer: layer =>
     set(state => ({ layers: { ...state.layers, [layer]: !state.layers[layer] } })),
+
+  setAisStatus: status => set({ aisStatus: status }),
 }))
