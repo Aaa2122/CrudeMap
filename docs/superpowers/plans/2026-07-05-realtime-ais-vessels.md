@@ -18,7 +18,7 @@
 - deck.gl: new layer keeps `parameters: globeParams(globe)`, hemisphere culling (`pointVisibleOnGlobe`), invisible `ScatterplotLayer` hit-target.
 - Colors from theme modules only (`mapTheme.ts` RGBA, `uiTheme.ts` hex). No raw hex in components.
 - API key lives only on the backend; never sent to the browser.
-- **Commits: user is the sole author. Do NOT add any `Co-Authored-By` trailer.**
+- **Commits: the user is the sole author. Do not add co-author trailers.**
 - Backend tests run in the container: `docker compose run --rm backend python -m pytest tests/ -v`. Frontend: `npx vitest run` from `frontend/`. `npm run build` must stay green.
 - Work on branch `feat/realtime-ais-vessels` (already created).
 

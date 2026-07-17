@@ -31,7 +31,7 @@ Show **real oil/gas tankers moving in real time** on the map using the free AISS
 - AIS animation is driven by **wall-clock time** (`Date.now()` / elapsed seconds), decoupled from the shared 60 s animation clock — the integer-clock-multiplier rule does not apply here.
 - Colors from theme modules only: map RGBA from `mapTheme.ts`, UI hex from `uiTheme.ts`. No raw hex in components.
 - API key lives **only** on the backend; never sent to the browser.
-- Commits: user is sole author, **no `Co-Authored-By: Claude` trailer** (project preference).
+- Commits: the user is the sole author; do not add co-author trailers.
 
 ## Architecture
 
