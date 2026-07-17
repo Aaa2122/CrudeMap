@@ -24,10 +24,13 @@ export function MapLegend({ scale, flowsLabel }: Props) {
   if (layers.flows) {
     keyRows.push({ label: 'Trade flows · particles = direction', color: accent, shape: 'line' })
   }
+  if (layers.aisLive) {
+    keyRows.push({ label: 'Live tankers · real AIS', color: accent, shape: 'dot' })
+  }
   if (layers.vessels && layers.flows) {
     keyRows.push({
-      label: commodity === 'gas' ? 'LNG carriers · simulated live' : 'Tankers · simulated live',
-      color: accent,
+      label: commodity === 'gas' ? 'Simulated LNG traffic' : 'Simulated tanker traffic',
+      color: toCss(NEUTRAL_MARK),
       shape: 'dot',
     })
   }

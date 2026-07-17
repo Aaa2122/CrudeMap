@@ -28,6 +28,16 @@ export interface CountryDetail extends CountryBrief {
   source: string | null
   source_year: number | null
   confidence: string | null
+  oil_source: string | null
+  oil_confidence: string | null
+  oil_period: string | null
+  oil_data_type: 'annual' | 'ytd' | 'annualized_ytd' | 'estimate' | 'mixed'
+  oil_is_partial: boolean
+  gas_source: string | null
+  gas_confidence: string | null
+  gas_period: string | null
+  gas_data_type: 'annual' | 'ytd' | 'annualized_ytd' | 'estimate' | 'mixed'
+  gas_is_partial: boolean
 }
 
 export interface Flow {
@@ -35,13 +45,19 @@ export interface Flow {
   source_iso: string
   target_iso: string
   commodity: Commodity
-  transport_mode: 'seaborne' | 'pipeline'
+    transport_mode: 'seaborne' | 'pipeline' | 'unspecified'
   volume_mt: number
   volume_bcm: number | null
   via_chokepoints: string[]
-  year: number
-  source: string | null
-  confidence: string | null
+    year: number
+    period: string | null
+    data_type: 'annual' | 'monthly' | 'annualized_ytd' | string
+    is_partial: boolean
+    reporting_basis: 'importer_reported' | 'exporter_reported' | string | null
+    conversion_method: string | null
+    source: string | null
+    source_url: string | null
+    confidence: string | null
 }
 
 export interface ChokepointBrief {

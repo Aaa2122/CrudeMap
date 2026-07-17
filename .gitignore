@@ -18,3 +18,7 @@ frontend/.env
 
 # Logs
 *.log
+
+# Local source-inspection scratch files
+tmp/
+backend/etl/data/generated/

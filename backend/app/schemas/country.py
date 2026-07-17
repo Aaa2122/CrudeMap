@@ -31,3 +31,13 @@ class CountryDetail(CountryBrief):
     source: str | None
     source_year: int | None
     confidence: str | None
+    oil_source: str | None = None
+    oil_confidence: str | None = None
+    oil_period: str | None = None
+    oil_data_type: str = "annual"
+    oil_is_partial: bool = False
+    gas_source: str | None = None
+    gas_confidence: str | None = None
+    gas_period: str | None = None
+    gas_data_type: str = "annual"
+    gas_is_partial: bool = False

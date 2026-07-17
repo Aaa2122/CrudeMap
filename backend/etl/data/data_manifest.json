@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-07-16",
+  "map_country_universe": "Natural Earth countries rendered by frontend/public/world-countries.geojson",
+  "policy": {
+    "current_year": 2026,
+    "current_year_label": "2026 YTD",
+    "completed_annual_baseline": 2025,
+    "zero_is_data_only_when_reported": true,
+    "stale_values_must_not_be_relabelled": true
+  },
+  "datasets": [
+    {
+      "id": "country_oil_balances",
+      "file": "countries.json",
+      "commodity": "oil",
+      "kind": "country_balance",
+      "current_vintage": "2026 YTD with 2025 fallback",
+      "target_vintage": "2026 YTD",
+      "primary_source": "JODI Oil World Database",
+      "source_url": "https://www.jodidata.org/oil/database/data-downloads.aspx",
+      "fallback_source": "EIA International total petroleum balance (2025 annual baseline)",
+      "fallback_url": "https://www.eia.gov/opendata/bulkfiles.php",
+      "expected_lag": "1-2 months",
+      "status": "partial_current"
+    },
+    {
+      "id": "country_gas_balances",
+      "file": "countries.json",
+      "commodity": "gas",
+      "kind": "country_balance",
+      "current_vintage": "2026 YTD with 2024 fallback",
+      "target_vintage": "2026 YTD",
+      "primary_source": "JODI Gas World Database",
+      "source_url": "https://www.jodidata.org/gas/database/data-downloads.aspx",
+      "fallback_source": "EIA International dry natural gas balance (2024 annual baseline)",
+      "fallback_url": "https://www.eia.gov/opendata/bulkfiles.php",
+      "expected_lag": "1-2 months",
+      "status": "partial_current"
+    },
+    {
+      "id": "bilateral_oil_flows",
+      "file": "flows.json",
+      "commodity": "oil",
+      "kind": "bilateral_flow",
+      "current_vintage": "2026 YTD where reporters have published; 2024 fallback",
+      "target_vintage": "2026 YTD",
+      "primary_source": "UN Comtrade HS 2709",
+      "source_url": "https://comtradeplus.un.org/",
+      "active_2026_sources": [
+        "UN Comtrade monthly public Preview, losslessly split below its 500-row cap",
+        "Eurostat Comext DS-045409 monthly physical quantities",
+        "EIA U.S. crude oil imports and exports by country"
+      ],
+      "fallback_source": "EIA U.S. crude oil imports/exports by country, then national customs agencies",
+      "expected_lag": "country-dependent",
+      "status": "partial_current"
+    },
+    {
+      "id": "bilateral_gas_flows",
+      "file": "flows_gas.json",
+      "commodity": "gas",
+      "kind": "bilateral_flow",
+      "current_vintage": "2026 YTD where reporters and operators have published; 2024 fallback",
+      "target_vintage": "2026 YTD",
+      "primary_source": "UN Comtrade HS 271111 plus pipeline/operator data",
+      "source_url": "https://comtradeplus.un.org/",
+      "active_2026_sources": [
+        "UN Comtrade monthly public Preview HS 271111, losslessly split below its 500-row cap",
+        "Eurostat Comext DS-045409 LNG physical quantities",
+        "EIA U.S. natural gas imports and exports by country",
+        "ENTSOG Transparency Platform daily physical pipeline flows"
+      ],
+      "fallback_source": "GIIGNL and national customs, regulators and system operators",
+      "expected_lag": "country-dependent",
+      "status": "partial_current"
+    }
+  ]
+}

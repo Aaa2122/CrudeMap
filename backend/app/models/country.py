@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, Integer
+from sqlalchemy import Boolean, Column, String, Float, Integer
 from app.database import Base
 
 
@@ -39,3 +39,17 @@ class Country(Base):
     source = Column(String, default="seed")
     source_year = Column(Integer, default=2024)
     confidence = Column(String, default="medium")
+
+    # Commodity-specific snapshot metadata. Current-year monthly observations
+    # can coexist with the last complete annual baseline without pretending
+    # that every value in this denormalized row has the same vintage.
+    oil_source = Column(String, nullable=True)
+    oil_confidence = Column(String, nullable=True)
+    oil_period = Column(String, nullable=True)  # e.g. 2026-01/2026-04
+    oil_data_type = Column(String, default="annual")  # annual / ytd / annualized_ytd / estimate
+    oil_is_partial = Column(Boolean, default=False)
+    gas_source = Column(String, nullable=True)
+    gas_confidence = Column(String, nullable=True)
+    gas_period = Column(String, nullable=True)
+    gas_data_type = Column(String, default="annual")
+    gas_is_partial = Column(Boolean, default=False)
