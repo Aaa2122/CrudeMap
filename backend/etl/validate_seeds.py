@@ -12,7 +12,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 
 VALID_COMMODITIES = {"oil", "gas", "mixed", "products"}
-VALID_TRANSPORT = {"seaborne", "pipeline"}
+VALID_TRANSPORT = {"seaborne", "pipeline", "unspecified"}
 VALID_STATUS = {"active", "limited", "offline", "producing", "declining", "developing"}
 
 errors: list[str] = []
@@ -67,6 +67,19 @@ def main() -> int:
                 err(f"{label}: gas flow without volume_bcm")
             if f.get("commodity") == "oil" and not f.get("volume_mt"):
                 err(f"{label}: oil flow without volume_mt")
+            if not f.get("period"):
+                err(f"{label}: missing period")
+            if f.get("data_type") not in {"annual", "monthly", "annualized_ytd"}:
+                err(f"{label}: bad data_type {f.get('data_type')}")
+            if "is_partial" not in f:
+                err(f"{label}: missing is_partial")
+            if f.get("year", 0) >= 2026:
+                if not f.get("source_url"):
+                    err(f"{label}: current flow without source_url")
+                if not f.get("conversion_method"):
+                    err(f"{label}: current flow without conversion_method")
+                if not f.get("reporting_basis"):
+                    err(f"{label}: current flow without reporting_basis")
 
     seen_names: set[str] = set()
     for fname in ("infrastructures.json", "pipelines.json", "lng_terminals.json"):

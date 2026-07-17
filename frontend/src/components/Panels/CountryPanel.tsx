@@ -53,7 +53,9 @@ export function CountryPanel({ iso }: Props) {
       <div className="space-y-1.5">
         <div className="flex items-baseline justify-between">
           <SectionLabel>Crude oil</SectionLabel>
-          <span className="font-mono text-[10px] text-text-muted">Mt/yr</span>
+          <span className="font-mono text-[10px] text-text-muted">
+            {country.oil_period ? `${country.oil_period} · ` : ''}Mt/yr
+          </span>
         </div>
         <InsetGroup>
           <InsetRow label="Production" value={country.production_oil_mt} />
@@ -73,7 +75,9 @@ export function CountryPanel({ iso }: Props) {
       <div className="space-y-1.5">
         <div className="flex items-baseline justify-between">
           <SectionLabel>Natural gas</SectionLabel>
-          <span className="font-mono text-[10px] text-text-muted">bcm/yr</span>
+          <span className="font-mono text-[10px] text-text-muted">
+            {country.gas_period ? `${country.gas_period} · ` : ''}bcm/yr
+          </span>
         </div>
         {hasGasData ? (
           <InsetGroup>
@@ -151,16 +155,43 @@ export function CountryPanel({ iso }: Props) {
       )}
 
       {/* Data provenance */}
-      <p className="flex items-center gap-1 border-t border-border pt-3 text-[11px] text-text-muted">
-        <span className="material-symbols-outlined" style={{ fontSize: '0.75rem' }}>info</span>
-        {country.source} · {country.source_year} ·
-        <span
-          className="font-medium"
-          style={{ color: country.confidence === 'high' ? ui.safe : country.confidence === 'medium' ? ui.orange : ui.alert }}
-        >
-          {country.confidence}
-        </span>
-      </p>
+      <div className="space-y-1 border-t border-border pt-3 text-[11px] text-text-muted">
+        <p className="flex items-center gap-1">
+          <span className="material-symbols-outlined" style={{ fontSize: '0.75rem' }}>info</span>
+          Oil: {country.oil_source ?? country.source} · {country.oil_period ?? country.source_year}
+          {country.oil_is_partial ? ` · ${country.oil_data_type.replace(/_/g, ' ')}` : ''}
+        </p>
+        <p className="pl-4">
+          {country.gas_source
+            ? <>Gas: {country.gas_source} · {country.gas_period ?? 'period unknown'}</>
+            : <>Gas: no reported profile</>}
+        </p>
+        <p className="pl-4 flex gap-3">
+          <span>Oil confidence:{' '}
+          <span
+            className="font-medium"
+            style={{ color: (country.oil_confidence ?? country.confidence) === 'high' ? ui.safe : (country.oil_confidence ?? country.confidence) === 'medium' ? ui.orange : ui.alert }}
+          >
+            {country.oil_confidence ?? country.confidence}
+          </span>
+          </span>
+          <span>Gas confidence:{' '}
+            <span
+              className="font-medium"
+              style={{ color: (country.gas_confidence ?? country.confidence) === 'high' ? ui.safe : (country.gas_confidence ?? country.confidence) === 'medium' ? ui.orange : ui.alert }}
+            >
+              {country.gas_confidence ?? country.confidence}
+            </span>
+          </span>
+        </p>
+      </div>
+
+      {country.data_level === 'R' && (
+        <div className="rounded-ctl border border-border bg-inset px-3 py-2 text-[12px] leading-relaxed text-text-muted">
+          This map polygon is a non-additive geographic rollup. Its oil and gas balance is included in the
+          parent country named in the source; the zeroes below are placeholders, not independent reported values.
+        </div>
+      )}
     </div>
   )
 }

@@ -1,0 +1,17 @@
+{
+  "availability_calls": 1,
+  "preview_calls": 2,
+  "split_responses": 0,
+  "period": "2026-06/2026-06",
+  "months_with_published_data": [
+    "202606"
+  ],
+  "available_reporter_months": 1,
+  "reporters_with_energy_rows": 1,
+  "raw_rows": 27,
+  "record_limit": 500,
+  "truncated_responses_accepted": 0,
+  "snapshot_period": "2026-01/2026-06",
+  "snapshot_raw_rows": 3897,
+  "incremental_from_month": 6
+}

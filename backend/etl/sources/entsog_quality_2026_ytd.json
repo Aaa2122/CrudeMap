@@ -1,0 +1,13 @@
+{
+  "positive_physical_rows": 82834,
+  "cross_border_rows_matched": 25565,
+  "cross_border_share_of_all_positive_pct": 30.86,
+  "topology_direction_keys_observed": 194,
+  "topology_direction_key_use_pct": 32.66,
+  "selected_point_days": 13890,
+  "directed_country_flows": 81,
+  "period": "2026-01-01/2026-06-30",
+  "interconnections": 1180,
+  "direction_routes": 594,
+  "downloaded_operational_rows": 154018
+}

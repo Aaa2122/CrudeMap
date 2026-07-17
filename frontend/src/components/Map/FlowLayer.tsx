@@ -41,12 +41,17 @@ export function FlowLayer({ flowPaths, disrupted, commodity, animTime, globe, ca
       ? `via ${d.flow.via_chokepoints.join(', ')}`
       : d.flow.transport_mode === 'pipeline'
       ? 'pipeline'
+      : d.flow.transport_mode === 'unspecified'
+      ? 'mode not reported · illustrative route'
       : 'direct route'
+    const vintage = d.flow.period || String(d.flow.year)
+    const quality = [d.flow.source, vintage, d.flow.confidence].filter(Boolean).join(' · ')
+    const partial = d.flow.is_partial ? ' · partial/annualized' : ''
     return {
       ...d,
       isDisrupted,
       width: flowWidth(volumeOf(d)),
-      __tooltip: `${d.flow.source_iso} -> ${d.flow.target_iso}${isDisrupted ? ' — DISRUPTED' : ''}\n${formatVolume(d)} ${commodity}\n${viaText}`,
+      __tooltip: `${d.flow.source_iso} -> ${d.flow.target_iso}${isDisrupted ? ' — DISRUPTED' : ''}\n${formatVolume(d)} ${commodity}\n${viaText}\n${quality}${partial}`,
     }
   })
 
